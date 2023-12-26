@@ -19,15 +19,21 @@
 </template>
 
 <script setup lang="ts">
-import { Memo, useMemoList, useUpdateMemo, useNewMemo } from "@/composables/use-memo";
+import {
+  Memo,
+  useMemoList,
+  useUpdateMemo,
+  useNewMemo,
+} from "@/composables/use-memo";
 import { ElInput, ElCheckbox, ElButton } from "element-plus";
 import { ref, watch } from "vue";
 import invariant from "tiny-invariant";
-import { DocumentAdd } from '@element-plus/icons-vue'
+import { DocumentAdd } from "@element-plus/icons-vue";
 
 const { resultData: memoList, refetch: refetchMemoList } = useMemoList();
 const updateItem = ref<Memo>();
-const { resultData: updateResponse, mutate: updateMemo } = useUpdateMemo(updateItem);
+const { resultData: updateResponse, mutate: updateMemo } =
+  useUpdateMemo(updateItem);
 const { resultData: addResponse, mutate: addMemo } = useNewMemo();
 
 const update = (
@@ -68,7 +74,7 @@ const add = () => {
       refetchMemoList.value();
     }
   });
-}
+};
 </script>
 
 <style scoped lang="scss">
