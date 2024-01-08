@@ -1,0 +1,32 @@
+import { Meta, Title, IconGallery, IconItem } from "@storybook/addon-docs";
+import { IconExample } from "@/../.storybook/IconExample";
+import CpLogo from "@/components/commons/images/CpLogo.vue";
+import IconAlert from "@/components/commons/images/IconAlert.vue";
+
+<Meta title="Iconography" />
+
+export const iconList = [
+  CpLogo,
+  [IconAlert, { fillColor: "var(--cp-primary-color)" }],
+];
+
+# Iconography
+
+<IconGallery>
+  {iconList.map((v) => {
+    if (Array.isArray(v)) {
+      const [component, prop] = v;
+      return (
+        <IconItem name={component.name} key={component.name}>
+          <IconExample component={component} prop={props} />
+        </IconItem>
+      );
+    } else {
+      return (
+        <IconItem name={v.name} key={v.name}>
+          <IconExample component={v} />
+        </IconItem>
+      );
+    }
+  })}
+</IconGallery>

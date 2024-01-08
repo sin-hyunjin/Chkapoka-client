@@ -11,7 +11,9 @@ export default defineConfig({
     vue(),
     svgLoader({ svgo: false, defaultImport: "component" }),
     tsconfigPaths(),
-    eslintPlugin(),
+    eslintPlugin({
+      exclude: [/virtual:/, /node_modules/],
+    }),
   ],
   resolve: {
     alias: [

@@ -1,35 +1,64 @@
 <template>
-  <button @click="goToInit">Logout</button>
+  <cp-button type="solid" width="100px" height="50px" @click="goToInit"
+    >Logout</cp-button
+  >
   <div>ChukaPokaMain</div>
 
   <div class="border">Tree & Tree Item List</div>
   <div class="border">
     <div>
       treeId: <input v-model="treeId" type="text" />
-      <button @click="navigate('tree')">Go To Tree {{ treeId }}</button>
+      <cp-button
+        type="solid"
+        width="175px"
+        height="50px"
+        @click="navigate('tree')"
+        >Go To Tree {{ treeId }}</cp-button
+      >
     </div>
     <div>
-      <button @click="navigate('tree-create')">Go To Tree Create</button>
+      <cp-button
+        type="solid"
+        width="175px"
+        height="50px"
+        @click="navigate('tree-create')"
+        >Go To Tree Create</cp-button
+      >
     </div>
   </div>
   <div class="border">
     <div>
       treeItemId: <input v-model="treeItemId" type="text" />
-      <button @click="navigate('treeitem')">
+      <cp-button
+        type="solid"
+        width="175px"
+        height="50px"
+        @click="navigate('treeitem')"
+      >
         Go To TreeItem {{ treeItemId }}
-      </button>
+      </cp-button>
     </div>
     <div>
-      <button @click="navigate('treeitem-create')">
+      <cp-button
+        type="solid"
+        width="175px"
+        height="50px"
+        @click="navigate('treeitem-create')"
+      >
         Go To TreeItem Create
-      </button>
+      </cp-button>
     </div>
     <div>
       treeItemId: <input v-model="treeItemId" type="text" />
 
-      <button @click="navigate('treeitem-edit')">
+      <cp-button
+        type="solid"
+        width="175px"
+        height="50px"
+        @click="navigate('treeitem-edit')"
+      >
         Go To TreeItem Edit {{ treeItemId }}
-      </button>
+      </cp-button>
     </div>
   </div>
 </template>
@@ -45,6 +74,7 @@ export default defineComponent({
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import CpButton from "@/components/commons/CpButton.vue";
 
 const router = useRouter();
 
