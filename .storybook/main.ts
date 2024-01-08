@@ -18,9 +18,6 @@ const config: StorybookConfig = {
   core: {
     builder: "@storybook/builder-vite",
   },
-  docs: {
-    autodocs: "tag",
-  },
   // async viteFinal(config, { configType }) {
   async viteFinal(config) {
     return mergeConfig(config, {
