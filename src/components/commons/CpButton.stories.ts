@@ -21,11 +21,10 @@ export const Solid: Story = {
     setup() {
       return { args };
     },
-    template: '<cp-button v-bind="args" />',
+    template: '<cp-button v-bind="args">Solid</cp-button>',
   }),
   args: {
     type: "solid",
-    text: "Solid",
   },
 };
 
@@ -35,10 +34,9 @@ export const Outlined: Story = {
     setup() {
       return { args };
     },
-    template: '<cp-button v-bind="args" />',
+    template: '<cp-button v-bind="args">Outlined</cp-button>',
   }),
   args: {
     type: "outlined",
-    text: "Outlined",
   },
 };
