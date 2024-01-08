@@ -1,28 +1,32 @@
 module.exports = {
   env: {
     node: true,
+    browser: true,
+    es2023: true,
   },
   extends: [
     "eslint:recommended",
     "plugin:vue/vue3-recommended",
-    "prettier",
     "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:storybook/recommended",
   ],
-  rules: {
-    // override/add rules settings here, such as:
-    // 'vue/no-unused-vars': 'error'
-    // "@typescript-eslint/ban-types": [
-    //   "error",
-    //   {
-    //     extendDefaults: true,
-    //     types: {
-    //       "{}": false,
-    //     },
-    //   },
-    // ],
-  },
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: [".eslintrc.{js,cjs,json}"],
+      parserOptions: {
+        sourceType: "script",
+      },
+    },
+  ],
   parser: "vue-eslint-parser",
   parserOptions: {
     parser: "@typescript-eslint/parser",
+    sourceType: "module",
   },
+  plugins: ["@typescript-eslint", "vue"],
+  rules: {},
 };
