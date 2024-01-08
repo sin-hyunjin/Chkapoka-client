@@ -1,5 +1,9 @@
+// TODO: 20230108-심재형: 색상도 리스트화..
 body * {
     --cp-primary-color: #F55555;
     --cp-primary-color-light: #F5555599;    // opaticy 0.5
-    --cp-text-white-color: #F5F5F5; // grey-100 등으로 변경가능
+    --cp-text-color-grey-100: #F5F5F5;
+    --cp-text-color-grey-400: #888888;
+    --cp-color-white: #FFFFFF;
+    --cp-color-text-black: #1B1717;
 }

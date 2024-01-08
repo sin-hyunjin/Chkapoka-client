@@ -21,7 +21,7 @@ const props = withDefaults(
   {
     bgColor: "var(--cp-primary-color)",
     borderRadius: "var(--button-base-border-radius)",
-    textColor: "var(--cp-text-white-color)",
+    textColor: "var(--cp-text-color-grey-100)",
     hoverColor: "var(--cp-primary-color-light)",
     width: "337px",
     height: "55px",
