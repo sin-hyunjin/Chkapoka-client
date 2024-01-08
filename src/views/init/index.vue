@@ -1,5 +1,5 @@
 <template>
-  <chuka-poka-init />
+  <chuka-poka-init :layout-type="layoutType" />
 </template>
 
 <script lang="ts">
@@ -12,6 +12,10 @@ export default defineComponent({
 
 <script setup lang="ts">
 import ChukaPokaInit from "@/containers/init/index.vue";
+import { LayoutType } from "@/composables/use-window-size-wrap";
+defineProps<{
+  layoutType: LayoutType;
+}>();
 </script>
 
 <style scoped lang="scss"></style>
