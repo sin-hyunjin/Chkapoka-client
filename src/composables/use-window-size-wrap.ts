@@ -1,7 +1,7 @@
 import { computed } from "vue";
 import { useWindowSize } from "@vueuse/core";
 
-export enum LayoutType {
+export const enum LayoutType {
   Web,
   Tablet,
   Mobile,
