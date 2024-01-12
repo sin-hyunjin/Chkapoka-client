@@ -16,5 +16,5 @@ jobs:
           deploy_key: ${{ secrets.SSH_DEPLOY_KEY }}
           publish_dir: .
           external_repository: doyou1/ChukaPoka_client_destination
-          publish_branch: main
+          publish_branch: dev
           allow_empty_commit: true
