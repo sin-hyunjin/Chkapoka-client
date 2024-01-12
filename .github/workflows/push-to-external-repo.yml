@@ -13,8 +13,9 @@ jobs:
       - name: push to external repository
         uses: peaceiris/actions-gh-pages@v3
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           deploy_key: ${{ secrets.SSH_DEPLOY_KEY }}
           publish_dir: .
-          external_repository: doyou1/ChukaPoka_client_destination
+          external_repository: doyou1/chukapoka_client_destination
           publish_branch: dev
           allow_empty_commit: true
