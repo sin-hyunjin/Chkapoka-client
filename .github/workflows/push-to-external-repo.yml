@@ -2,8 +2,8 @@ name: (dev) push to external repo
 on:
   push:
     branches:
-      # - dev
-      - feat/init-page-4  # 0112 단말별로 확인하기 위해
+      - dev
+      # - feat/init-page-4  # 0112 단말별로 확인하기 위해
 jobs:
   push-to-external-repo:
     runs-on: ubuntu-latest
