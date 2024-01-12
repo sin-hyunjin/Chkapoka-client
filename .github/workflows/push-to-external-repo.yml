@@ -3,7 +3,7 @@ on:
   push:
     branches:
       # - dev
-      - feat/init-page-4
+      - feat/init-page-4  # 0112 단말별로 확인하기 위해
 jobs:
   push-to-external-repo:
     runs-on: ubuntu-latest
@@ -16,5 +16,5 @@ jobs:
           deploy_key: ${{ secrets.SSH_DEPLOY_KEY }}
           publish_dir: .
           external_repository: doyou1/ChukaPoka_client_destination
-          publish_branch: main
+          publish_branch: feat/init-page-4
           allow_empty_commit: true
