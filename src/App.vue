@@ -1,23 +1,18 @@
 <template>
-  <div>
-    <cp-logo />
+  <div class="wrap">
+    <router-view :layout-type="layoutType"></router-view>
   </div>
-  <cp-button type="solid" width="100px" height="50px" @click="goToMain"
-    >GoToMain</cp-button
-  >
-  <router-view></router-view>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import CpLogo from "@/components/commons/images/CpLogo.vue";
-import CpButton from "@/components/commons/CpButton.vue";
-const router = useRouter();
-const goToMain = () => {
-  router.push({
-    name: "ChukaPokaMain",
-  });
-};
+import { useWindowSizeWrap } from "@/composables/use-window-size-wrap";
+const { layoutType } = useWindowSizeWrap();
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.wrap {
+  width: 100%;
+  height: 100vh;
+  padding: 16px;
+}
+</style>

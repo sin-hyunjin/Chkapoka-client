@@ -1,0 +1,20 @@
+name: (dev) push to external repo
+on:
+  push:
+    branches:
+      - dev
+      # - feat/init-page-4  # 0112 단말별로 확인하기 위해
+jobs:
+  push-to-external-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+      - name: push to external repository
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.SSH_DEPLOY_KEY }}
+          publish_dir: .
+          external_repository: doyou1/ChukaPoka_client_destination
+          publish_branch: dev
+          allow_empty_commit: true

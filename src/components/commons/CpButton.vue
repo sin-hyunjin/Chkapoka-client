@@ -1,5 +1,9 @@
 <template>
-  <el-button class="cp-text-md-p" :style="innerStyle" @click="$emit('click')"
+  <el-button
+    class="cp-text-md-p"
+    :style="innerStyle"
+    :disabled="disabled"
+    @click="$emit('click')"
     ><slot
   /></el-button>
 </template>
@@ -17,14 +21,16 @@ const props = withDefaults(
     hoverColor?: string;
     width?: string;
     height?: string;
+    disabled?: boolean;
   }>(),
   {
     bgColor: "var(--cp-primary-color)",
     borderRadius: "var(--button-base-border-radius)",
-    textColor: "var(--cp-text-white-color)",
+    textColor: "var(--cp-text-color-grey-100)",
     hoverColor: "var(--cp-primary-color-light)",
     width: "337px",
     height: "55px",
+    disabled: false,
   },
 );
 defineEmits<{
