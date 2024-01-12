@@ -8,15 +8,15 @@ const meta: Meta<typeof CpButton> = {
 
 //👇 This default export determines where your story goes in the story list
 export default meta;
-type Story = StoryObj<typeof CpButton>;
+// type Story = StoryObj<typeof CpButton>;
 
 /*
  *👇 Render functions are a framework specific feature to allow you control on how the component renders.
  * See https://storybook.js.org/docs/api/csf
  * to learn how to use render functions.
  */
-export const Solid: Story = {
-  render: (args: { any: string }) => ({
+export const Solid: StoryObj<{ type: string }> = {
+  render: (args) => ({
     components: { CpButton },
     setup() {
       return { args };
@@ -28,8 +28,8 @@ export const Solid: Story = {
   },
 };
 
-export const Outlined: Story = {
-  render: (args: { any: string }) => ({
+export const Outlined: StoryObj<{ type: string }> = {
+  render: (args) => ({
     components: { CpButton },
     setup() {
       return { args };
