@@ -2,7 +2,7 @@
 body * {
     /** 새로 추가된 색상(!important는 element-plus component에도 적용하기 위해서) */
     --cp-color-red: #F55555 !important;
-    --cp-color-red-light: #F5555599 !important; 
+    --cp-color-red-light: #F5555599 !important; // 99는 opacity: 0.5
     --cp-color-pink: #FF9F9F !important;
     --cp-color-pink-light: #FF9F9F99 !important;
     --cp-color-old-lace: #FEFBF7 !important;
@@ -16,16 +16,4 @@ body * {
     --cp-color-grey-700: #555454 !important;
     --cp-color-grey-900: #383636 !important;
     --cp-color-black: #1B1717 !important;
-
-
-       // opaticy 0.5
-    // 사용되는 부분이 있음 추후 논의 필요
-    --cp-text-color-grey-000: #E0E0E0;
-    // --cp-text-color-grey-100: #F5F5F5;
-    --cp-text-color-grey-200: #BABABD;
-    --cp-text-color-grey-400: #888888;
-    
-    
-    --cp-color-input-bg-pink: #FEF2F4;
-    --cp-color-text-black: #1B1717;
 }
