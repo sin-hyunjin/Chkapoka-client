@@ -9,5 +9,14 @@ body * {
 }
 
 body * {
+    /* 새로 추가된 margin, padding 수치 */
+    --cp-number-4: 4px;
+    --cp-number-8: 8px;
+    --cp-number-12: 12px;
+    --cp-number-16: 16px;
+    --cp-number-24: 24px;
+}
+
+body * {
     --button-base-border-radius: 12px;
 }

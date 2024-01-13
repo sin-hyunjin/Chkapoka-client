@@ -180,7 +180,7 @@ const sendFormData = (type: SignFormCurrentStep, value: string) => {
 
 .password {
   & ::v-deep(.el-input__wrapper svg) {
-    color: var(--cp-primary-color);
+    color: var(--cp-color-red);
   }
   & ::v-deep(.el-input__password) {
     width: 25px;

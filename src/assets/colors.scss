@@ -1,14 +1,31 @@
 // TODO: 20230108-심재형: 색상도 리스트화..
 body * {
-    --cp-primary-color: #F55555;
-    --cp-primary-color-light: #F5555599;    // opaticy 0.5
+    /** 새로 추가된 색상 */
+    --cp-color-red: #F55555;
+    --cp-color-red-light: #F5555599; 
+    --cp-color-pink: #FF9F9F;
+    --cp-color-pink-ligth: #FF9F9F99;
+    --cp-color-old-lace: #FEFBF7;
+    --cp-color-chocolate: #574C4A;
+    --cp-color-light-green: #CCE9C2;
+
+    --cp-color-white: #FFFFFF;
+    --cp-color-grey-100: #F5F5F5;
+    --cp-color-grey-300: #D9D9D9;
+    --cp-color-grey-500: #A2A2A2;
+    --cp-color-grey-700: #555454;
+    --cp-color-grey-900: #383636;
+    --cp-color-black: #1B1717;
+
+
+       // opaticy 0.5
+    // 사용되는 부분이 있음 추후 논의 필요
     --cp-text-color-grey-000: #E0E0E0;
-    --cp-text-color-grey-100: #F5F5F5;
+    // --cp-text-color-grey-100: #F5F5F5;
     --cp-text-color-grey-200: #BABABD;
     --cp-text-color-grey-400: #888888;
     
     
     --cp-color-input-bg-pink: #FEF2F4;
-    --cp-color-white: #FFFFFF;
     --cp-color-text-black: #1B1717;
 }

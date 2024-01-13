@@ -24,10 +24,10 @@ const props = withDefaults(
     disabled?: boolean;
   }>(),
   {
-    bgColor: "var(--cp-primary-color)",
+    bgColor: "var(--cp-color-red)",
     borderRadius: "var(--button-base-border-radius)",
-    textColor: "var(--cp-text-color-grey-100)",
-    hoverColor: "var(--cp-primary-color-light)",
+    textColor: "var(--cp-color-grey-100)",
+    hoverColor: "var(--cp-color-red-light)",
     width: "337px",
     height: "55px",
     disabled: false,

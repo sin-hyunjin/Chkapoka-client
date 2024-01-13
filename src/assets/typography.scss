@@ -1,3 +1,74 @@
+body * {
+    font-family: 'Pretendard-Regular';
+    --el-font-family: 'Pretendard-Regular';
+    @font-face {
+      font-family: "Pretendard-Regular";
+        src: url("assets/fonts/Pretendard-Regular.ttf") format("truetype");
+    }
+  }
+
+/** 새로 추가된 폰트 */
+.cp-text-head-1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.cp-text-head-2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.cp-text-head-3 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.cp-text-head-4 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.cp-text-title-1 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.cp-text-title-2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cp-text-title-3 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.cp-text-title-4 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cp-text-main-1 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.cp-text-main-2 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.cp-text-main-3 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.cp-text-main-4 {
+    font-size: 13px;
+    font-weight: 500;
+}
+/** 새로 추가된 폰트 */
+
 // TODO: 20230108-심재형: 폰트도 리스트화..
 .cp-text-sm {
     font-size: 12px;

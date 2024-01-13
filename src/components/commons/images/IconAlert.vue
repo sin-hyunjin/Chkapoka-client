@@ -29,7 +29,7 @@ withDefaults(
     fillColor?: string;
   }>(),
   {
-    fillColor: "var(--cp-primary-color)",
+    fillColor: "var(--cp-color-red)",
   },
 );
 </script>

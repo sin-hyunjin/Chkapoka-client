@@ -163,6 +163,6 @@ onMounted(() => {
 }
 
 .primary-text {
-  color: var(--cp-primary-color);
+  color: var(--cp-color-red);
 }
 </style>
