@@ -16,7 +16,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .cp-layout-mobile-container {
-  max-width: 480px;
+  max-width: var(--cp-mobile-max-width);
   height: 100%;
   margin: 0 auto;
 }

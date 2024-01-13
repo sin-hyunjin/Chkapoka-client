@@ -13,6 +13,6 @@ const { layoutType } = useWindowSizeWrap();
 .wrap {
   width: 100%;
   height: 100vh;
-  padding: 16px;
+  padding: var(--cp-number-16);
 }
 </style>

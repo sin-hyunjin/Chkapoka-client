@@ -9,6 +9,7 @@ export const pattern = {
 export const useValidateInputValue = (value: {
   email?: Ref<string> | string;
   password?: Ref<string> | string;
+  verifyNumber?: Ref<number> | number;
 }) => {
   const isValidEmailValue = computed<boolean>(() => {
     const v = unref(value.email);
@@ -32,8 +33,18 @@ export const useValidateInputValue = (value: {
       return false;
     }
   });
+  const isValidVerifyNumberValue = computed<boolean>(() => {
+    const v = unref(value.verifyNumber);
+    if (v !== undefined) {
+      // 인증번호가 6자리가 아니라면
+      return `${v}`.length !== 6;
+    } else {
+      return false;
+    }
+  });
   return {
     isValidEmailValue,
     isValidPasswordValue,
+    isValidVerifyNumberValue,
   };
 };

@@ -1,71 +1,71 @@
 body * {
-    font-family: 'Pretendard-Regular';
-    --el-font-family: 'Pretendard-Regular';
+    font-family: "Pretendard-Regular";
+    --el-font-family:"Pretendard-Regular";
     @font-face {
       font-family: "Pretendard-Regular";
         src: url("assets/fonts/Pretendard-Regular.ttf") format("truetype");
     }
   }
 
-/** 새로 추가된 폰트 */
+/** 새로 추가된 폰트(!important는 element-plus component에도 적용하기 위해서) */
 .cp-text-head-1 {
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 32px !important;
+    font-weight: 700 !important;
 }
 
 .cp-text-head-2 {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 24px !important;
+    font-weight: 700 !important;
 }
 
 .cp-text-head-3 {
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 22px !important;
+    font-weight: 700 !important;
 }
 
 .cp-text-head-4 {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 20px !important;
+    font-weight: 700 !important;
 }
 
 .cp-text-title-1 {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 18px !important;
+    font-weight: 600 !important;
 }
 
 .cp-text-title-2 {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 16px !important;
+    font-weight: 600 !important;
 }
 
 .cp-text-title-3 {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 15px !important;
+    font-weight: 600 !important;
 }
 
 .cp-text-title-4 {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 14px !important;
+    font-weight: 600 !important;
 }
 
 .cp-text-main-1 {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 18px !important;
+    font-weight: 500 !important;
 }
 
 .cp-text-main-2 {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 16px !important;
+    font-weight: 500 !important;
 }
 
 .cp-text-main-3 {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 14px !important;
+    font-weight: 500 !important;
 }
 
 .cp-text-main-4 {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 13px !important;
+    font-weight: 500 !important;
 }
 /** 새로 추가된 폰트 */
 

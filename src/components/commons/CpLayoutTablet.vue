@@ -16,7 +16,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .cp-layout-tablet-container {
-  max-width: 768px;
+  max-width: var(--cp-tablet-max-width);
   height: 100%;
   margin: 0 auto;
 }
