@@ -1,14 +1,19 @@
 // TODO: 20230108-심재형: 색상도 리스트화..
 body * {
-    --cp-primary-color: #F55555;
-    --cp-primary-color-light: #F5555599;    // opaticy 0.5
-    --cp-text-color-grey-000: #E0E0E0;
-    --cp-text-color-grey-100: #F5F5F5;
-    --cp-text-color-grey-200: #BABABD;
-    --cp-text-color-grey-400: #888888;
-    
-    
-    --cp-color-input-bg-pink: #FEF2F4;
-    --cp-color-white: #FFFFFF;
-    --cp-color-text-black: #1B1717;
+    /** 새로 추가된 색상(!important는 element-plus component에도 적용하기 위해서) */
+    --cp-color-red: #F55555 !important;
+    --cp-color-red-light: #F5555599 !important; // 99는 opacity: 0.5
+    --cp-color-pink: #FF9F9F !important;
+    --cp-color-pink-light: #FF9F9F99 !important;
+    --cp-color-old-lace: #FEFBF7 !important;
+    --cp-color-chocolate: #574C4A !important;
+    --cp-color-light-green: #CCE9C2 !important;
+
+    --cp-color-white: #FFFFFF !important;
+    --cp-color-grey-100: #F5F5F5 !important;
+    --cp-color-grey-300: #D9D9D9 !important;
+    --cp-color-grey-500: #A2A2A2 !important;
+    --cp-color-grey-700: #555454 !important;
+    --cp-color-grey-900: #383636 !important;
+    --cp-color-black: #1B1717 !important;
 }

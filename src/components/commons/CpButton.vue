@@ -1,11 +1,14 @@
 <template>
   <el-button
-    class="cp-text-md-p"
+    :class="classArr"
     :style="innerStyle"
     :disabled="disabled"
     @click="$emit('click')"
-    ><slot
-  /></el-button>
+  >
+    <div>
+      <slot />
+    </div>
+  </el-button>
 </template>
 
 <script setup lang="ts">
@@ -14,7 +17,8 @@ import { ElButton } from "element-plus";
 
 const props = withDefaults(
   defineProps<{
-    type: "outlined" | "solid";
+    type: "outlined" | "solid" | "icon";
+    classArr?: string[];
     bgColor?: string;
     borderRadius?: string;
     textColor?: string;
@@ -24,10 +28,11 @@ const props = withDefaults(
     disabled?: boolean;
   }>(),
   {
-    bgColor: "var(--cp-primary-color)",
-    borderRadius: "var(--button-base-border-radius)",
-    textColor: "var(--cp-text-color-grey-100)",
-    hoverColor: "var(--cp-primary-color-light)",
+    classArr: () => ["cp-text-title-2"],
+    bgColor: "var(--cp-color-red)",
+    borderRadius: "var(--cp-number-12)",
+    textColor: "var(--cp-color-grey-100)",
+    hoverColor: "var(--cp-color-red-light)",
     width: "337px",
     height: "55px",
     disabled: false,
@@ -73,20 +78,24 @@ const innerStyle = computed(() => {
         "--el-button-hover-border-color": props.hoverColor,
       };
     }
+    case "icon": {
+      return {
+        ...common,
+        "--el-button-text-color": props.textColor,
+        "--el-button-hover-text-color": props.textColor,
+        "--el-button-active-text-color": props.textColor,
+        "--el-button-bg-color": "transparent",
+        "--el-button-hover-bg-color": "transparent",
+        "--el-button-active-bg-color": "transparent",
+        "--el-button-border-color": "transparent",
+        "--el-button-active-border-color": "transparent",
+        "--el-button-hover-border-color": "transparent",
+        padding: "0",
+      };
+    }
     default: {
       return {};
     }
   }
 });
 </script>
-
-<style scoped lang="scss">
-.el-button {
-  // element-plus css가 우선으로 적용되는 경우, 아래와 같이 css를 적용한다..
-  // .cp-text-md-p
-  font-size: 16px;
-  font-weight: 600;
-
-  // scoped로 내부 css에 접근이 어려운 경우, ::v-deep(.el-button)와 같이 접근
-}
-</style>

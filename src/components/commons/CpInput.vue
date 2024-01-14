@@ -1,5 +1,6 @@
 <template>
   <el-input
+    :class="classArr"
     :style="compStyle"
     v-bind="props"
     @update:model-value="updateModelValue"
@@ -12,22 +13,27 @@ import { ElInput, inputEmits, inputProps } from "element-plus";
 
 const props = defineProps({
   ...inputProps,
+  classArr: {
+    type: Array<string>,
+    required: false,
+    default: () => ["cp-text-head-2"],
+  },
   width: { type: String, required: false, default: "327px" },
   height: { type: String, required: false, default: "56px" },
   bgColor: {
     type: String,
     required: false,
-    default: "var(--cp-color-input-bg-pink)",
+    default: "var(--cp-color-pink-light)",
   },
   borderRadius: {
     type: String,
     required: false,
-    default: "6px",
+    default: "var(--cp-number-4)",
   },
   placeholderTextColor: {
     type: String,
     required: false,
-    default: "var(--cp-text-color-grey-000)",
+    default: "var(--cp-color-grey-100)",
   },
 });
 
@@ -52,11 +58,5 @@ const compStyle = computed(() => {
 <style scoped lang="scss">
 ::v-deep(.el-input__wrapper) {
   box-shadow: none;
-}
-
-.el-input {
-  // .cp-text-lg
-  font-size: 24px;
-  font-weight: 400;
 }
 </style>

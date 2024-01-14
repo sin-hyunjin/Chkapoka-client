@@ -1,39 +1,70 @@
-// TODO: 20230108-심재형: 폰트도 리스트화..
-.cp-text-sm {
-    font-size: 12px;
-    font-weight: 400;
-}
-.cp-text-sm-p {
-    font-size: 12px;
-    font-weight: 600;
+body * {
+    font-family: "Pretendard-Regular";
+    --el-font-family:"Pretendard-Regular";
+    @font-face {
+      font-family: "Pretendard-Regular";
+        src: url("assets/fonts/Pretendard-Regular.ttf") format("truetype");
+    }
+  }
+
+/** 새로 추가된 폰트(!important는 element-plus component에도 적용하기 위해서) */
+.cp-text-head-1 {
+    font-size: 32px !important;
+    font-weight: 700 !important;
 }
 
-.cp-text-md {
-    font-size: 16px;
-    font-weight: 400;
+.cp-text-head-2 {
+    font-size: 24px !important;
+    font-weight: 700 !important;
 }
 
-.cp-text-md-p {
-    font-size: 16px;
-    font-weight: 600;
+.cp-text-head-3 {
+    font-size: 22px !important;
+    font-weight: 700 !important;
 }
 
-.cp-text-lg {
-    font-size: 24px;
-    font-weight: 400;
+.cp-text-head-4 {
+    font-size: 20px !important;
+    font-weight: 700 !important;
 }
 
-.cp-text-lg-p {
-    font-size: 24px;
-    font-weight: 600;
+.cp-text-title-1 {
+    font-size: 18px !important;
+    font-weight: 600 !important;
 }
 
-.cp-text-xl-p {
-    font-size: 32px;
-    font-weight: 700;
+.cp-text-title-2 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
 }
 
-.cp-text-title {
-    font-size: 40px;
-    font-weight: 700;
+.cp-text-title-3 {
+    font-size: 15px !important;
+    font-weight: 600 !important;
 }
+
+.cp-text-title-4 {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+.cp-text-main-1 {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+}
+
+.cp-text-main-2 {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+}
+
+.cp-text-main-3 {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+.cp-text-main-4 {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+/** 새로 추가된 폰트 */

@@ -1,38 +1,77 @@
 <template>
   <div :class="['sign-container', layoutTypeClass]">
-    <template v-if="currentStep === SignFormCurrentStep.EMAIL">
-      <div class="top-text">
-        <div class="top-text__title cp-text-lg-p">안녕하세요</div>
-        <div class="top-text__title cp-text-lg-p">이메일을 알려주세요</div>
-        <div class="top-text__description cp-text-sm-p">
+    <div class="top">
+      <cp-button
+        type="icon"
+        :icon="IconArrowLeft"
+        width="auto"
+        height="auto"
+        bg-color="transparent"
+        text-color="var(--cp-color-black)"
+        @click="$emit('back')"
+        >뒤로가기</cp-button
+      >
+    </div>
+    <div class="top-text">
+      <template v-if="currentStep === SignFormStep.EMAIL">
+        <div class="top-text__title cp-text-head-2">안녕하세요</div>
+        <div class="top-text__title cp-text-head-2">이메일을 알려주세요</div>
+        <div class="top-text__description cp-text-title-4">
           편지를 쓰기 위해 회원가입이 필요해요!
         </div>
-      </div>
-      <div class="input-form">
+      </template>
+      <template v-if="currentStep === SignFormStep.REQUEST_EMAIL_VERIFY">
+        <div class="top-text__title cp-text-head-2">본인인증을 위해</div>
+        <div class="top-text__title cp-text-head-2">
+          메일로 코드를 보내드릴게요 :)
+        </div>
+        <div class="top-text__description cp-text-title-4">
+          인증코드를 받으시려면 아래 버튼을 눌러주세요.
+        </div>
+      </template>
+      <template v-if="currentStep === SignFormStep.CHECK_EMAIL_NUMBER">
+        <div class="top-text__title cp-text-head-2">
+          작성하신 이메일로 코드를 전송했어요!
+        </div>
+        <div class="top-text__description cp-text-title-4">
+          {{ emailValue }}의 메일함을 확인해주세요.
+        </div>
+      </template>
+      <template v-if="currentStep === SignFormStep.PASSWORD">
+        <div class="top-text__title cp-text-head-2">반가워요~</div>
+        <div class="top-text__title cp-text-head-2">
+          비밀번호를 적어주세요 :)
+        </div>
+        <div class="top-text__description cp-text-title-4">
+          영문자, 숫자를 이용해 8글자 이상의 비밀번호를 입력하세요.
+        </div>
+      </template>
+    </div>
+    <div class="input-form">
+      <template v-if="currentStep === SignFormStep.EMAIL">
         <cp-input
           v-model="emailValue"
           type="email"
           placeholder="example@example.com"
         />
-      </div>
-      <div class="button">
-        <cp-button
-          type="solid"
-          :disabled="isValidEmailValue"
-          @click="sendFormData(currentStep, emailValue)"
-          >시작하기</cp-button
-        >
-      </div>
-    </template>
-    <template v-if="currentStep === SignFormCurrentStep.PASSWORD">
-      <div class="top-text">
-        <div class="top-text__title cp-text-lg-p">반가워요~</div>
-        <div class="top-text__title cp-text-lg-p">비밀번호를 적어주세요 :)</div>
-        <div class="top-text__description cp-text-sm-p">
-          영문자, 숫자를 이용해 8글자 이상의 비밀번호를 입력하세요.
-        </div>
-      </div>
-      <div class="input-form">
+      </template>
+      <template v-if="currentStep === SignFormStep.REQUEST_EMAIL_VERIFY">
+        <cp-input
+          v-model="emailValue"
+          readonly
+          type="email"
+          placeholder="example@example.com"
+        />
+      </template>
+      <template v-if="currentStep === SignFormStep.CHECK_EMAIL_NUMBER">
+        <!-- TODO: 새로운 번호 입력폼, 다시 전송 요청하기 -->
+        <cp-input
+          :model-value="verifyNumberValue"
+          type="number"
+          @update:model-value="verifyNumberValue = Number($event)"
+        />
+      </template>
+      <template v-if="currentStep === SignFormStep.PASSWORD">
         <cp-input
           v-model="passwordValue"
           class="password"
@@ -40,45 +79,17 @@
           placeholder="비밀번호"
           show-password
         />
-      </div>
-      <div class="button">
-        <cp-button
-          type="solid"
-          :disabled="isValidPasswordValue"
-          @click="sendFormData(currentStep, passwordValue)"
-          >시작하기</cp-button
-        >
-      </div>
-    </template>
-    <template v-if="currentStep === SignFormCurrentStep.EMAIL_VERIFY">
-      <div class="top-text">
-        <!-- <div class="top-text__title cp-text-lg-p">반가워요~</div>
-        <div class="top-text__title cp-text-lg-p">비밀번호를 적어주세요 :)</div>
-        <div class="top-text__description cp-text-sm-p">
-          영문자, 숫자를 이용해 8글자 이상의 비밀번호를 입력하세요.
-        </div> -->
-        <div class="top-text__title cp-text-lg-p">
-          이메일 인증번호 처리는 내일~
-        </div>
-      </div>
-      <div class="input-form">
-        <!-- <cp-input
-          v-model="passwordValue"
-          class="password"
-          type="password"
-          placeholder="비밀번호"
-          show-password
-        /> -->
-      </div>
-      <div class="button">
-        <!-- <cp-button
-          type="solid"
-          :disabled="isValidPasswordValue"
-          @click="sendFormData(currentStep, passwordValue)"
-          >시작하기</cp-button
-        > -->
-      </div>
-    </template>
+      </template>
+    </div>
+    <div class="button">
+      <cp-button
+        type="solid"
+        :disabled="current.valid"
+        @click="sendFormData(currentStep, current.value)"
+      >
+        {{ current.buttonText }}
+      </cp-button>
+    </div>
   </div>
 </template>
 
@@ -93,18 +104,21 @@ export default defineComponent({
 import { ref, defineProps, computed } from "vue";
 import CpInput from "@/components/commons/CpInput.vue";
 import CpButton from "@/components/commons/CpButton.vue";
+import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
 // import IconShowPassword from "@/components/commons/images/IconShowPassword.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import { useValidateInputValue } from "@/composables/use-validate-input-value";
-import { SignFormCurrentStep } from "@/utils/const";
+import { SignFormStep } from "@/utils/const";
 
 const props = defineProps<{
   layoutType: LayoutType;
-  currentStep: SignFormCurrentStep;
+  currentStep: SignFormStep;
 }>();
 
 const emits = defineEmits<{
-  (e: "send", type: SignFormCurrentStep, value: string): void;
+  (e: "send", type: SignFormStep, value?: string | number): void;
+  (e: "navigate", type: SignFormStep): void;
+  (e: "back"): void;
 }>();
 
 const layoutTypeClass = computed<string | undefined>(() => {
@@ -121,13 +135,56 @@ const layoutTypeClass = computed<string | undefined>(() => {
 
 const emailValue = ref<string>("example@example.com");
 const passwordValue = ref<string>("pass1234");
+const verifyNumberValue = ref<number>(123456);
+const { isValidEmailValue, isValidPasswordValue, isValidVerifyNumberValue } =
+  useValidateInputValue({
+    email: emailValue,
+    password: passwordValue,
+    verifyNumber: verifyNumberValue,
+  });
 
-const { isValidEmailValue, isValidPasswordValue } = useValidateInputValue({
-  email: emailValue,
-  password: passwordValue,
+const current = computed(() => {
+  switch (props.currentStep) {
+    case SignFormStep.EMAIL: {
+      return {
+        valid: isValidEmailValue.value,
+        value: emailValue.value,
+        buttonText: "시작하기",
+      };
+    }
+    case SignFormStep.REQUEST_EMAIL_VERIFY: {
+      return {
+        valid: false,
+        value: undefined,
+        buttonText: "인증번호 전송",
+      };
+    }
+    case SignFormStep.CHECK_EMAIL_NUMBER: {
+      return {
+        valid: isValidVerifyNumberValue.value,
+        value: verifyNumberValue.value,
+        buttonText: "인증하기",
+      };
+    }
+    case SignFormStep.PASSWORD: {
+      return {
+        valid: isValidPasswordValue.value,
+        value: passwordValue.value,
+        buttonText: "로그인",
+      };
+    }
+    default: {
+      return {
+        valid: false,
+        value: undefined,
+        buttonText: "",
+      };
+    }
+  }
 });
 
-const sendFormData = (type: SignFormCurrentStep, value: string) => {
+const sendFormData = (type: SignFormStep, value?: string | number) => {
+  console.log(type, value);
   emits("send", type, value);
 };
 </script>
@@ -136,7 +193,7 @@ const sendFormData = (type: SignFormCurrentStep, value: string) => {
 .sign-container {
   min-width: 480px;
   height: 100%;
-  border-radius: 16px;
+  border-radius: var(--cp-number-16);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -144,15 +201,15 @@ const sendFormData = (type: SignFormCurrentStep, value: string) => {
   margin: 0 auto;
 
   .top-text {
-    margin-top: 100px;
+    margin-top: 50px;
     &__title {
-      color: var(--cp-color-text-black);
+      color: var(--cp-color-black);
     }
 
     &__description {
-      margin-top: 6px;
-      margin-bottom: 10px;
-      color: var(--cp-text-color-grey-200);
+      margin-top: var(--cp-number-4);
+      margin-bottom: var(--cp-number-12);
+      color: var(--cp-color-grey-500);
     }
   }
 
@@ -166,11 +223,14 @@ const sendFormData = (type: SignFormCurrentStep, value: string) => {
 }
 
 .web .top-text,
+.web .top,
+.tablet .top,
 .tablet .top-text {
   // button or input width
   width: 327px;
 }
 .mobile {
+  .top,
   .top-text,
   .input-form,
   .button {
@@ -180,7 +240,7 @@ const sendFormData = (type: SignFormCurrentStep, value: string) => {
 
 .password {
   & ::v-deep(.el-input__wrapper svg) {
-    color: var(--cp-primary-color);
+    color: var(--cp-color-red);
   }
   & ::v-deep(.el-input__password) {
     width: 25px;

@@ -1,8 +1,8 @@
 <template>
   <div :class="['init-container', !isInit ? 'linear-bg' : 'white-bg']">
     <div v-if="!isInit" ref="textRef" class="init-animation-text">
-      <div class="init-animation-text__title cp-text-title">CHUKAPOKA</div>
-      <div class="init-animation-text__description cp-text-sm-p">
+      <div class="init-animation-text__title cp-text-head-1">CHUKAPOKA</div>
+      <div class="init-animation-text__description cp-text-title-4">
         마음을 전하는 가장 따뜻한 방법
       </div>
     </div>
@@ -11,7 +11,7 @@
         <cp-logo />
       </div>
       <div class="bottom">
-        <div class="text cp-text-xl-p">
+        <div class="text cp-text-head-1">
           <div>따뜻한 이야기를</div>
           <div class="primary-text">간편하게</div>
         </div>
@@ -19,7 +19,7 @@
           <cp-button class="btn-start" type="solid" @click="$emit('start')"
             >시작하기</cp-button
           >
-          <div class="more-info cp-text-sm">
+          <div class="more-info cp-text-main-4">
             시작하기를 누르면
             <span>이용약관</span>
             /
@@ -88,7 +88,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 16px;
+  border-radius: var(--cp-number-16);
 
   .init-animation-text {
     animation: fadeInRight 1s;
@@ -118,7 +118,7 @@ onMounted(() => {
       .text {
         margin-top: auto;
         // margin-top: 128px;
-        color: var(--cp-color-text-black);
+        color: var(--cp-color-black);
         text-align: center;
       }
 
@@ -132,8 +132,8 @@ onMounted(() => {
         }
 
         .more-info {
-          margin: 24px 0;
-          color: var(--cp-text-color-grey-400);
+          margin: var(--cp-number-24) 0;
+          color: var(--cp-color-grey-500);
           & span {
             text-decoration: underline;
             &:hover {
@@ -163,6 +163,6 @@ onMounted(() => {
 }
 
 .primary-text {
-  color: var(--cp-primary-color);
+  color: var(--cp-color-red);
 }
 </style>

@@ -9,5 +9,13 @@ body * {
 }
 
 body * {
-    --button-base-border-radius: 12px;
+    /* 새로 추가된 margin, padding 수치(!important는 element-plus component에도 적용하기 위해서) */
+    --cp-number-4: 4px !important;
+    --cp-number-8: 8px !important;
+    --cp-number-12: 12px !important;
+    --cp-number-16: 16px !important;
+    --cp-number-24: 24px !important;
+    --cp-web-max-width: 768px !important;
+    --cp-tablet-max-width: 768px !important;
+    --cp-mobile-max-width: 480px !important;
 }
