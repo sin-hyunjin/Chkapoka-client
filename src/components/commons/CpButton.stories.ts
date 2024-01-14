@@ -1,3 +1,4 @@
+import { Component } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import CpButton from "./CpButton.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
@@ -45,7 +46,7 @@ export const Outlined: StoryObj<{ type: string }> = {
 export const Icon: StoryObj<{
   type: string;
   textColor: string;
-  icon: IconArrowLeft;
+  icon: Component;
 }> = {
   render: (args) => ({
     components: { CpButton },
