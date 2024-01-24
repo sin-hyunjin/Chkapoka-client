@@ -65,17 +65,19 @@
       </template>
       <template v-if="currentStep === SignFormStep.CHECK_EMAIL_NUMBER">
         <!-- TODO: 새로운 번호 입력폼, 다시 전송 요청하기 -->
-        <cp-input
+        <!-- <cp-input
           :model-value="verifyNumberValue"
           type="number"
           @update:model-value="verifyNumberValue = Number($event)"
-        />
+        /> -->
+        <cp-email-number-input></cp-email-number-input>
       </template>
       <template v-if="currentStep === SignFormStep.PASSWORD">
         <cp-input
           v-model="passwordValue"
           class="password"
           type="password"
+          1
           placeholder="비밀번호"
           show-password
         />
@@ -102,8 +104,9 @@ export default defineComponent({
 </script>
 <script setup lang="ts">
 import { ref, defineProps, computed } from "vue";
-import CpInput from "@/components/commons/CpInput.vue";
+import CpEmailNumberInput from "@/components/commons/CpEmailNumberInput.vue";
 import CpButton from "@/components/commons/CpButton.vue";
+import CpInput from "@/components/commons/CpInput.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
 // import IconShowPassword from "@/components/commons/images/IconShowPassword.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
