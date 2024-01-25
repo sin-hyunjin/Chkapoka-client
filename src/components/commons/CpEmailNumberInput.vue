@@ -1,11 +1,12 @@
-<!-- 
-  * v-model vs :model-value, @update:model-value
-    - v-model (양방향 바인딩)
+<!-- * v-model vs :model-value, @update:model-value
+    - v-model (in native element)
+      - value 속성에 값을 할당하는 v-bind와 input 이벤트 시 값을 입력하는 v-on 두 개의 directive가 햡쳐져서 동작
       - 사용자로부터 값을 입력 받는 <input>,<select>,<textarea> 등에서 사용
       - value 값에 모델의 값을 표시, 입력 값을 변경하면 자동으로 모델에 반영
       - <input>에서 type이 checkbox or <select>에서 multiple 속성인 경우
         -> 선택된 값이 배열 객체와 연결, 나머지는 단일 값과 연결
       - 디렉티브에 수식어를 사용할 수 o (v-model.lazy.number or v-model.trim 등)
+        ! native element에서만 적용 component x
         lazy: 입력 폼에서 change 이벤트가 발생하면 데이터 동기화
               기본은 key 이벤트가 발생할 때마다 반영
         number: 입력 값을 parseInt 또는 parseDouble을 이용해 number 타입으로 저장
@@ -32,13 +33,29 @@
         }.mount("#app")
       </script>
 
+      ex)
+      <input v-model="text" />
+      text 값이 바뀌면 input의 value 값이 바뀌고,
+      input의 value 값이 바뀌면 text 값이 바뀜
+      -> v-on, v-bind를 조합하여 사용한 것과 동일한 결과
+        <input :value="text" @input:"text = $event.target.value" />
 
-
+      => but component에 v-model을 적용하려면?
+    * component에서의 v-model
+      <CustomInput :model-value="text" @update:model-value = "newValue => text = newValue" />
+      -> 달라진 부분
+         :value -> model-value
+         @input -> @update:model-value
+         커스텀 이벤트로 바뀌었기 때문에 전달받은 값(newValue)로 갱신
+      ∴ component에서 v-model을 사용하려면 model-value, @update:model-value 
+         명칭을 사용해서 컴포넌트의 props와 emit 이용
     - :model-value
+      로컬 ref의 값과 동기화 되는 props
     - @update:model-value
+      로컬 ref의 값이 변경될 때 발생하는 이벤트
     - $event
-  
-  * Vue keyboard event
+ -->
+<!-- * Vue keyboard event
     - keyup
       @keyup = "keyHandle()"
       key를 눌렀다가 떼면 keyHandle method 실행
@@ -75,9 +92,9 @@
     - .ctrl / .alt / .shift / .meta (mac - command / window - window key)
     - keyup + system modifier keys 함께 쓰는 경우
       키가 눌러져 있어야 이벤트 발생! 
-      keyup.ctrl -> ctrl 누른 상태에서 다른 입력키를 뗄 때 트리거. ctrl만 떼만 트리거 z
+      keyup.ctrl -> ctrl 누른 상태에서 다른 입력키를 뗄 때 트리거. ctrl만 떼면 트리거 x
+-->
 
- -->
 <template>
   <div class="wrap">
     <el-input
@@ -131,7 +148,7 @@
     <el-button :disabled="!isAllInput">Button!</el-button>
   </div>
 </template>
-<!-- 
+<!-- * ref, unref, computed
   * ref
     - Vue3 이전의 ref -> Vue 템플릿의 DOM이나 컴포넌트를 가리키는 속성
       Vue3 -> reactive reference
