@@ -105,7 +105,6 @@ import { ref, defineProps, computed } from "vue";
 import CpInput from "@/components/commons/CpInput.vue";
 import CpButton from "@/components/commons/CpButton.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
-// import IconShowPassword from "@/components/commons/images/IconShowPassword.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import { useValidateInputValue } from "@/composables/use-validate-input-value";
 import { SignFormStep } from "@/utils/const";
@@ -184,7 +183,6 @@ const current = computed(() => {
 });
 
 const sendFormData = (type: SignFormStep, value?: string | number) => {
-  console.log(type, value);
   emits("send", type, value);
 };
 </script>

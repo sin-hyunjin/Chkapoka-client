@@ -37,6 +37,11 @@ import { LayoutType } from "@/composables/use-window-size-wrap";
 import { SignFormStep } from "@/utils/const";
 import type { SignFormData } from "@/utils/const";
 import invariant from "tiny-invariant";
+import {
+  EmailType,
+  NextActionType,
+  useEmailCheck,
+} from "@/composables/use-user-process";
 
 defineProps<{
   layoutType: LayoutType;
@@ -77,6 +82,28 @@ const handleSend = (currentType: SignFormStep, value?: string | number) => {
   apiProcess(currentType);
 };
 
+const currentNextAction = ref<NextActionType | undefined>(undefined);
+// email check api
+const { mutate: requestEmailCheck } = useEmailCheck({
+  onSuccess(res) {
+    const nextAction = res.data.data.nextAction;
+    currentNextAction.value = nextAction;
+    // 등록된 이메일
+    if (nextAction === "LOGIN") {
+      // 비밀번호 입력 폼 이동
+      navigate(SignFormStep.PASSWORD);
+    }
+    // 등록되지 않은 이메일
+    if (nextAction === "JOIN") {
+      // 이메일 인증번호 요청 폼 이동
+      navigate(SignFormStep.REQUEST_EMAIL_VERIFY);
+    }
+  },
+  onError(error) {
+    console.error(error.response?.data);
+  },
+});
+
 const apiProcess = (currentType: SignFormStep) => {
   switch (currentType) {
     case SignFormStep.EMAIL: {
@@ -84,18 +111,15 @@ const apiProcess = (currentType: SignFormStep) => {
       // 추후 api 연동 필요
       console.log("존재하는 이메일인지 api로 확인...");
 
-      // 등록된 이메일일 경우
-      if (TEMP_REGISTERED_USER_INFO.email === formData.value.email) {
-        // 비밀번호 입력 폼 이동
-        navigate(SignFormStep.PASSWORD);
-      } else {
-        // 이메일 인증번호 요청 폼 이동
-        navigate(SignFormStep.REQUEST_EMAIL_VERIFY);
-      }
+      requestEmailCheck({
+        email: formData.value.email,
+        emailType: EmailType.DEFAULT,
+      });
       break;
     }
     case SignFormStep.REQUEST_EMAIL_VERIFY: {
       // api로 현재 입력받은 이메일로 verify number 전송
+      console.log("이메일 인증번호 전송 요청...");
       requestEmailVerify();
       // 이메일 인증번호 입력 폼으로 이동
       navigate(SignFormStep.CHECK_EMAIL_NUMBER);
@@ -106,7 +130,6 @@ const apiProcess = (currentType: SignFormStep) => {
         TEMP_REGISTERED_USER_INFO.verifyNumber === formData.value.verifyNumber
       ) {
         // 유효한 인증번호 입력시
-
         // 이메일 인증번호 입력 폼으로 이동
         navigate(SignFormStep.PASSWORD);
       } else {
@@ -152,13 +175,14 @@ const back = () => {
     }
     case SignFormStep.PASSWORD: {
       // 등록된 아이디의 비밀번호 입력인 경우 : 아이디 입력폼으로
-      if (formData.value.email === TEMP_REGISTERED_USER_INFO.email) {
+      if (currentNextAction.value === "LOGIN") {
         navigate(SignFormStep.EMAIL);
       }
       // 등록되지 않은 아이디의 비밀번호 입력인 경우 : 이메일 인증번호 입력폼 ?? TODO: 돌아가지 않는게 맞는데...
-      else {
+      if (currentNextAction.value === "JOIN") {
         navigate(SignFormStep.CHECK_EMAIL_NUMBER);
       }
+      break;
     }
   }
 };
