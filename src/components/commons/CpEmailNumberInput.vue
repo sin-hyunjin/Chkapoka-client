@@ -116,15 +116,15 @@
       ref="inputRefs"
       :key="idx"
       :autofocus="idx === 0"
+      :class="classArr"
+      :style="compStyle"
+      :model-value="splitModelValue(modelValue, idx)"
+      :disabled="modelValue.length < idx"
       type="text"
       maxlength="1"
       @keyup="handleKeyup($event, idx)"
       @paste="handlePaste($event, idx)"
     />
-    <!--       
-      :model-value="splitModelValue(modelValue, idx)"
-      :disabled="modelValue.length < idx" 
-    -->
   </div>
 </template>
 <!-- * ref, unref, computed
@@ -258,29 +258,47 @@
 
  -->
 <script setup lang="ts">
-import { ref, defineProps, defineEmits } from "vue";
+import { ref, defineProps, defineEmits, computed } from "vue";
 import { ElInput } from "element-plus";
 
-const props = defineProps<{
-  modelValue: string;
-}>();
+const props = withDefaults(
+  defineProps<{
+    modelValue: string;
+    classArr?: string[];
+    width?: string;
+    height?: string;
+    bgColor?: string;
+    borderColor?: string;
+    borderRadius?: string;
+    textColor?: string;
+  }>(),
+  {
+    classArr: () => ["cp-text-head-2"],
+    width: "57px",
+    height: "63px",
+    bgColor: "var(--cp-color-pink-light)",
+    borderColor: "var(--cp-color-pink)",
+    borderRadius: "var(--cp-number-12)",
+    textColor: "var(--cp-color-grey-100)",
+  },
+);
 
 const emits = defineEmits<{
   (e: "update:modelValue", value: string): void;
 }>();
 
-// const splitModelValue = (modelValue: string, idx: number) => {
-//   // el-input에서 받아온 modelValue(입력 값), idx(필드 인덱스)
-//   const len = modelValue.length; // 받아온 입력 값의 길이 확인
-//   if (idx <= len - 1) {
-//     // 입력 필드의 인덱스가 사용자가 입력한 길이를 초과하지 않는다면
-//     return modelValue[idx];
-//     // 인덱스 값에 따른 해당 위치의 문자 반환
-//     // 입력한 값을 6개의 입력 필드로 분할하여 표시
-//   } else {
-//     return ""; // 인덱스가 입력 값의 길이보다 크거나 같으면 빈 입력필드 표시
-//   }
-// };
+const splitModelValue = (modelValue: string, idx: number) => {
+  // el-input에서 받아온 modelValue(입력 값), idx(필드 인덱스)
+  const len = modelValue.length; // 받아온 입력 값의 길이 확인
+  if (idx <= len - 1) {
+    // 입력 필드의 인덱스가 사용자가 입력한 길이를 초과하지 않는다면
+    return modelValue[idx];
+    // 인덱스 값에 따른 해당 위치의 문자 반환
+    // 입력한 값을 6개의 입력 필드로 분할하여 표시
+  } else {
+    return ""; // 인덱스가 입력 값의 길이보다 크거나 같으면 빈 입력필드 표시
+  }
+};
 
 const inputRefs = ref<InstanceType<typeof ElInput>[]>();
 
@@ -358,11 +376,35 @@ const handlePaste = (event: ClipboardEvent, idx: number) => {
     focusInput(5);
   }
 };
+
+const compStyle = computed(() => {
+  return {
+    "--el-input-width": props.width,
+    "--el-input-height": props.height,
+    "--el-input-bg-color": props.bgColor,
+    "--el-input-border-color": props.borderColor,
+    "--el-input-border-radius": props.borderRadius,
+    "--el-text-color-placeholder": props.textColor,
+  };
+});
 </script>
 
 <style scoped lang="scss">
 .wrap {
   display: flex;
   flex-direction: row;
+  margin: 0 auto;
+}
+.wrap > .el-input {
+  flex: 1;
+  margin-right: var(--cp-number-4);
+}
+
+.wrap > .el-input:last-child {
+  margin-right: 0;
+}
+
+::v-deep(.el-input__wrapper) {
+  box-shadow: none;
 }
 </style>

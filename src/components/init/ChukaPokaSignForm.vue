@@ -70,7 +70,9 @@
           type="number"
           @update:model-value="verifyNumberValue = Number($event)"
         /> -->
-        <cp-email-number-input></cp-email-number-input>
+        <cp-email-number-input
+          v-model="verifyNumberValue"
+        ></cp-email-number-input>
       </template>
       <template v-if="currentStep === SignFormStep.PASSWORD">
         <cp-input
@@ -138,7 +140,7 @@ const layoutTypeClass = computed<string | undefined>(() => {
 
 const emailValue = ref<string>("example@example.com");
 const passwordValue = ref<string>("pass1234");
-const verifyNumberValue = ref<number>(123456);
+const verifyNumberValue = ref<string>("");
 const { isValidEmailValue, isValidPasswordValue, isValidVerifyNumberValue } =
   useValidateInputValue({
     email: emailValue,
