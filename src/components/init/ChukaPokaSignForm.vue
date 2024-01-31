@@ -73,6 +73,17 @@
         <cp-email-number-input
           v-model="verifyNumberValue"
         ></cp-email-number-input>
+        <div class="resend-btn">
+          <cp-button
+            type="solid"
+            width="96px"
+            height="31px"
+            border-radius="var(--cp-number-4)"
+            bg-color="var(--cp-color-grey-100)"
+            text-color="var(--cp-color-grey-500)"
+            >코드 다시 받기</cp-button
+          >
+        </div>
       </template>
       <template v-if="currentStep === SignFormStep.PASSWORD">
         <cp-input
@@ -224,6 +235,12 @@ const sendFormData = (type: SignFormStep, value?: string | number) => {
 
   .button {
     margin-top: auto;
+  }
+
+  .resend-btn {
+    margin-top: var(--cp-number-12);
+    display: flex;
+    justify-content: flex-end;
   }
 }
 
