@@ -404,7 +404,7 @@ const compStyle = computed(() => {
   margin-right: 0;
 }
 
-::v-deep(.el-input__wrapper) {
-  box-shadow: none;
-}
+// ::v-deep(.el-input__wrapper) {
+//   box-shadow: none;
+// }
 </style>
