@@ -75,12 +75,14 @@
         ></cp-email-number-input>
         <div class="resend-btn">
           <cp-button
+            :class-arr="['cp-text-main-4']"
             type="solid"
             width="96px"
             height="31px"
             border-radius="var(--cp-number-4)"
             bg-color="var(--cp-color-grey-100)"
-            text-color="var(--cp-color-grey-500)"
+            text-color="var(--cp-color-grey-700)"
+            hover-color="var(--cp-color-grey-300)"
             >코드 다시 받기</cp-button
           >
         </div>
@@ -241,6 +243,9 @@ const sendFormData = (type: SignFormStep, value?: string | number) => {
     margin-top: var(--cp-number-12);
     display: flex;
     justify-content: flex-end;
+  }
+  .resend-btn > .el-button {
+    border: none;
   }
 }
 
