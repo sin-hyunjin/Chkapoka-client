@@ -1,4 +1,9 @@
 <template>
+  <div>
+    <cp-icon-circle-button class="buttons" type>
+      <icon-plus />
+    </cp-icon-circle-button>
+  </div>
   <div :class="['init-container', !isInit ? 'linear-bg' : 'white-bg']">
     <div v-if="!isInit" ref="textRef" class="init-animation-text">
       <div class="init-animation-text__title cp-text-head-1">CHUKAPOKA</div>
@@ -42,6 +47,11 @@ export default defineComponent({
 import { ref, onMounted, defineEmits } from "vue";
 import CpLogo from "@/components/commons/images/CpLogo.vue";
 import CpButton from "@/components/commons/CpButton.vue";
+
+// 정은우 버튼 test를 위해 임시 추가
+import CpIconCircleButton from "../commons/CpIconCircleButton.vue";
+import IconPlus from "../commons/images/IconPlus.vue";
+// import IconAddPost from "../commons/images/IconAddPost.vue";
 const textRef = ref<HTMLDivElement>();
 const isInit = ref(false);
 
