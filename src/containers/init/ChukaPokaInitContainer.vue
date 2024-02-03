@@ -48,8 +48,7 @@ const TEMP_REGISTERED_USER_INFO = {
   verifyNumber: 123456,
 };
 
-// const signFormCurrentStep = ref<SignFormStep>(SignFormStep.PREV_EMAIL);
-const signFormCurrentStep = ref<SignFormStep>(SignFormStep.CHECK_EMAIL_NUMBER);
+const signFormCurrentStep = ref<SignFormStep>(SignFormStep.PREV_EMAIL);
 const formData = ref<SignFormData>({
   email: "",
   password: "",

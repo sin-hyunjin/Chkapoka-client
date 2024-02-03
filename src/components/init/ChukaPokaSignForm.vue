@@ -64,12 +64,6 @@
         />
       </template>
       <template v-if="currentStep === SignFormStep.CHECK_EMAIL_NUMBER">
-        <!-- TODO: 새로운 번호 입력폼, 다시 전송 요청하기 -->
-        <!-- <cp-input
-          :model-value="verifyNumberValue"
-          type="number"
-          @update:model-value="verifyNumberValue = Number($event)"
-        /> -->
         <cp-email-number-input
           v-model="verifyNumberValue"
         ></cp-email-number-input>
@@ -92,7 +86,6 @@
           v-model="passwordValue"
           class="password"
           type="password"
-          1
           placeholder="비밀번호"
           show-password
         />
@@ -123,7 +116,6 @@ import CpEmailNumberInput from "@/components/commons/CpEmailNumberInput.vue";
 import CpButton from "@/components/commons/CpButton.vue";
 import CpInput from "@/components/commons/CpInput.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
-// import IconShowPassword from "@/components/commons/images/IconShowPassword.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import { useValidateInputValue } from "@/composables/use-validate-input-value";
 import { SignFormStep } from "@/utils/const";
