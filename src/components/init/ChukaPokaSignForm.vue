@@ -64,12 +64,22 @@
         />
       </template>
       <template v-if="currentStep === SignFormStep.CHECK_EMAIL_NUMBER">
-        <!-- TODO: 새로운 번호 입력폼, 다시 전송 요청하기 -->
-        <cp-input
-          :model-value="verifyNumberValue"
-          type="number"
-          @update:model-value="verifyNumberValue = Number($event)"
-        />
+        <cp-email-number-input
+          v-model="verifyNumberValue"
+        ></cp-email-number-input>
+        <div class="resend-btn">
+          <cp-button
+            :class-arr="['cp-text-main-4']"
+            type="solid"
+            width="96px"
+            height="31px"
+            border-radius="var(--cp-number-4)"
+            bg-color="var(--cp-color-grey-100)"
+            text-color="var(--cp-color-grey-700)"
+            hover-color="var(--cp-color-grey-300)"
+            >코드 다시 받기</cp-button
+          >
+        </div>
       </template>
       <template v-if="currentStep === SignFormStep.PASSWORD">
         <cp-input
@@ -102,10 +112,10 @@ export default defineComponent({
 </script>
 <script setup lang="ts">
 import { ref, defineProps, computed } from "vue";
-import CpInput from "@/components/commons/CpInput.vue";
+import CpEmailNumberInput from "@/components/commons/CpEmailNumberInput.vue";
 import CpButton from "@/components/commons/CpButton.vue";
+import CpInput from "@/components/commons/CpInput.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
-// import IconShowPassword from "@/components/commons/images/IconShowPassword.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import { useValidateInputValue } from "@/composables/use-validate-input-value";
 import { SignFormStep } from "@/utils/const";
@@ -135,7 +145,7 @@ const layoutTypeClass = computed<string | undefined>(() => {
 
 const emailValue = ref<string>("example@example.com");
 const passwordValue = ref<string>("pass1234");
-const verifyNumberValue = ref<number>(123456);
+const verifyNumberValue = ref<string>("");
 const { isValidEmailValue, isValidPasswordValue, isValidVerifyNumberValue } =
   useValidateInputValue({
     email: emailValue,
@@ -219,6 +229,15 @@ const sendFormData = (type: SignFormStep, value?: string | number) => {
 
   .button {
     margin-top: auto;
+  }
+
+  .resend-btn {
+    margin-top: var(--cp-number-12);
+    display: flex;
+    justify-content: flex-end;
+  }
+  .resend-btn > .el-button {
+    border: none;
   }
 }
 
