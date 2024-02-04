@@ -17,7 +17,7 @@ import { ElButton } from "element-plus";
 
 const props = withDefaults(
   defineProps<{
-    type: "outlined" | "solid" | "icon";
+    type: "outlined" | "solid";
     classArr?: string[];
     bgColor?: string;
     borderRadius?: string;
@@ -76,21 +76,6 @@ const innerStyle = computed(() => {
         "--el-button-border-color": props.bgColor,
         "--el-button-active-border-color": props.hoverColor,
         "--el-button-hover-border-color": props.hoverColor,
-      };
-    }
-    case "icon": {
-      return {
-        ...common,
-        "--el-button-text-color": props.textColor,
-        "--el-button-hover-text-color": props.textColor,
-        "--el-button-active-text-color": props.textColor,
-        "--el-button-bg-color": "transparent",
-        "--el-button-hover-bg-color": "transparent",
-        "--el-button-active-bg-color": "transparent",
-        "--el-button-border-color": "transparent",
-        "--el-button-active-border-color": "transparent",
-        "--el-button-hover-border-color": "transparent",
-        padding: "0",
       };
     }
     default: {

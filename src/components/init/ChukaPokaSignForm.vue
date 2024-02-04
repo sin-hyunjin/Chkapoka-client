@@ -2,7 +2,7 @@
   <div :class="['sign-container', layoutTypeClass]">
     <div class="top">
       <cp-button
-        type="icon"
+        type="solid"
         :icon="IconArrowLeft"
         width="auto"
         height="auto"
