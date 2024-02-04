@@ -1,8 +1,7 @@
 import { Component } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import CpIconCircleButton from "./CpIconCircleButton.vue";
-import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
-
+import IconPlusVue from "./images/IconPlus.vue";
 const meta: Meta<typeof CpIconCircleButton> = {
   title: "CpIconCircleButton",
   component: CpIconCircleButton,
@@ -17,47 +16,50 @@ export default meta;
  * See https://storybook.js.org/docs/api/csf
  * to learn how to use render functions.
  */
-export const Solid: StoryObj<{ type: string }> = {
+
+// export const Solid: StoryObj<{ type: string }> = {
+//   render: (args) => ({
+//     components: { CpIconCircleButton },
+//     setup() {
+//       return { args };
+//     },
+//     template: '<cp-button circle v-bind="args">Solid</cp-button>',
+//   }),
+//   args: {
+//     type: "solid",
+//   },
+// };
+
+
+export const RedSolid: StoryObj<{
+  type: string;
+  icon: Component;
+}> = {
   render: (args) => ({
     components: { CpIconCircleButton },
     setup() {
       return { args };
     },
-    template: '<cp-icon-circle-button v-bind="args">Solid</cp-icon-circle-button>',
+    template: '<cp-icon-circle-button v-bind="args"></cp-icon-circle-button>',
   }),
   args: {
-    type: "solid",
+    type: "redSolid",
+    icon: IconPlusVue,
   },
 };
-
-export const Outlined: StoryObj<{ type: string }> = {
-  render: (args) => ({
-    components: { CpButton },
-    setup() {
-      return { args };
-    },
-    template: '<cp-button v-bind="args">Outlined</cp-button>',
-  }),
-  args: {
-    type: "outlined",
-  },
-};
-
-export const Icon: StoryObj<{
+export const WhiteSolid: StoryObj<{
   type: string;
-  textColor: string;
-  icon: Component;
 }> = {
   render: (args) => ({
-    components: { CpButton },
+    components: { CpIconCircleButton },
     setup() {
       return { args };
     },
-    template: '<cp-button v-bind="args">Icon</cp-button>',
+    template: '<cp-icon-circle-button v-bind="args"></cp-icon-circle-button>',
   }),
   args: {
-    type: "icon",
-    textColor: "var(--cp-color-black)",
-    icon: IconArrowLeft,
+    type: "redSolid",
   },
 };
+
+

@@ -1,7 +1,6 @@
 <!-- 
-    240129 : CpIconCircleButton.vue
+    240205 : CpIconCircleButton.vue
     정은우 
-    기존 CpButton을 기반으로 만들고 있으나 아직 고치는 중.. ^ㅡㅠ
  -->
 <template>
   <el-button
@@ -23,11 +22,10 @@ import { ElButton } from "element-plus";
 
 const props = withDefaults(
   defineProps<{
-    type: "outlined" | "solid" | "icon";
+    type: "RedSolid"|"WhiteSolid";
     classArr?: string[];
     bgColor?: string;
     borderRadius?: string;
-    textColor?: string;
     hoverColor?: string;
     width?: string;
     height?: string;
@@ -36,12 +34,12 @@ const props = withDefaults(
   {
     classArr: () => ["cp-text-title-2"],
     bgColor: "var(--cp-color-red)",
-    borderRadius: "var(--cp-number-12)",
-    textColor: "var(--cp-color-grey-100)",
+    borderRadius: "100%",
     hoverColor: "var(--cp-color-pink)",
     width: "56px",
     height: "56px",
     disabled: false,
+    display: "flex",
   },
 );
 defineEmits<{
@@ -50,21 +48,36 @@ defineEmits<{
 
 const innerStyle = computed(() => {
   const common = {
-    "--el-border-radius-base": props.borderRadius,
+    "--el-border-radius-circle": props.borderRadius,
     width: props.width,
     height: props.height,
   };
-  return {
-    ...common,
-    "--el-button-text-color": props.textColor,
-    "--el-button-hover-text-color": props.textColor,
-    "--el-button-active-text-color": props.textColor,
-    "--el-button-bg-color": props.bgColor,
-    "--el-button-hover-bg-color": props.hoverColor,
-    "--el-button-active-bg-color": props.hoverColor,
-    "--el-button-hover-color": props.bgColor,
-    "--el-button-active-border-color": props.hoverColor,
-    "--el-button-hover-border-color": props.hoverColor,
-  };
+  switch (props.type) {
+    case "RedSolid": {
+      return {
+        ...common,
+        "--el-button-bg-color": props.bgColor,
+        "--el-button-hover-bg-color": props.hoverColor,
+        "--el-button-active-bg-color": props.hoverColor,
+        "--el-button-hover-color": props.bgColor,
+        "--el-button-active-border-color": props.hoverColor,
+        "--el-button-hover-border-color": props.hoverColor,
+      };
+    }
+        case "WhiteSolid": {
+      return {
+        ...common,
+        "--el-button-bg-color": props.bgColor,
+        "--el-button-hover-bg-color": props.hoverColor,
+        "--el-button-active-bg-color": props.hoverColor,
+        "--el-button-hover-color": props.bgColor,
+        "--el-button-active-border-color": props.hoverColor,
+        "--el-button-hover-border-color": props.hoverColor,
+      };
+    }
+    default: {
+      return {};
+    }
+  }
 });
 </script>
