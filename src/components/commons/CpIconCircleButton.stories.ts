@@ -1,7 +1,8 @@
 import { Component } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import CpIconCircleButton from "./CpIconCircleButton.vue";
-import IconPlusVue from "./images/IconPlus.vue";
+import IconPlus from "./images/IconPlus.vue";
+
 const meta: Meta<typeof CpIconCircleButton> = {
   title: "CpIconCircleButton",
   component: CpIconCircleButton,
@@ -17,49 +18,16 @@ export default meta;
  * to learn how to use render functions.
  */
 
-// export const Solid: StoryObj<{ type: string }> = {
-//   render: (args) => ({
-//     components: { CpIconCircleButton },
-//     setup() {
-//       return { args };
-//     },
-//     template: '<cp-button circle v-bind="args">Solid</cp-button>',
-//   }),
-//   args: {
-//     type: "solid",
-//   },
-// };
-
-
-export const RedSolid: StoryObj<{
-  type: string;
+export const Default: StoryObj<{
   icon: Component;
 }> = {
   render: (args) => ({
-    components: { CpIconCircleButton },
+    components: { CpIconCircleButton, IconPlus },
     setup() {
       return { args };
     },
-    template: '<cp-icon-circle-button v-bind="args"></cp-icon-circle-button>',
+    template:
+      '<cp-icon-circle-button v-bind="args"><icon-plus/></cp-icon-circle-button>',
   }),
-  args: {
-    type: "redSolid",
-    icon: IconPlusVue,
-  },
+  args: {},
 };
-export const WhiteSolid: StoryObj<{
-  type: string;
-}> = {
-  render: (args) => ({
-    components: { CpIconCircleButton },
-    setup() {
-      return { args };
-    },
-    template: '<cp-icon-circle-button v-bind="args"></cp-icon-circle-button>',
-  }),
-  args: {
-    type: "redSolid",
-  },
-};
-
-

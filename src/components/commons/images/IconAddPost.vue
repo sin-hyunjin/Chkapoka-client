@@ -35,3 +35,17 @@ withDefaults(
   },
 );
 </script>
+<style scoped lang="scss">
+svg {
+  &:hover {
+    fill: var("--cp-color-red-light");
+  }
+}
+</style>
+<style scoped lang="scss">
+svg {
+  &:hover {
+    fill: var(--cp-color-red-light);
+  }
+}
+</style>
