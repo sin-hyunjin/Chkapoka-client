@@ -10,9 +10,7 @@
     :disabled="disabled"
     @click="$emit('click')"
   >
-    <div>
-      <slot />
-    </div>
+    <slot />
   </el-button>
 </template>
 
@@ -24,9 +22,7 @@ const props = withDefaults(
   defineProps<{
     classArr?: string[];
     bgColor?: string;
-    iconColor?:string;
     hoverBgColor?: string;
-    hoverIconColor?: string;
     borderRadius?: string;
     width?: string;
     height?: string;
@@ -36,8 +32,6 @@ const props = withDefaults(
     classArr: () => ["cp-text-title-2"],
     bgColor: "var(--cp-color-red)",
     hoverBgColor: "var(--cp-color-pink)",
-    iconColor:"var(--cp-color-white)",
-    hoverIconColor: "var(--cp-color-grey-100)",
     borderRadius: "100%",
     width: "56px",
     height: "56px",
@@ -55,16 +49,14 @@ const innerStyle = computed(() => {
     width: props.width,
     height: props.height,
   };
-      return {
-        ...common,
-        "--el-button-bg-color": props.bgColor,
-        "--el-button-hover-bg-color": props.hoverBgColor,
-        "--el-button-active-bg-color": props.hoverBgColor,
-        "--el-button-icon-color": props.iconColor,
-        "--el-button-hover-icon-color": props.hoverIconColor,
-        "--el-button-active-border-color": props.hoverIconColor,
-        "--el-button-hover-border-color": props.hoverBgColor,
-      };
-    });
+  return {
+    ...common,
+    "--el-button-bg-color": props.bgColor,
+    "--el-button-hover-bg-color": props.hoverBgColor,
+    "--el-button-active-bg-color": props.hoverBgColor,
+    "--el-button-active-border-color": props.hoverBgColor,
+    "--el-button-hover-border-color": props.hoverBgColor,
+  };
+});
 </script>
 <style scoped lang="scss"></style>
