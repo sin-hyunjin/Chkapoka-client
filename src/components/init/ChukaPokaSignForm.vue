@@ -55,12 +55,7 @@
           placeholder="example@example.com"
         /> -->
 
-        <cp-icon-button type="solid" text-color="var(--cp-color-grey-900)"
-          ><div class="cp-text-head-4">
-            <IconTree></IconTree>
-            <span>선택 초기화</span>
-          </div></cp-icon-button
-        >
+        <cp-icon-button type="icon"><IconTree /></cp-icon-button>
       </template>
       <template v-if="currentStep === SignFormStep.REQUEST_EMAIL_VERIFY">
         <cp-input
@@ -124,7 +119,7 @@ import CpButton from "@/components/commons/CpButton.vue";
 import CpInput from "@/components/commons/CpInput.vue";
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
-import IconTree from "@/components/commons/images/IconRefresh.vue";
+import IconTree from "@/components/commons/images/IconEditPen.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import { useValidateInputValue } from "@/composables/use-validate-input-value";
 import { SignFormStep } from "@/utils/const";

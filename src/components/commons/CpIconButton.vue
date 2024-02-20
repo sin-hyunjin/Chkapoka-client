@@ -15,22 +15,21 @@ import { ElButton } from "element-plus";
 
 const props = withDefaults(
   defineProps<{
+    type: "icon" | "text";
     classArr?: string[];
     borderRadius?: string;
-    bgColor?: string;
     textColor?: string;
+    hoverColor?: string;
     width?: string;
     height?: string;
-    disabled?: boolean;
   }>(),
   {
     classArr: () => ["cp-text-title-2"],
-    bgColor: "transparent",
     borderRadius: "var(--cp-number-8)",
-    textColor: "var(--cp-color-grey-100)",
-    width: "162px",
-    height: "66px",
-    disabled: false,
+    textColor: "var(--cp-color-black)",
+    hoverColor: "var(--cp-color-red-light)",
+    width: "auto",
+    height: "auto",
   },
 );
 defineEmits<{
@@ -43,9 +42,34 @@ const innerStyle = computed(() => {
     width: props.width,
     height: props.height,
   };
-  return {
-    ...common,
-    "--el-button-bg-color": props.bgColor,
-  };
+  switch (props.type) {
+    case "text": {
+      return {
+        ...common,
+        "--el-button-text-color": props.textColor,
+        "--el-button-bg-color": "transparent",
+        "--el-button-hover-bg-color": props.hoverColor,
+        "--el-button-active-bg-color": props.hoverColor,
+        "--el-button-hover-text-color": props.textColor,
+        "--el-button-active-text-color": props.textColor,
+        "--el-button-active-border-color": props.hoverColor,
+        "--el-button-hover-border-color": props.hoverColor,
+      };
+    }
+    case "icon": {
+      return {
+        ...common,
+        "--el-button-text-color": props.textColor,
+        "--el-button-border-color": "transparent",
+        "--el-button-bg-color": "transparent",
+        "--el-button-hover-bg-color": "transparent",
+        "--el-button-active-border-color": "transparent",
+        "--el-button-hover-border-color": "transparent",
+      };
+    }
+    default: {
+      return {};
+    }
+  }
 });
 </script>
