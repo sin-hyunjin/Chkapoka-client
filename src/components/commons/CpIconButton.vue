@@ -26,7 +26,7 @@ const props = withDefaults(
   {
     classArr: () => ["cp-text-title-2"],
     borderRadius: "var(--cp-number-8)",
-    textColor: "var(--cp-color-black)",
+    textColor: "var(--cp-color-grey-500)",
     hoverColor: "var(--cp-color-red-light)",
     width: "auto",
     height: "auto",

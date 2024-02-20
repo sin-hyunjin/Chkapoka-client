@@ -49,13 +49,11 @@
     </div>
     <div class="input-form">
       <template v-if="currentStep === SignFormStep.EMAIL">
-        <!-- <cp-input
+        <cp-input
           v-model="emailValue"
           type="email"
           placeholder="example@example.com"
-        /> -->
-
-        <cp-icon-button type="icon"><IconTree /></cp-icon-button>
+        />
       </template>
       <template v-if="currentStep === SignFormStep.REQUEST_EMAIL_VERIFY">
         <cp-input
@@ -119,7 +117,6 @@ import CpButton from "@/components/commons/CpButton.vue";
 import CpInput from "@/components/commons/CpInput.vue";
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
-import IconTree from "@/components/commons/images/IconEditPen.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import { useValidateInputValue } from "@/composables/use-validate-input-value";
 import { SignFormStep } from "@/utils/const";
