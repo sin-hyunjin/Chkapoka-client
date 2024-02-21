@@ -115,7 +115,6 @@ import { ref, defineProps, computed } from "vue";
 import CpEmailNumberInput from "@/components/commons/CpEmailNumberInput.vue";
 import CpButton from "@/components/commons/CpButton.vue";
 import CpInput from "@/components/commons/CpInput.vue";
-import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import { useValidateInputValue } from "@/composables/use-validate-input-value";
