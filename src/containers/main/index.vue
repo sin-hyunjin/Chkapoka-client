@@ -20,6 +20,8 @@ import ChukaPokaMainContent from "@/components/main/ChukaPokaMainContent.vue";
 
 <style scoped lang="scss">
 .main-container-wrap {
+  width: 100%;
+  height: 100%;
   background-color: var(--cp-color-red);
   display: flex;
   flex-direction: column;

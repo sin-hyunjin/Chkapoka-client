@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header-wrap">
     <nav class="nav">
       <div class="left cp-text-head-4">CHUKAPOKA</div>
       <div class="right">
