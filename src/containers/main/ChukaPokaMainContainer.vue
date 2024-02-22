@@ -1,21 +1,29 @@
 <template>
-  <div class="main-container-wrap">
-    <chuka-poka-main-header />
-    <chuka-poka-main-content />
-  </div>
+  <cp-layout :layout-type="LayoutType.Mobile">
+    <div class="main-container-wrap">
+      <chuka-poka-main-header />
+      <chuka-poka-main-content />
+    </div>
+  </cp-layout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ChukaPokaMain",
+  name: "ChukaPokaMainContainer",
 });
 </script>
 
 <script setup lang="ts">
 import ChukaPokaMainHeader from "@/components/main/ChukaPokaMainHeader.vue";
 import ChukaPokaMainContent from "@/components/main/ChukaPokaMainContent.vue";
+import CpLayout from "@/components/commons/CpLayout.vue";
+import { LayoutType } from "@/composables/use-window-size-wrap";
+
+defineProps<{
+  layoutType: LayoutType;
+}>();
 </script>
 
 <style scoped lang="scss">
