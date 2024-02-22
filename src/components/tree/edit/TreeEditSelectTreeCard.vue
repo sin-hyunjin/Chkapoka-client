@@ -22,6 +22,7 @@ import { ElButton } from "element-plus";
 
 const props = withDefaults(
   defineProps<{
+    type: "treecard" | "backgroundcard";
     classArr?: string[];
     bgColor?: string;
     hoverBgColor?: string;
@@ -35,7 +36,7 @@ const props = withDefaults(
     classArr: () => ["cp-text-main-4"],
     bgColor: "var(--cp-color-white)",
     hoverBgColor: "var(--cp-color-white)",
-    borderColor:"var(cp-color-gray-500)",
+    borderColor: "var(cp-color-gray-500)",
     hoverBorderColor: "var(--cp-color-red)",
     borderRadius: "1rem",
     width: "100px",
@@ -52,22 +53,43 @@ defineEmits<{
 }>();
 
 const innerStyle = computed(() => {
-  const common = {
-    "--el-border-radius-base": props.borderRadius,
-    width: props.width,
-    height: props.height,
-  };
-  return {
-    ...common,
-    "--el-button-bg-color": props.bgColor,
-    "--el-button-border-color": props.borderColor,
-    "--el-button-hover-bg-color": props.hoverBgColor,
-    "--el-button-hover-border-color": props.hoverBorderColor,
-    "--el-button-hover-text-color": props.borderColor,
-    "--el-button-active-bg-color": props.bgColor,
-    "--el-button-active-border-color": props.borderColor,
-    "--el-button-active-text-color": props.borderColor,
-  };
+  const common = {};
+
+  switch (props.type) {
+    case "treecard": {
+      return {
+        ...common,
+        width: props.width,
+        height: props.height,
+        "--el-border-radius-base": props.borderRadius,
+        "--el-button-bg-color": props.bgColor,
+        "--el-button-border-color": props.borderColor,
+        "--el-button-hover-bg-color": props.hoverBgColor,
+        "--el-button-hover-border-color": props.hoverBorderColor,
+        "--el-button-hover-text-color": props.borderColor,
+        "--el-button-active-bg-color": props.bgColor,
+        "--el-button-active-border-color": props.borderColor,
+        "--el-button-active-text-color": props.borderColor,
+      };
+    }
+    case "backgroundcard": {
+      return {
+        ...common,
+        width: "52px",
+        height: "52px",
+        "--el-border-radius-base": "100%",
+        "--el-button-bg-color": props.bgColor,
+        "--el-button-border-color": props.borderColor,
+        "--el-button-hover-bg-color": props.bgColor,
+        "--el-button-hover-border-color": props.hoverBorderColor,
+        "--el-button-active-bg-color": props.bgColor,
+        "--el-button-active-border-color": props.borderColor,
+      };
+    }
+    default: {
+      return {};
+    }
+  }
 });
 </script>
 <style scoped lang="scss">
@@ -77,18 +99,12 @@ const innerStyle = computed(() => {
     color: var(--el-button-border-color);
     border-color: var(--el-button-border-color);
     flex-wrap: wrap;
-    &:hover{
+    padding: 0.875rem;
+    &:hover {
       border: 3px solid var(--el-button-hover-border-color);
-      background-color: var(--el-button-bg-color); // 투명도 추가
-      // opacity: 0.5;
     }
-    &:active{
-      // border-color: var(--cp-color-gray-100);
-      background-color: var(--cp-color-white);
-    }
-    span{
+    span {
       width: 100%;
-      word-wrap: break-word;
     }
   }
 }
