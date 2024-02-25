@@ -1,19 +1,4 @@
 <template>
-  <div>
-    <tree-edit-select-tree-card type="treecard">
-      <icon-tree />
-    </tree-edit-select-tree-card>
-
-    <tree-edit-select-tree-card type="treecard">
-      더 많은 나무가 <br />
-      생길 예정이에요!
-    </tree-edit-select-tree-card>
-    <tree-edit-select-tree-card
-      type="backgroundcard"
-      bg-color="var(--cp-color-light-green)"
-    >
-    </tree-edit-select-tree-card>
-  </div>
   <div :class="['init-container', !isInit ? 'linear-bg' : 'white-bg']">
     <div v-if="!isInit" ref="textRef" class="init-animation-text">
       <div class="init-animation-text__title cp-text-head-1">CHUKAPOKA</div>
@@ -57,10 +42,6 @@ export default defineComponent({
 import { ref, onMounted, defineEmits } from "vue";
 import CpLogo from "@/components/commons/images/CpLogo.vue";
 import CpButton from "@/components/commons/CpButton.vue";
-
-// 정은우 test 아래 import는 삭제해도 됨
-import TreeEditSelectTreeCard from "@/components/tree/edit/TreeEditSelectTreeCard.vue";
-import IconTree from "../commons/images/tree/IconTree.vue";
 
 const textRef = ref<HTMLDivElement>();
 const isInit = ref(false);

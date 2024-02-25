@@ -4,13 +4,7 @@
  -->
 <template>
   <div class="wrap">
-    <el-button
-      plain
-      :class="classArr"
-      :style="innerStyle"
-      :disabled="disabled"
-      @click="$emit('click')"
-    >
+    <el-button plain :class="classArr" :style="innerStyle" :disabled="disabled">
       <slot />
     </el-button>
   </div>
@@ -22,7 +16,7 @@ import { ElButton } from "element-plus";
 
 const props = withDefaults(
   defineProps<{
-    type: "treecard" | "backgroundcard";
+    type: "treeCard" | "backgroundCard";
     classArr?: string[];
     bgColor?: string;
     hoverBgColor?: string;
@@ -42,10 +36,6 @@ const props = withDefaults(
     width: "100px",
     height: "100px",
     disabled: false,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexWrap: "wrap",
   },
 );
 defineEmits<{
@@ -66,10 +56,6 @@ const innerStyle = computed(() => {
         "--el-button-border-color": props.borderColor,
         "--el-button-hover-bg-color": props.hoverBgColor,
         "--el-button-hover-border-color": props.hoverBorderColor,
-        "--el-button-hover-text-color": props.borderColor,
-        "--el-button-active-bg-color": props.bgColor,
-        "--el-button-active-border-color": props.borderColor,
-        "--el-button-active-text-color": props.borderColor,
       };
     }
     case "backgroundcard": {
@@ -82,8 +68,6 @@ const innerStyle = computed(() => {
         "--el-button-border-color": props.borderColor,
         "--el-button-hover-bg-color": props.bgColor,
         "--el-button-hover-border-color": props.hoverBorderColor,
-        "--el-button-active-bg-color": props.bgColor,
-        "--el-button-active-border-color": props.borderColor,
       };
     }
     default: {
@@ -99,7 +83,7 @@ const innerStyle = computed(() => {
     color: var(--el-button-border-color);
     border-color: var(--el-button-border-color);
     flex-wrap: wrap;
-    padding: 0.875rem;
+    padding: 2px;
     &:hover {
       border: 3px solid var(--el-button-hover-border-color);
     }
