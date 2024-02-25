@@ -31,7 +31,7 @@ const props = withDefaults(
     classArr: () => ["cp-text-title-2"],
     bgColor: "var(--cp-color-red)",
     borderRadius: "var(--cp-number-12)",
-    textColor: "var(--cp-color-grey-100)",
+    textColor: "var(--cp-color-gray-100)",
     hoverColor: "var(--cp-color-red-light)",
     width: "337px",
     height: "55px",

@@ -33,7 +33,7 @@ const props = defineProps({
   placeholderTextColor: {
     type: String,
     required: false,
-    default: "var(--cp-color-grey-100)",
+    default: "var(--cp-color-gray-100)",
   },
 });
 
