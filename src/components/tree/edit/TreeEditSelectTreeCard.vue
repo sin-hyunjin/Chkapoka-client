@@ -46,7 +46,7 @@ const innerStyle = computed(() => {
   const common = {};
 
   switch (props.type) {
-    case "treecard": {
+    case "treeCard": {
       return {
         ...common,
         width: props.width,
@@ -58,7 +58,7 @@ const innerStyle = computed(() => {
         "--el-button-hover-border-color": props.hoverBorderColor,
       };
     }
-    case "backgroundcard": {
+    case "backgroundCard": {
       return {
         ...common,
         width: "52px",

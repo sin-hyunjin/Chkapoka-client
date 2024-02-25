@@ -1,4 +1,3 @@
-import { Component } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import TreeEditSelectTreeCard from "./TreeEditSelectTreeCard.vue";
 import IconTree from "@/components/commons/images/tree/IconTree.vue";
@@ -19,7 +18,6 @@ export default meta;
  */
 
 export const TreeCard: StoryObj<{
-  icon: Component;
   type: string;
 }> = {
   render: (args) => ({
@@ -30,11 +28,12 @@ export const TreeCard: StoryObj<{
     template: `<tree-edit-select-tree-card v-bind="args"><icon-tree/></tree-edit-select-tree-card`,
   }),
   args: {
-    type: "treecard",
+    type: "treeCard",
   },
 };
 export const BackgroundCard: StoryObj<{
   type: string;
+  bgColor: string;
 }> = {
   render: (args) => ({
     components: { TreeEditSelectTreeCard },
@@ -44,6 +43,7 @@ export const BackgroundCard: StoryObj<{
     template: `<tree-edit-select-tree-card v-bind="args"></tree-edit-select-tree-card>`,
   }),
   args: {
-    type: "backgroundcard",
+    type: "backgroundCard",
+    bgColor: "var(--cp-color-pink)",
   },
 };
