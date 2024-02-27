@@ -22,24 +22,107 @@ export const Icon: StoryObj<{ type: string }> = {
     setup() {
       return { args };
     },
-    template:
-      '<cp-icon-button v-bind="args"><icon-edit-button /></cp-icon-button>',
+    template: `
+        <cp-icon-button v-bind="args">
+          <template #icon>
+            <icon-edit-button />
+          </template>
+        </cp-icon-button>
+      `,
   }),
   args: {
     type: "icon",
   },
 };
 
-export const Text: StoryObj<{ type: string }> = {
+export const withTextTop: StoryObj<{ type: string; textAlign: string }> = {
   render: (args) => ({
     components: { CpIconButton, IconRefresh },
     setup() {
       return { args };
     },
-    template:
-      '<cp-icon-button v-bind="args"><icon-refresh/><span>선택 초기화</span></cp-icon-button>',
+    template: `
+    <cp-icon-button v-bind="args">
+      <template #icon>
+        <icon-refresh />
+      </template>
+      <template #text>
+        선택 초기화
+      </template>
+    </cp-icon-button>
+  `,
   }),
   args: {
-    type: "text",
+    type: "withText",
+    textAlign: "top",
+  },
+};
+
+export const withTextBottom: StoryObj<{ type: string; textAlign: string }> = {
+  render: (args) => ({
+    components: { CpIconButton, IconRefresh },
+    setup() {
+      return { args };
+    },
+    template: `
+    <cp-icon-button v-bind="args">
+      <template #icon>
+        <icon-refresh />
+      </template>
+      <template #text>
+        선택 초기화
+      </template>
+    </cp-icon-button>
+  `,
+  }),
+  args: {
+    type: "withText",
+    textAlign: "bottom",
+  },
+};
+
+export const withTextStart: StoryObj<{ type: string; textAlign: string }> = {
+  render: (args) => ({
+    components: { CpIconButton, IconRefresh },
+    setup() {
+      return { args };
+    },
+    template: `
+    <cp-icon-button v-bind="args">
+      <template #icon>
+        <icon-refresh />
+      </template>
+      <template #text>
+        선택 초기화
+      </template>
+    </cp-icon-button>
+  `,
+  }),
+  args: {
+    type: "withText",
+    textAlign: "start",
+  },
+};
+
+export const withTextEnd: StoryObj<{ type: string; textAlign: string }> = {
+  render: (args) => ({
+    components: { CpIconButton, IconRefresh },
+    setup() {
+      return { args };
+    },
+    template: `
+    <cp-icon-button v-bind="args">
+      <template #icon>
+        <icon-refresh />
+      </template>
+      <template #text>
+        선택 초기화
+      </template>
+    </cp-icon-button>
+  `,
+  }),
+  args: {
+    type: "withText",
+    textAlign: "end",
   },
 };

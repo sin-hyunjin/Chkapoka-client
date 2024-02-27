@@ -1,40 +1,84 @@
 <template>
-  <el-button
-    :class="classArr"
-    :style="innerStyle"
-    :disabled="disabled"
-    @click="$emit('click')"
-  >
-    <slot />
+  <el-button :class="classArr" :style="innerStyle">
+    <template v-if="type === 'icon'">
+      <slot name="icon"></slot>
+    </template>
+    <template v-if="type === 'withText'">
+      <template v-if="textAlign === 'top'">
+        <div class="top">
+          <div class="text">
+            <slot name="text"></slot>
+          </div>
+          <div class="icon">
+            <slot name="icon"></slot>
+          </div>
+        </div>
+      </template>
+      <template v-if="textAlign === 'bottom'">
+        <div class="bottom">
+          <div class="icon">
+            <slot name="icon"></slot>
+          </div>
+          <div class="text">
+            <slot name="text"></slot>
+          </div>
+        </div>
+      </template>
+      <template v-if="textAlign === 'start'">
+        <div class="start text">
+          <slot name="text"></slot>
+        </div>
+        <div class="start icon">
+          <slot name="icon"></slot>
+        </div>
+      </template>
+      <template v-if="textAlign === 'end'">
+        <div class="end icon">
+          <slot name="icon"></slot>
+        </div>
+        <div class="end text">
+          <slot name="text"></slot>
+        </div>
+      </template>
+    </template>
   </el-button>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, computed } from "vue";
+import { defineProps, computed, withDefaults } from "vue";
 import { ElButton } from "element-plus";
 
 const props = withDefaults(
   defineProps<{
-    type: "icon" | "text";
     classArr?: string[];
-    borderRadius?: string;
-    textColor?: string;
-    hoverColor?: string;
+    type: "icon" | "withText";
+    textAlign?: "top" | "bottom" | "start" | "end";
     width?: string;
     height?: string;
+    visibleBorder?: boolean;
+    borderRadius?: string;
+    bgColor?: string;
+    textColor?: string;
+    borderColor?: string;
+    hoverBgColor?: string;
+    hoverTextColor?: string;
+    hoverBorderColor?: string;
   }>(),
   {
-    classArr: () => ["cp-text-title-2"],
-    borderRadius: "var(--cp-number-12)",
-    textColor: "var(--cp-color-grey-500)",
-    hoverColor: "var(--cp-color-red-light)",
+    classArr: () => ["cp-text-title-3"],
+    textAlign: "start",
     width: "auto",
     height: "auto",
+    visibleBorder: false,
+    borderRadius: "var(--cp-number-12)",
+    bgColor: "var(--cp-color-white)",
+    textColor: "var(--cp-color-black)",
+    borderColor: "var(--cp-color-red-light)",
+    hoverBgColor: "var(--cp-color-grey-100)",
+    hoverTextColor: "var(--cp-color-black)",
+    hoverBorderColor: "var(--cp-color-grey-100)",
   },
 );
-defineEmits<{
-  (e: "click"): void;
-}>();
 
 const innerStyle = computed(() => {
   const common = {
@@ -43,17 +87,17 @@ const innerStyle = computed(() => {
     height: props.height,
   };
   switch (props.type) {
-    case "text": {
+    case "withText": {
       return {
         ...common,
         "--el-button-text-color": props.textColor,
         "--el-button-bg-color": "transparent",
-        "--el-button-hover-bg-color": props.hoverColor,
-        "--el-button-active-bg-color": props.hoverColor,
+        "--el-button-hover-bg-color": props.hoverBgColor,
+        "--el-button-active-bg-color": props.hoverBgColor,
         "--el-button-hover-text-color": props.textColor,
         "--el-button-active-text-color": props.textColor,
-        "--el-button-active-border-color": props.hoverColor,
-        "--el-button-hover-border-color": props.hoverColor,
+        "--el-button-active-border-color": props.hoverBorderColor,
+        "--el-button-hover-border-color": props.hoverBorderColor,
       };
     }
     case "icon": {
@@ -73,3 +117,24 @@ const innerStyle = computed(() => {
   }
 });
 </script>
+<style scoped lang="scss">
+.top {
+  .text {
+    margin-bottom: 8px;
+  }
+}
+
+.bottom {
+  .icon {
+    margin-bottom: 8px;
+  }
+}
+
+.start.text {
+  margin-right: 8px;
+}
+
+.end.icon {
+  margin-right: 8px;
+}
+</style>
