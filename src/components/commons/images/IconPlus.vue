@@ -36,8 +36,8 @@ withDefaults(
 );
 </script>
 <style scoped lang="scss">
-svg{
-  &:hover{
+svg {
+  &:hover {
     fill: var(--cp-color-gray-100);
   }
 }
