@@ -3,36 +3,47 @@
     <nav class="nav">
       <div class="left cp-text-head-4">CHUKAPOKA</div>
       <div class="right">
-        <icon-notification
-          class="noti-btn"
-          fill-color="var(--cp-color-white)"
-        />
-        <icon-menu class="menu-btn" fill-color="var(--cp-color-white)" />
+        <cp-icon-button class="noti-btn" type="icon">
+          <template #icon>
+            <icon-notification fill-color="var(--cp-color-white)" />
+          </template>
+        </cp-icon-button>
+        <cp-icon-button class="menu-btn" type="icon">
+          <template #icon>
+            <icon-menu fill-color="var(--cp-color-white)" />
+          </template>
+        </cp-icon-button>
       </div>
     </nav>
     <div class="buttons">
-      <cp-button
-        type="solid"
-        :class-arr="['cp-text-head-4']"
+      <cp-icon-button
+        class="create-tree-btn"
+        type="withText"
+        text-align="start"
         bg-color="#FFE8E8"
         text-color="var(--cp-color-black)"
-        width="162px"
-        height="66px"
-        border-radius="12px"
       >
-        나무만들기
-      </cp-button>
-      <cp-button
-        type="solid"
-        :class-arr="['cp-text-head-4']"
+        <template #icon>
+          <icon-menu fill-color="var(--cp-color-white)" />
+        </template>
+        <template #text>
+          <div class="text cp-text-head-4'">나무만들기</div>
+        </template>
+      </cp-icon-button>
+      <cp-icon-button
+        class="create-tree-btn"
+        type="withText"
+        text-align="start"
         bg-color="#FFE8E8"
         text-color="var(--cp-color-black)"
-        width="162px"
-        height="66px"
-        border-radius="12px"
       >
-        편지쓰기
-      </cp-button>
+        <template #icon>
+          <icon-menu fill-color="var(--cp-color-white)" />
+        </template>
+        <template #text>
+          <div class="text cp-text-head-4'">편지쓰기</div>
+        </template>
+      </cp-icon-button>
     </div>
   </header>
 </template>
@@ -45,7 +56,7 @@ export default defineComponent({
 });
 </script>
 <script setup lang="ts">
-import CpButton from "@/components/commons/CpButton.vue";
+import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconNotification from "@/components/commons/images/IconNotification.vue";
 import IconMenu from "@/components/commons/images/IconMenu.vue";
 </script>

@@ -1,6 +1,10 @@
 <template>
   <div class="tree-empty-container">
-    <div class="add-btn"><cp-button>나무 심으러 가기</cp-button></div>
+    <div class="add-btn">
+      <cp-icon-button type="withText">
+        <template #text>나무 심으러 가기</template>
+      </cp-icon-button>
+    </div>
     <div class="green-ground" />
   </div>
 </template>
@@ -14,7 +18,7 @@ export default defineComponent({
 </script>
 <script setup lang="ts">
 import { defineEmits } from "vue";
-import CpButton from "@/components/commons/CpButton.vue";
+import CpIconButton from "@/components/commons/CpIconButton.vue";
 
 defineEmits<{
   (e: "click"): void;
@@ -29,6 +33,7 @@ defineEmits<{
 
   .add-btn {
     height: 150px;
+    background-color: #fefcf8;
 
     display: flex;
     justify-content: center;
