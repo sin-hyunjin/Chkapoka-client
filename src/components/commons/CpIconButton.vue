@@ -74,9 +74,9 @@ const props = withDefaults(
     bgColor: "var(--cp-color-white)",
     textColor: "var(--cp-color-black)",
     borderColor: "var(--cp-color-red-light)",
-    hoverBgColor: "var(--cp-color-grey-100)",
+    hoverBgColor: "var(--cp-color-gray-100)",
     hoverTextColor: "var(--cp-color-black)",
-    hoverBorderColor: "var(--cp-color-grey-100)",
+    hoverBorderColor: "var(--cp-color-gray-100)",
   },
 );
 
