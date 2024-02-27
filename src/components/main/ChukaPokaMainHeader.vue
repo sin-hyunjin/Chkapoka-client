@@ -3,12 +3,12 @@
     <nav class="nav">
       <div class="left cp-text-head-4">CHUKAPOKA</div>
       <div class="right">
-        <cp-icon-button class="noti-btn" type="icon">
+        <cp-icon-button type="icon">
           <template #icon>
             <icon-notification fill-color="var(--cp-color-white)" />
           </template>
         </cp-icon-button>
-        <cp-icon-button class="menu-btn" type="icon">
+        <cp-icon-button type="icon">
           <template #icon>
             <icon-menu fill-color="var(--cp-color-white)" />
           </template>
@@ -16,29 +16,17 @@
       </div>
     </nav>
     <div class="buttons">
-      <cp-icon-button
-        class="create-tree-btn"
-        type="withText"
-        text-align="start"
-        bg-color="#FFE8E8"
-        text-color="var(--cp-color-black)"
-      >
+      <cp-icon-button type="withText" text-align="start">
         <template #icon>
-          <icon-menu fill-color="var(--cp-color-white)" />
+          <icon-tree-green fill-color="var(--cp-color-white)" />
         </template>
         <template #text>
           <div class="text cp-text-head-4'">나무만들기</div>
         </template>
       </cp-icon-button>
-      <cp-icon-button
-        class="create-tree-btn"
-        type="withText"
-        text-align="start"
-        bg-color="#FFE8E8"
-        text-color="var(--cp-color-black)"
-      >
+      <cp-icon-button type="withText" text-align="start">
         <template #icon>
-          <icon-menu fill-color="var(--cp-color-white)" />
+          <icon-letter-pink fill-color="var(--cp-color-white)" />
         </template>
         <template #text>
           <div class="text cp-text-head-4'">편지쓰기</div>
@@ -59,6 +47,8 @@ export default defineComponent({
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconNotification from "@/components/commons/images/IconNotification.vue";
 import IconMenu from "@/components/commons/images/IconMenu.vue";
+import IconTreeGreen from "@/components/commons/images/IconTreeGreen.vue";
+import IconLetterPink from "@/components/commons/images/IconLetterPink.vue";
 </script>
 
 <style scoped lang="scss">
@@ -80,16 +70,6 @@ header {
     .right {
       display: flex;
       align-items: center;
-      .menu-btn {
-        margin-left: 16px;
-      }
-
-      & .noti-btn:hover {
-        cursor: pointer;
-      }
-      & .menu-btn:hover {
-        cursor: pointer;
-      }
     }
   }
 

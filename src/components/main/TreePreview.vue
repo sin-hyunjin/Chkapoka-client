@@ -1,8 +1,10 @@
 <template>
   <div class="tree-preview-container">
-    <icon-tree-preview class="tree-image" />
-    <div class="tree-name">{{ data.title }}</div>
-    <div class="tree-updated-at">{{ data.updatedAt }}</div>
+    <div class="freestyle">
+      <icon-tree-preview class="tree-image" />
+      <div class="tree-name">{{ data.title }}</div>
+      <div class="tree-updated-at">{{ data.updatedAt }}</div>
+    </div>
   </div>
 </template>
 
@@ -35,6 +37,12 @@ defineEmits<{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
   & .tree-image {
     border-radius: var(--cp-number-8);
   }
@@ -46,9 +54,9 @@ defineEmits<{
   }
 
   & .tree-updated-at {
+    color: #6f6f6f;
     margin-left: var(--cp-number-4);
     margin-top: 2px;
-    color: #6f6f6f;
     font-size: 8px;
   }
 }
