@@ -40,7 +40,7 @@ const props = withDefaults(
     bgColor: "var(--cp-color-pink-light)",
     borderColor: "var(--cp-color-pink)",
     borderRadius: "var(--cp-number-12)",
-    textColor: "var(--cp-color-grey-100)",
+    textColor: "var(--cp-color-gray-100)",
     hoverColor: "var(--cp-color-red-light)",
   },
 );

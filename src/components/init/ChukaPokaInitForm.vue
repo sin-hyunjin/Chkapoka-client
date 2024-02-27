@@ -134,7 +134,7 @@ onMounted(() => {
 
         .more-info {
           margin: var(--cp-number-24) 0;
-          color: var(--cp-color-grey-500);
+          color: var(--cp-color-gray-500);
           & span {
             text-decoration: underline;
             &:hover {
