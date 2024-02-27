@@ -91,13 +91,20 @@ const innerStyle = computed(() => {
       return {
         ...common,
         "--el-button-text-color": props.textColor,
-        "--el-button-bg-color": "transparent",
+        "--el-button-bg-color": props.bgColor,
+        "--el-button-border-color": props.visibleBorder
+          ? props.borderColor
+          : "transparent",
         "--el-button-hover-bg-color": props.hoverBgColor,
         "--el-button-active-bg-color": props.hoverBgColor,
         "--el-button-hover-text-color": props.textColor,
         "--el-button-active-text-color": props.textColor,
-        "--el-button-active-border-color": props.hoverBorderColor,
-        "--el-button-hover-border-color": props.hoverBorderColor,
+        "--el-button-active-border-color": props.visibleBorder
+          ? props.hoverBorderColor
+          : "transparent",
+        "--el-button-hover-border-color": props.visibleBorder
+          ? props.hoverBorderColor
+          : "transparent",
       };
     }
     case "icon": {
