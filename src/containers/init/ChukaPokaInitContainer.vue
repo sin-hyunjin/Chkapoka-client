@@ -29,7 +29,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
 import CpLayout from "@/components/commons/CpLayout.vue";
 import ChukaPokaInitForm from "@/components/init/ChukaPokaInitForm.vue";
 import ChukaPokaSignForm from "@/components/init/ChukaPokaSignForm.vue";

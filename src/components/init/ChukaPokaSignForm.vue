@@ -111,7 +111,7 @@ export default defineComponent({
 });
 </script>
 <script setup lang="ts">
-import { ref, defineProps, computed } from "vue";
+import { ref, defineProps, computed, defineEmits } from "vue";
 import CpEmailNumberInput from "@/components/commons/CpEmailNumberInput.vue";
 import CpButton from "@/components/commons/CpButton.vue";
 import CpInput from "@/components/commons/CpInput.vue";
