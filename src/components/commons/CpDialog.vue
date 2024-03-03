@@ -56,7 +56,6 @@ const props = defineProps({
   },
 });
 
-// const emits = defineEmits(dialogEmits);
 defineEmits({ ...dialogEmits });
 
 const innerStyle = computed(() => {
@@ -67,7 +66,7 @@ const innerStyle = computed(() => {
     ) {
       return "var(--cp-web-max-width)";
     } else {
-      return "var(--cp-mobile-max-width)";
+      return "auto";
     }
   };
 
