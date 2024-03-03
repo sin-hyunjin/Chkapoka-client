@@ -83,6 +83,7 @@ const innerStyle = computed(() => {
   border-radius: 12px;
   display: flex;
   flex-direction: column;
+  height: 90vh !important;
 
   .header,
   .footer {
