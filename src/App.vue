@@ -6,7 +6,9 @@
 
 <script setup lang="ts">
 import { useWindowSizeWrap } from "@/composables/use-window-size-wrap";
+import { useHandleRoutingWithToken } from "@/composables/use-handle-routing-with-token";
 const { layoutType } = useWindowSizeWrap();
+useHandleRoutingWithToken();
 </script>
 
 <style scoped lang="scss">
