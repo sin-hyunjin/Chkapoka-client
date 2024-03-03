@@ -2,7 +2,7 @@
   <div :class="['sign-container', layoutTypeClass]">
     <div class="top">
       <cp-button
-        type="icon"
+        type="solid"
         :icon="IconArrowLeft"
         width="auto"
         height="auto"
@@ -74,9 +74,9 @@
             width="96px"
             height="31px"
             border-radius="var(--cp-number-4)"
-            bg-color="var(--cp-color-grey-100)"
-            text-color="var(--cp-color-grey-700)"
-            hover-color="var(--cp-color-grey-300)"
+            bg-color="var(--cp-color-gray-100)"
+            text-color="var(--cp-color-gray-700)"
+            hover-color="var(--cp-color-gray-300)"
             >코드 다시 받기</cp-button
           >
         </div>
@@ -111,7 +111,7 @@ export default defineComponent({
 });
 </script>
 <script setup lang="ts">
-import { ref, defineProps, computed } from "vue";
+import { ref, defineProps, computed, defineEmits } from "vue";
 import CpEmailNumberInput from "@/components/commons/CpEmailNumberInput.vue";
 import CpButton from "@/components/commons/CpButton.vue";
 import CpInput from "@/components/commons/CpInput.vue";
@@ -221,7 +221,7 @@ const sendFormData = (type: SignFormStepTypes, value?: string | number) => {
     &__description {
       margin-top: var(--cp-number-4);
       margin-bottom: var(--cp-number-12);
-      color: var(--cp-color-grey-500);
+      color: var(--cp-color-gray-500);
     }
   }
 

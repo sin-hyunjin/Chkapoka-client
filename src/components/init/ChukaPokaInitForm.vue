@@ -42,6 +42,7 @@ export default defineComponent({
 import { ref, onMounted, defineEmits } from "vue";
 import CpLogo from "@/components/commons/images/CpLogo.vue";
 import CpButton from "@/components/commons/CpButton.vue";
+
 const textRef = ref<HTMLDivElement>();
 const isInit = ref(false);
 
@@ -133,7 +134,7 @@ onMounted(() => {
 
         .more-info {
           margin: var(--cp-number-24) 0;
-          color: var(--cp-color-grey-500);
+          color: var(--cp-color-gray-500);
           & span {
             text-decoration: underline;
             &:hover {

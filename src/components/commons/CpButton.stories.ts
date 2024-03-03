@@ -1,7 +1,5 @@
-import { Component } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import CpButton from "./CpButton.vue";
-import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
 
 const meta: Meta<typeof CpButton> = {
   title: "CpButton",
@@ -40,24 +38,5 @@ export const Outlined: StoryObj<{ type: string }> = {
   }),
   args: {
     type: "outlined",
-  },
-};
-
-export const Icon: StoryObj<{
-  type: string;
-  textColor: string;
-  icon: Component;
-}> = {
-  render: (args) => ({
-    components: { CpButton },
-    setup() {
-      return { args };
-    },
-    template: '<cp-button v-bind="args">Icon</cp-button>',
-  }),
-  args: {
-    type: "icon",
-    textColor: "var(--cp-color-black)",
-    icon: IconArrowLeft,
   },
 };
