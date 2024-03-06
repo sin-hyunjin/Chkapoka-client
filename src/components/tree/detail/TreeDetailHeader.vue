@@ -2,7 +2,7 @@
   <div>
     <div class="tree-detail-header">
       <div class="tree-detail-title">
-        <h3 class="cp-text-head-2">트리 이름 적는 곳</h3>
+        <h3 class="cp-text-head-2 tree-detail-title-h3">트리 이름 적는 곳</h3>
         <cp-icon-button type="icon" width="18px" height="18px">
           <icon-edit-pen />
         </cp-icon-button>
@@ -41,6 +41,9 @@ defineProps<{
   }
   &-title {
     display: flex;
+    &-h3 {
+      color: var(--cp-color-chocolate);
+    }
   }
   &-date p {
     margin: 0.5rem 0;
