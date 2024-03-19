@@ -41,7 +41,7 @@ defineProps<{
 
 <style scoped lang="scss">
 // TODO: 추후 삭제
-.tree-detail-header {
-  border: 1px solid black;
-}
+// .tree-detail-header {
+//   border: 1px solid black;
+// }
 </style>
