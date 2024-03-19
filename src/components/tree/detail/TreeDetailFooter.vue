@@ -1,6 +1,12 @@
 <template>
   <div class="tree-detail-footer">
-    <cp-button type="solid">초대하기</cp-button>
+    <!-- <template>
+      <cp-button type="solid">초대하기</cp-button>
+    </template> -->
+    <cp-icon-circle-button class="menu__container">
+      <icon-plus />
+    </cp-icon-circle-button>
+
   </div>
 </template>
 
@@ -13,14 +19,16 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-// import TreeType from "@/components/commons/images/TreeType.vue";
-// import TreeFigure from "../TreeFigure.vue";
-import CpButton from "@/components/commons/CpButton.vue";
+
+import CpIconCircleButton from "@/components/commons/CpIconCircleButton.vue";
+import IconPlus from "@/components/commons/images/IconPlus.vue";
+
 
 import { defineProps } from "vue";
 defineProps<{
   id: string;
 }>();
+
 </script>
 
 <style scoped lang="scss">
@@ -31,10 +39,15 @@ defineProps<{
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .menu {
+    &__container:focus {
+      transform: rotate(45deg);
+    }
+    &__item:active {
+      transform: scale(0.95);
+    }
+  }
 }
 
-// TODO: 추후 삭제
-// .tree-detail-footer {
-//   border: 1px solid black;
-// }
 </style>

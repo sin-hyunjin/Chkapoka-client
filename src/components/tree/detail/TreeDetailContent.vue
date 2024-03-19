@@ -3,8 +3,8 @@
     <!-- Content Header 부분 -->
     <div class="info">
       <div class="text">
-        <div class="title cp-text-head-2">트리 이름 적는 곳</div>
-        <div class="date cp-text-main-4">2023.12.31</div>
+        <div class="title cp-text-head-2">{{ title }}</div>
+        <div class="date cp-text-main-4">{{ updatedAt }}</div>
       </div>
     </div>
     <div class="body">
@@ -34,7 +34,7 @@ export default defineComponent({
 import TreeType from "@/components/commons/images/TreeType.vue";
 import TreeItem from "@/components/tree/TreeItem.vue";
 // import TreeFigure from "../TreeFigure.vue";
-import { computed, defineProps, ref, watch } from "vue";
+import { computed, defineProps, ref } from "vue";
 defineProps<{
   id: string;
 }>();
@@ -48,7 +48,8 @@ const treeSize = computed(() => {
     height: treeRef.value?.offsetHeight ?? 0,
   };
 });
-
+const title = ref<string>("트리 이름 적는 곳");
+const updatedAt = ref<string>("2023.12.31");
 const treeItemList = [
   {
     id: "treeItem1",
@@ -91,11 +92,6 @@ const treeItemList = [
     title: "승연에게",
   },
 ];
-// const treeItemDivisionList = [2,6];
-
-watch(treeSize, () => {
-  console.log(treeSize.value);
-});
 
 const getTreeItemPosition = (idx: number) => {
   if (idx === 0) {
@@ -158,11 +154,4 @@ const getTreeItemPosition = (idx: number) => {
     }
   }
 }
-
-// TODO: 추후 삭제
-// .tree-detail-content,
-// .info,
-// .body {
-//   border: solid 1px black;
-// }
 </style>

@@ -36,20 +36,5 @@ defineProps<{
 
   display: flex;
   flex-direction: column;
-  // &-background {
-  //   width: 100%;
-  //   height: 100%;
-  //   background-position: center center;
-  //   // 사이즈 지정해야 하는데 어떻게 동적으로 할지 모루겠음. rem이니까 이대로 해도 되나..?
-  //   background-size: 37.5rem 42.5rem;
-  //   background-repeat: repeat-x;
-  //   background-image: url("@/components/tree/background/background_01.png");
-  // }
-  // &-wrap {
-  //   width: 100%;
-  //   height: 100%;
-  //   display: flex;
-  //   flex-direction: column;
-  // }
 }
 </style>
