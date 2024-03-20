@@ -4,7 +4,13 @@
  -->
 <template>
   <div class="wrap">
-    <el-button plain :class="classArr" :style="innerStyle" :disabled="disabled">
+    <el-button
+      plain
+      :class="classArr"
+      :style="innerStyle"
+      :disabled="disabled"
+      @click="$emit('click')"
+    >
       <slot />
     </el-button>
   </div>

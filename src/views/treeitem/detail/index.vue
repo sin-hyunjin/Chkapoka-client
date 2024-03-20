@@ -1,5 +1,5 @@
 <template>
-  <tree-item-detail :id="id" />
+  <tree-item-detail />
 </template>
 
 <script lang="ts">
@@ -12,10 +12,6 @@ export default defineComponent({
 
 <script setup lang="ts">
 import TreeItemDetail from "@/containers/treeitem/detail/index.vue";
-
-defineProps<{
-  id: string;
-}>();
 </script>
 
 <style scoped lang="scss"></style>

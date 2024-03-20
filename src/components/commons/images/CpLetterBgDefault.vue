@@ -34,6 +34,6 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "CpLetter",
+  name: "CpLetterBgDefault",
 });
 </script>
