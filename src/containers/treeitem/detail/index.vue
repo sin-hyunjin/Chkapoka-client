@@ -199,6 +199,21 @@ const sendWriteData = () => {
   margin-top: var(--cp-number-24);
 }
 
+.letter-form {
+  margin-top: var(--cp-number-24);
+  > *:not(:first-child) {
+    margin-top: var(--cp-number-24);
+  }
+}
+
+.title-form > div {
+  margin-bottom: var(--cp-number-12);
+}
+
+.content-form > div {
+  margin-bottom: var(--cp-number-12);
+}
+
 .footer {
   align-items: center;
 }
