@@ -1,67 +1,70 @@
 <template>
-  <div class="dialog">
-    <cp-dialog v-model="visible">
-      <template #header>
-        <div class="header">아이템 작성</div>
-      </template>
-      <div>편지지 선택하기</div>
-      <div class="letter-select">
-        <letter-paper
-          v-for="(data, idx) in letterPapers"
-          :key="idx"
-          :data="data"
-          @get-letter="showLetter"
-        />
-      </div>
-
-      <!-- for test -->
-      <!-- <div>선택된 편지지 : {{ letterValue }}</div> -->
-
-      <!-- letter selected form -->
-      <div v-if="currentStep === 'LETTER_SELECT'" class="letter-select-form">
-        <bg-select-form v-model="letterValue" :letter="letterValue" />
-      </div>
-      <!-- write form -->
-      <div v-if="currentStep === 'WRITE_LETTER'" class="write-form">
-        <div class="letter-form">
-          <div class="title-form">
-            <div>편지 제목</div>
-            <cp-input
-              v-model="titleValue"
-              bg-color="var(--cp-color-gray-100)"
-            />
-          </div>
-          <div class="content-form">
-            <div>본문</div>
-            <cp-input
-              v-model="contentValue"
-              bg-color="var(--cp-color-gray-100)"
-            />
-          </div>
+  <cp-layout class="layout" :layout-type="LayoutType.Mobile">
+    <div class="dialog">
+      <cp-dialog v-model="visible">
+        <template #header>
+          <div class="header">아이템 작성</div>
+        </template>
+        <div>편지지 선택하기</div>
+        <div class="letter-select">
+          <letter-paper
+            v-for="(data, idx) in letterPapers"
+            :key="idx"
+            :data="data"
+            @get-letter="showLetter"
+          />
         </div>
-        <!-- <letter-form :title="titleValue" :content="contentValue" /> -->
-      </div>
-      <!-- write success -->
-      <div v-if="currentStep === 'WRITE_SUCCESS'" class="write-success">
-        write success💔
-      </div>
-      <template #footer>
-        <div class="footer">
-          <cp-button
-            type="solid"
-            :disabled="current.valid"
-            @click="sendWriteData"
-            >편지쓰기</cp-button
-          >
+
+        <!-- for test -->
+        <!-- <div>선택된 편지지 : {{ letterValue }}</div> -->
+
+        <!-- letter selected form -->
+        <div v-if="currentStep === 'LETTER_SELECT'" class="letter-select-form">
+          <bg-select-form v-model="letterValue" :letter="letterValue" />
         </div>
-      </template>
-    </cp-dialog>
-  </div>
+        <!-- write form -->
+        <div v-if="currentStep === 'WRITE_LETTER'" class="write-form">
+          <div class="letter-form">
+            <div class="title-form">
+              <div>편지 제목</div>
+              <cp-input
+                v-model="titleValue"
+                bg-color="var(--cp-color-gray-100)"
+              />
+            </div>
+            <div class="content-form">
+              <div>본문</div>
+              <cp-input
+                v-model="contentValue"
+                bg-color="var(--cp-color-gray-100)"
+              />
+            </div>
+          </div>
+          <!-- <letter-form :title="titleValue" :content="contentValue" /> -->
+        </div>
+        <!-- write success -->
+        <div v-if="currentStep === 'WRITE_SUCCESS'" class="write-success">
+          write success💔
+        </div>
+        <template #footer>
+          <div class="footer">
+            <cp-button
+              type="solid"
+              :disabled="current.valid"
+              @click="sendWriteData"
+              >편지쓰기</cp-button
+            >
+          </div>
+        </template>
+      </cp-dialog>
+    </div>
+  </cp-layout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useValidateInputValue } from "@/composables/use-validate-input-value";
+import { LayoutType } from "@/composables/use-window-size-wrap";
 
 export default defineComponent({
   name: "TreeItemDetail",
@@ -69,12 +72,17 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, defineProps } from "vue";
+import CpLayout from "@/components/commons/CpLayout.vue";
 import CpDialog from "@/components/commons/CpDialog.vue";
 import CpButton from "@/components/commons/CpButton.vue";
 import LetterPaper from "./LetterPaper.vue";
 import CpInput from "@/components/commons/CpInput.vue";
 import BgSelectForm from "./BgSelectForm.vue";
+
+defineProps<{
+  layoutType: LayoutType;
+}>();
 
 const visible = ref<boolean>(true);
 const currentStep = ref<string>("LETTER_SELECT");
@@ -83,6 +91,7 @@ const titleValue = ref<string>("");
 const contentValue = ref<string>("");
 const selectedTitle = ref<string>(""); // for test
 const selectedContent = ref<string>(""); // for test
+
 const { isValidLetterPaperValue, isValidTitleValue, isValidContentValue } =
   useValidateInputValue({
     letterPaper: letterValue,
@@ -168,9 +177,6 @@ const sendWriteData = () => {
 </script>
 
 <style scoped lang="scss">
-.dialog {
-  overflow: auto;
-}
 .dialog::-webkit-scrollbar {
   display: none;
 }
