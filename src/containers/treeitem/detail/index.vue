@@ -34,21 +34,6 @@
                 placeholder="편지내용"
               />
             </div>
-            <!-- <div class="body">
-              <div class="tree-img">
-                <cp-letter-bg-default class="tree-icon" />
-                <input
-                  v-model="titleValue"
-                  class="tree-item"
-                  placeholder="편지제목"
-                />
-                <textarea
-                  v-model="contentValue"
-                  class="tree-item2"
-                  placeholder="편지내용"
-                />
-              </div>
-            </div> -->
           </div>
         </div>
         <!-- write success -->
