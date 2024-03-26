@@ -1,5 +1,5 @@
 <template>
-  <template v-if="props.letter === 'night'">
+  <template v-if="props.letter === 'default'">
     <div>
       <cp-letter-bg-default />
     </div>
