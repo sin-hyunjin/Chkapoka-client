@@ -16,7 +16,11 @@
       </div>
     </nav>
     <div class="buttons">
-      <cp-icon-button type="withText" text-align="start">
+      <cp-icon-button
+        type="withText"
+        text-align="start"
+        @click="$emit('create:tree')"
+      >
         <template #icon>
           <icon-tree-green fill-color="var(--cp-color-white)" />
         </template>
@@ -49,6 +53,10 @@ import IconNotification from "@/components/commons/images/IconNotification.vue";
 import IconMenu from "@/components/commons/images/IconMenu.vue";
 import IconTreeGreen from "@/components/commons/images/IconTreeGreen.vue";
 import IconLetterPink from "@/components/commons/images/IconLetterPink.vue";
+
+defineEmits<{
+  (e: "create:tree"): void;
+}>();
 </script>
 
 <style scoped lang="scss">

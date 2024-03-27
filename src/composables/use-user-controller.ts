@@ -129,13 +129,14 @@ export const useJoinLoginProcess = () => {
       case SignFormStepType.PASSWORD: {
         // login
         // 추후 api 연동 필요
-        requestJoinLogin({
-          email: formData.value.email,
-          emailType: EmailType.DEFAULT,
-          password: formData.value.password,
-          actionType: currentNextAction.value,
-        });
-
+        if (currentNextAction.value) {
+          requestJoinLogin({
+            email: formData.value.email,
+            emailType: EmailType.DEFAULT,
+            password: formData.value.password,
+            actionType: currentNextAction.value,
+          });
+        }
         break;
       }
     }

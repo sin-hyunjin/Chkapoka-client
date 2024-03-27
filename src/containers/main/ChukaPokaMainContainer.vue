@@ -1,8 +1,12 @@
 <template>
   <cp-layout :layout-type="LayoutType.Mobile">
-    <div class="main-container-wrap">
-      <chuka-poka-main-header />
-      <chuka-poka-main-content />
+    <div v-if="treeListData && treeItemListData" class="main-container-wrap">
+      <chuka-poka-main-header @create:tree="createTree" />
+      <chuka-poka-main-content
+        :tree-list="treeListData.treeList"
+        :tree-item-list="treeItemListData.treeItemList"
+        @create:tree="createTree"
+      />
     </div>
   </cp-layout>
 </template>
@@ -20,10 +24,23 @@ import ChukaPokaMainHeader from "@/components/main/ChukaPokaMainHeader.vue";
 import ChukaPokaMainContent from "@/components/main/ChukaPokaMainContent.vue";
 import CpLayout from "@/components/commons/CpLayout.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
+import {
+  useFetchTreeList,
+  useFetchTreeItemList,
+} from "@/composables/use-main-api";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 defineProps<{
   layoutType: LayoutType;
 }>();
+
+const { resultData: treeListData } = useFetchTreeList();
+const { resultData: treeItemListData } = useFetchTreeItemList();
+
+const createTree = () => {
+  router.push({ name: "TreeCreate" });
+};
 </script>
 
 <style scoped lang="scss">
