@@ -1,5 +1,5 @@
 <template>
-  <tree-detail :id="id" />
+  <tree-detail-container :id="id" :layout-type="layoutType"/>
 </template>
 
 <script lang="ts">
@@ -11,10 +11,11 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import TreeDetail from "@/containers/tree/detail/index.vue";
-
+import TreeDetailContainer from "@/containers/tree/detail/TreeDetailContainer.vue";
+import { LayoutType } from "@/composables/use-window-size-wrap";
 defineProps<{
   id: string;
+  layoutType: LayoutType;
 }>();
 </script>
 
