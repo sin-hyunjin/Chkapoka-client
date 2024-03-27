@@ -13,14 +13,14 @@
       >
     </div>
     <div class="top-text">
-      <template v-if="currentStep === SignFormStep.EMAIL">
+      <template v-if="currentStep === SignFormStepType.EMAIL">
         <div class="top-text__title cp-text-head-2">안녕하세요</div>
         <div class="top-text__title cp-text-head-2">이메일을 알려주세요</div>
         <div class="top-text__description cp-text-title-4">
           편지를 쓰기 위해 회원가입이 필요해요!
         </div>
       </template>
-      <template v-if="currentStep === SignFormStep.REQUEST_EMAIL_VERIFY">
+      <template v-if="currentStep === SignFormStepType.REQUEST_EMAIL_VERIFY">
         <div class="top-text__title cp-text-head-2">본인인증을 위해</div>
         <div class="top-text__title cp-text-head-2">
           메일로 코드를 보내드릴게요 :)
@@ -29,7 +29,7 @@
           인증코드를 받으시려면 아래 버튼을 눌러주세요.
         </div>
       </template>
-      <template v-if="currentStep === SignFormStep.CHECK_EMAIL_NUMBER">
+      <template v-if="currentStep === SignFormStepType.CHECK_EMAIL_NUMBER">
         <div class="top-text__title cp-text-head-2">
           작성하신 이메일로 코드를 전송했어요!
         </div>
@@ -37,7 +37,7 @@
           {{ emailValue }}의 메일함을 확인해주세요.
         </div>
       </template>
-      <template v-if="currentStep === SignFormStep.PASSWORD">
+      <template v-if="currentStep === SignFormStepType.PASSWORD">
         <div class="top-text__title cp-text-head-2">반가워요~</div>
         <div class="top-text__title cp-text-head-2">
           비밀번호를 적어주세요 :)
@@ -48,14 +48,14 @@
       </template>
     </div>
     <div class="input-form">
-      <template v-if="currentStep === SignFormStep.EMAIL">
+      <template v-if="currentStep === SignFormStepType.EMAIL">
         <cp-input
           v-model="emailValue"
           type="email"
           placeholder="example@example.com"
         />
       </template>
-      <template v-if="currentStep === SignFormStep.REQUEST_EMAIL_VERIFY">
+      <template v-if="currentStep === SignFormStepType.REQUEST_EMAIL_VERIFY">
         <cp-input
           v-model="emailValue"
           readonly
@@ -63,7 +63,7 @@
           placeholder="example@example.com"
         />
       </template>
-      <template v-if="currentStep === SignFormStep.CHECK_EMAIL_NUMBER">
+      <template v-if="currentStep === SignFormStepType.CHECK_EMAIL_NUMBER">
         <cp-email-number-input
           v-model="verifyNumberValue"
         ></cp-email-number-input>
@@ -81,7 +81,7 @@
           >
         </div>
       </template>
-      <template v-if="currentStep === SignFormStep.PASSWORD">
+      <template v-if="currentStep === SignFormStepType.PASSWORD">
         <cp-input
           v-model="passwordValue"
           class="password"
@@ -118,16 +118,19 @@ import CpInput from "@/components/commons/CpInput.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import { useValidateInputValue } from "@/composables/use-validate-input-value";
-import { SignFormStep } from "@/utils/const";
+import {
+  SignFormStepType,
+  SignFormStepTypes,
+} from "@/composables/use-user-controller";
 
 const props = defineProps<{
   layoutType: LayoutType;
-  currentStep: SignFormStep;
+  currentStep: SignFormStepTypes;
 }>();
 
 const emits = defineEmits<{
-  (e: "send", type: SignFormStep, value?: string | number): void;
-  (e: "navigate", type: SignFormStep): void;
+  (e: "send", type: SignFormStepTypes, value?: string | number): void;
+  (e: "navigate", type: SignFormStepTypes): void;
   (e: "back"): void;
 }>();
 
@@ -155,28 +158,28 @@ const { isValidEmailValue, isValidPasswordValue, isValidVerifyNumberValue } =
 
 const current = computed(() => {
   switch (props.currentStep) {
-    case SignFormStep.EMAIL: {
+    case SignFormStepType.EMAIL: {
       return {
         valid: isValidEmailValue.value,
         value: emailValue.value,
         buttonText: "시작하기",
       };
     }
-    case SignFormStep.REQUEST_EMAIL_VERIFY: {
+    case SignFormStepType.REQUEST_EMAIL_VERIFY: {
       return {
         valid: false,
         value: undefined,
         buttonText: "인증번호 전송",
       };
     }
-    case SignFormStep.CHECK_EMAIL_NUMBER: {
+    case SignFormStepType.CHECK_EMAIL_NUMBER: {
       return {
         valid: isValidVerifyNumberValue.value,
         value: verifyNumberValue.value,
         buttonText: "인증하기",
       };
     }
-    case SignFormStep.PASSWORD: {
+    case SignFormStepType.PASSWORD: {
       return {
         valid: isValidPasswordValue.value,
         value: passwordValue.value,
@@ -193,8 +196,7 @@ const current = computed(() => {
   }
 });
 
-const sendFormData = (type: SignFormStep, value?: string | number) => {
-  console.log(type, value);
+const sendFormData = (type: SignFormStepTypes, value?: string | number) => {
   emits("send", type, value);
 };
 </script>
