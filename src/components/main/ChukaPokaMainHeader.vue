@@ -8,11 +8,22 @@
             <icon-notification fill-color="var(--cp-color-white)" />
           </template>
         </cp-icon-button>
+
+        <!-- 현진 : menu 버튼  -->
         <cp-icon-button type="icon">
           <template #icon>
-            <icon-menu fill-color="var(--cp-color-white)" />
+            <icon-menu
+              fill-color="var(--cp-color-white)"
+              @click="visible = true"
+            >
+            </icon-menu>
+            <main-header-modal
+              :visible="visible"
+              @close="visible = false"
+            ></main-header-modal>
           </template>
         </cp-icon-button>
+        <!-- 메뉴버튼  끝 -->
       </div>
     </nav>
     <div class="buttons">
@@ -44,15 +55,20 @@ export default defineComponent({
 });
 </script>
 <script setup lang="ts">
+import { ref } from "vue";
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconNotification from "@/components/commons/images/IconNotification.vue";
 import IconMenu from "@/components/commons/images/IconMenu.vue";
 import IconTreeGreen from "@/components/commons/images/IconTreeGreen.vue";
 import IconLetterPink from "@/components/commons/images/IconLetterPink.vue";
+import MainHeaderModal from "@/components/main/MainHeaderModal.vue";
+
+const visible = ref(false);
 </script>
 
 <style scoped lang="scss">
 header {
+  position: relative;
   padding-top: 44px;
   padding-bottom: 32px;
 
