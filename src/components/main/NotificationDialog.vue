@@ -5,19 +5,24 @@
         <div class="cp-text-title-2">알림</div>
       </template>
       <div class="noti-list">
-        <div class="noti-icon">
-          <div class="type-icon"><icon-notification-tree /></div>
-        </div>
-        <div class="noti-content">
-          <div class="noti-header">
-            <div class="title cp-text-title-2">새로운 트리</div>
-            <div class="header-right">
-              <div class="type-circle"></div>
-              <div class="type-text">트리</div>
+        <!-- new tree -->
+        <div class="noti-list-content">
+          <div class="noti-icon">
+            <div class="type-icon">
+              <icon-notification-tree />
             </div>
           </div>
-          <div class="noti-body">친구에게서 공유된 새로운 트리가 있어요!</div>
-          <div class="noti-footer">2024.01.03</div>
+          <div class="noti-content">
+            <div class="noti-header">
+              <div class="title cp-text-title-2">새로운 트리</div>
+              <div class="header-right">
+                <div class="type-circle"></div>
+                <div class="type-text">트리</div>
+              </div>
+            </div>
+            <div class="noti-body">친구에게서 공유된 새로운 트리가 있어요!</div>
+            <div class="noti-footer">2024.01.03</div>
+          </div>
         </div>
       </div>
     </cp-dialog>
@@ -39,7 +44,7 @@ const visible = ref<boolean>(true);
 </script>
 
 <style scoped lang="scss">
-.noti-list {
+.noti-list-content {
   display: flex;
   padding: var(--cp-number-12) var(--cp-number-8);
 
