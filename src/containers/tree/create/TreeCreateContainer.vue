@@ -27,7 +27,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useCreateTree } from "@/composables/use-tree-create-api";
 
 export default defineComponent({
   name: "TreeCreateContainer",
@@ -42,8 +41,9 @@ import { defineProps, computed, ref } from "vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import CpLayout from "@/components/commons/CpLayout.vue";
 import { useTreeCreateController } from "@/composables/use-tree-create-controller";
-import { useRouter } from "vue-router";
 import SelectOwnerTypeDialog from "@/components/tree/create/SelectOwnerTypeDialog.vue";
+import { useCreateTree } from "@/composables/use-tree-create-api";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 
@@ -52,13 +52,11 @@ defineProps<{
 }>();
 
 const { formData, updateFormData, isValid } = useTreeCreateController();
-
 const { mutate: save } = useCreateTree({
   onSuccess: (data) => {
     router.push({ name: "TreeDetail", params: { id: data.data.data.treeId } });
   },
 });
-
 const handleSave = () => {
   save(formData.value);
 };
@@ -67,7 +65,6 @@ const visibleSelectOwnerTypeDialog = ref<boolean>(false);
 const updateVisibleSelectOwnerTypeDialog = (visible: boolean) => {
   visibleSelectOwnerTypeDialog.value = visible;
 };
-
 const innerStyle = computed(() => {
   if (formData.value.bgType === "BG_TYPE_01") {
     return {

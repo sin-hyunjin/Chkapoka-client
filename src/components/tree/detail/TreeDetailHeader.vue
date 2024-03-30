@@ -1,6 +1,11 @@
 <template>
   <div class="tree-detail-header">
-    <cp-icon-button type="withText" text-align="end">
+    <cp-icon-button
+      type="withText"
+      text-align="end"
+      bg-color="transparent"
+      @click="$emit('back')"
+    >
       <template #icon>
         <icon-arrow-left />
       </template>
@@ -20,10 +25,8 @@ export default defineComponent({
 <script setup lang="ts">
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
-import { defineProps } from "vue";
-defineProps<{
-  id: string;
+
+defineEmits<{
+  (e: "back"): void;
 }>();
 </script>
-
-<style scoped lang="scss"></style>

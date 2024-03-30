@@ -29,11 +29,13 @@ import TreeImage02 from "@/components/commons/images/TreeImage02.vue";
 import TreeImage03 from "@/components/commons/images/TreeImage03.vue";
 import TreeImage04 from "@/components/commons/images/TreeImage04.vue";
 import TreeItem from "@/components/tree/TreeItem.vue";
+import { TreeDetailTreeItem } from "@/composables/use-tree-create-api";
 import { TreeType } from "@/composables/use-tree-create-controller";
 import { computed, ref } from "vue";
 
-defineProps<{
+const props = defineProps<{
   treeType: TreeType;
+  treeItemList?: TreeDetailTreeItem[];
 }>();
 
 const treeRef = ref<HTMLDivElement>();
@@ -69,48 +71,54 @@ const getTreeItemPosition = (idx: number) => {
   }
 };
 
-const treeItemList = [
-  {
-    id: "treeItem1",
-    title: "편지1",
-  },
-  {
-    id: "treeItem2",
-    title: "편지2",
-  },
-  {
-    id: "treeItem3",
-    title: "편지3",
-  },
-  {
-    id: "treeItem4",
-    title: "편지4",
-  },
-  {
-    id: "treeItem5",
-    title: "편지5",
-  },
-  {
-    id: "treeItem6",
-    title: "편지6",
-  },
-  {
-    id: "treeItem7",
-    title: "편지7",
-  },
-  {
-    id: "treeItem8",
-    title: "편지8",
-  },
-  {
-    id: "treeItem9",
-    title: "편지9",
-  },
-  {
-    id: "treeItem10",
-    title: "편지10",
-  },
-];
+const treeItemList = computed(() => {
+  if (props.treeItemList) {
+    return [];
+  } else {
+    return [
+      {
+        id: "treeItem1",
+        title: "편지1",
+      },
+      {
+        id: "treeItem2",
+        title: "편지2",
+      },
+      {
+        id: "treeItem3",
+        title: "편지3",
+      },
+      {
+        id: "treeItem4",
+        title: "편지4",
+      },
+      {
+        id: "treeItem5",
+        title: "편지5",
+      },
+      {
+        id: "treeItem6",
+        title: "편지6",
+      },
+      {
+        id: "treeItem7",
+        title: "편지7",
+      },
+      {
+        id: "treeItem8",
+        title: "편지8",
+      },
+      {
+        id: "treeItem9",
+        title: "편지9",
+      },
+      {
+        id: "treeItem10",
+        title: "편지10",
+      },
+    ];
+  }
+});
 </script>
 
 <style scoped lang="scss">
@@ -129,4 +137,3 @@ const treeItemList = [
   }
 }
 </style>
-@/composables/use-tree-create-controller

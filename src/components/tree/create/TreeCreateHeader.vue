@@ -3,8 +3,8 @@
     <cp-icon-button
       type="withText"
       text-align="end"
-      @click="$emit('back')"
       bg-color="transparent"
+      @click="$emit('back')"
     >
       <template #icon>
         <icon-arrow-left />
@@ -30,5 +30,3 @@ defineEmits<{
   (e: "back"): void;
 }>();
 </script>
-
-<style scoped lang="scss"></style>

@@ -4,6 +4,14 @@ import { BgType, OwnerType, TreeCreateFormData, TreeType } from "@/composables/u
 
 
 /** POST api/tree START */
+export type TreeDetailTreeItem = {
+  id: string;
+  treeId: string;
+  title: string;
+  updatedAt: string;
+  isMyTreeItem: boolean;
+};
+
 export type TreeDetailResponseDto = {
   treeId: string;
   title: string;
@@ -13,6 +21,7 @@ export type TreeDetailResponseDto = {
   treeType: TreeType;
   bgType: BgType;
   updatedAt: string;
+  treeItemList: TreeDetailTreeItem[]
 };
 
 
