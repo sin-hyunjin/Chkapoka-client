@@ -28,6 +28,6 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "IconFlower",
+  name: "IconFlower01",
 });
 </script>

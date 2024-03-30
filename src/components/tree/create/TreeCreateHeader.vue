@@ -1,6 +1,11 @@
 <template>
-  <div class="tree-detail-header">
-    <cp-icon-button type="withText" text-align="end">
+  <div class="tree-create-header">
+    <cp-icon-button
+      type="withText"
+      text-align="end"
+      @click="$emit('back')"
+      bg-color="transparent"
+    >
       <template #icon>
         <icon-arrow-left />
       </template>
@@ -13,16 +18,16 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "TreeDetailHeader",
+  name: "TreeCreateHeader",
 });
 </script>
 
 <script setup lang="ts">
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
-import { defineProps } from "vue";
-defineProps<{
-  id: string;
+
+defineEmits<{
+  (e: "back"): void;
 }>();
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <tree-create />
+  <tree-create-container :layout-type="layoutType" />
 </template>
 
 <script lang="ts">
@@ -11,7 +11,11 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import TreeCreate from "@/containers/tree/create/index.vue";
+import TreeCreateContainer from "@/containers/tree/create/TreeCreateContainer.vue";
+import { LayoutType } from "@/composables/use-window-size-wrap";
+defineProps<{
+  layoutType: LayoutType;
+}>();
 </script>
 
 <style scoped lang="scss"></style>
