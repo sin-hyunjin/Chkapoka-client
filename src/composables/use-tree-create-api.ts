@@ -1,6 +1,6 @@
 import { BaseErrorResponse, BaseResultResponse, useAxios } from "@/plugins/axios";
 import { UseMutationOptions, useMutation } from "vue-query";
-import { BgType, OwnerType, TreeCreateFormData, TreeType } from "@/composables/use-tree-create-controller";
+import { BgType, OwnerType, ShareType, TreeCreateFormData, TreeType } from "@/composables/use-tree-create-controller";
 
 
 /** POST api/tree START */
@@ -18,6 +18,7 @@ export type TreeDetailResponseDto = {
   linkId: string;
   sendId: string;
   ownerType: OwnerType;
+  shareType: ShareType;
   treeType: TreeType;
   bgType: BgType;
   updatedAt: string;

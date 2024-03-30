@@ -8,19 +8,21 @@
       />
       <tree-create-footer
         :is-valid="isValid"
-        @create="updateVisibleSelectOwnerTypeDialog(true)"
+        @create="updateVisibleSelectOptionsDialog(true)"
       />
     </div>
-    <select-owner-type-dialog
-      v-if="visibleSelectOwnerTypeDialog"
-      :visible="visibleSelectOwnerTypeDialog"
+    <select-options-dialog
+      v-if="visibleSelectOptionsDialog"
+      :visible="visibleSelectOptionsDialog"
       :owner-type="formData.ownerType"
+      :share-type="formData.shareType"
       @save="
-        formData.ownerType = $event;
-        updateVisibleSelectOwnerTypeDialog(false);
+        formData.ownerType = $event.ownerType;
+        formData.shareType = $event.shareType;
+        updateVisibleSelectOptionsDialog(false);
         handleSave();
       "
-      @close="updateVisibleSelectOwnerTypeDialog(false)"
+      @close="updateVisibleSelectOptionsDialog(false)"
     />
   </cp-layout>
 </template>
@@ -41,7 +43,7 @@ import { defineProps, computed, ref } from "vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import CpLayout from "@/components/commons/CpLayout.vue";
 import { useTreeCreateController } from "@/composables/use-tree-create-controller";
-import SelectOwnerTypeDialog from "@/components/tree/create/SelectOwnerTypeDialog.vue";
+import SelectOptionsDialog from "@/components/tree/create/SelectOptionsDialog.vue";
 import { useCreateTree } from "@/composables/use-tree-create-api";
 import { useRouter } from "vue-router";
 
@@ -61,9 +63,9 @@ const handleSave = () => {
   save(formData.value);
 };
 
-const visibleSelectOwnerTypeDialog = ref<boolean>(false);
-const updateVisibleSelectOwnerTypeDialog = (visible: boolean) => {
-  visibleSelectOwnerTypeDialog.value = visible;
+const visibleSelectOptionsDialog = ref<boolean>(false);
+const updateVisibleSelectOptionsDialog = (visible: boolean) => {
+  visibleSelectOptionsDialog.value = visible;
 };
 const innerStyle = computed(() => {
   if (formData.value.bgType === "BG_TYPE_01") {
@@ -94,4 +96,3 @@ const back = () => {
   flex-direction: column;
 }
 </style>
-@/composables/use-tree-create-controller

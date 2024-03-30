@@ -1,31 +1,16 @@
 import { BaseErrorResponse, BaseResultResponse, useAxios } from "@/plugins/axios.js";
 import { computed } from "vue";
 import { useQuery, UseQueryOptions } from "vue-query";
+import { TreeDetailResponseDto } from "@/composables/use-tree-create-api";
 
 
 /** GET api/tree Start */
-export type TreeListItem = {
-  /** 트리 리스트정보 */
-  treeId: string;
-  title: string;
-  type: string; // MINE or NOT_YEN_SEND
-  linkId: string;
-  sendId: string;
-  updatedBy: string;
-  updatedAt: string;
-  /** 트리색상 부분 추가 가능 */
-  treeBgColor: string;
-  groundColor: string;
-  treeTopColor: string;
-  treeItemColor: string;
-  treeBottomColor: string;
-};
 
 export const useFetchTreeList = (
-  options?: UseQueryOptions<BaseResultResponse<{ treeList: TreeListItem[] }>, BaseErrorResponse>,
+  options?: UseQueryOptions<BaseResultResponse<{ treeList: TreeDetailResponseDto[] }>, BaseErrorResponse>,
 ) => {
   const api = useAxios();
-  const { data, refetch } = useQuery<BaseResultResponse<{ treeList: TreeListItem[] }>, BaseErrorResponse>(
+  const { data, refetch } = useQuery<BaseResultResponse<{ treeList: TreeDetailResponseDto[] }>, BaseErrorResponse>(
     ["useFetchTreeList"],
     () => {
       return api.get("/api/tree");

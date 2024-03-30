@@ -16,9 +16,15 @@
           <div class="select-type">
             <div class="title cp-text-title-2">트리 소유자 유형</div>
             <cp-radio-group
-              v-model="innerOwnerType"
+              v-model="innerOptions.ownerType"
               type="button"
               :items="ownerTypeItems"
+            />
+            <div class="title cp-text-title-2">트리 아이템 열람 유형</div>
+            <cp-radio-group
+              v-model="innerOptions.shareType"
+              type="button"
+              :items="shareTypeItems"
             />
           </div>
         </div>
@@ -27,7 +33,7 @@
             type="solid"
             width="auto"
             height="auto"
-            @click="$emit('save', innerOwnerType)"
+            @click="$emit('save', innerOptions)"
           >
             트리 완성하기
           </cp-button>
@@ -49,7 +55,7 @@
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  name: "SelectOwnerTypeDialog",
+  name: "SelectOptionsDialog",
 });
 </script>
 
@@ -57,20 +63,40 @@ export default defineComponent({
 import CpDialog from "@/components/commons/CpDialog.vue";
 import CpButton from "@/components/commons/CpButton.vue";
 import CpRadioGroup from "@/components/commons/CpRadioGroup.vue";
+import { OwnerType, ShareType } from "@/composables/use-tree-create-controller";
+
 const props = defineProps<{
   visible: boolean;
-  ownerType: "MINE" | "NOT_YET_SEND";
+  ownerType: OwnerType;
+  shareType: ShareType;
 }>();
 
 defineEmits<{
-  (e: "save", ownerType: "MINE" | "NOT_YET_SEND"): void;
+  (
+    e: "save",
+    value: {
+      ownerType: OwnerType;
+      shareType: ShareType;
+    },
+  ): void;
   (e: "close"): void;
 }>();
 
-const innerOwnerType = ref<"MINE" | "NOT_YET_SEND">(props.ownerType);
+const innerOptions = ref<{
+  ownerType: OwnerType;
+  shareType: ShareType;
+}>({
+  ownerType: props.ownerType,
+  shareType: props.shareType,
+});
 const ownerTypeItems = [
   { label: "내트리", name: "MINE" },
   { label: "미부여 트리", name: "NOT_YET_SEND" },
+];
+
+const shareTypeItems = [
+  { label: "혼자보기", name: "ONLY" },
+  { label: "다같이보기", name: "TOGETHER" },
 ];
 </script>
 
@@ -100,7 +126,7 @@ const ownerTypeItems = [
       color: var(--cp-color-black);
 
       .title {
-        margin-bottom: var(--cp-number-8);
+        margin: var(--cp-number-8) 0;
       }
     }
   }

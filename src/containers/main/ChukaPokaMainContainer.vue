@@ -6,6 +6,7 @@
         :tree-list="treeListData.treeList"
         :tree-item-list="treeItemListData.treeItemList"
         @create:tree="createTree"
+        @click:tree="clickTree"
       />
     </div>
   </cp-layout>
@@ -40,6 +41,10 @@ const { resultData: treeItemListData } = useFetchTreeItemList();
 
 const createTree = () => {
   router.push({ name: "TreeCreate" });
+};
+
+const clickTree = (treeId: string) => {
+  router.push({ name: "TreeDetail", params: { id: treeId } });
 };
 </script>
 
