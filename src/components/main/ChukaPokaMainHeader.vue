@@ -11,11 +11,33 @@
             <icon-notification fill-color="var(--cp-color-white)" />
           </template>
         </cp-icon-button>
+
+        <!-- 현진 : menu 버튼  -->
         <cp-icon-button type="icon">
           <template #icon>
-            <icon-menu fill-color="var(--cp-color-white)" />
+            <icon-menu
+              fill-color="var(--cp-color-white)"
+              @click="updateVisibleMenuModel(true)"
+            >
+            </icon-menu>
           </template>
         </cp-icon-button>
+        <cp-menu-modal
+          v-if="visibleMenuModel"
+          :visible="visibleMenuModel"
+          @close="updateVisibleMenuModel(false)"
+        >
+          <div class="menu-modal">
+            <div><cp-button type="solid" width="100%">로그아웃</cp-button></div>
+            <div>
+              <cp-button type="solid" width="100%">개발진정보</cp-button>
+            </div>
+            <div>
+              <cp-button type="solid" width="100%">개인정보처리방침</cp-button>
+            </div>
+          </div>
+        </cp-menu-modal>
+        <!-- 메뉴버튼  끝 -->
       </div>
     </nav>
     <div class="buttons">
@@ -57,12 +79,20 @@ export default defineComponent({
 </script>
 <script setup lang="ts">
 import { ref } from "vue";
+import CpButton from "@/components/commons/CpButton.vue";
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconNotification from "@/components/commons/images/IconNotification.vue";
 import IconMenu from "@/components/commons/images/IconMenu.vue";
 import IconTreeGreen from "@/components/commons/images/IconTreeGreen.vue";
 import IconLetterPink from "@/components/commons/images/IconLetterPink.vue";
+import CpMenuModal from "@/components/commons/CpMenuModal.vue";
 import NotificationDialog from "@/components/main/NotificationDialog.vue";
+
+const visibleMenuModel = ref(false);
+
+const updateVisibleMenuModel = (visible: boolean) => {
+  visibleMenuModel.value = visible;
+};
 
 const visibleNotificationDialog = ref<boolean>(false);
 
@@ -78,6 +108,7 @@ defineEmits<{
 
 <style scoped lang="scss">
 header {
+  position: relative;
   padding-top: 44px;
   padding-bottom: 32px;
 
