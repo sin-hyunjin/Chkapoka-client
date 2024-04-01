@@ -6,7 +6,10 @@
       :style="innerStyle"
     >
       <chuka-poka-link-header @back="back" />
-      <chuka-poka-link-content :data="resultData" />
+      <chuka-poka-link-content
+        :data="resultData"
+        @click:tree-item="handleClickTreeItem"
+      />
       <chuka-poka-link-footer
         :data="resultData"
         @link="handleLink"
@@ -14,10 +17,24 @@
       />
     </div>
   </cp-layout>
+  <tree-item-create-dialog
+    v-if="resultData && visibleCreateTreeItemDialog"
+    :visible="visibleCreateTreeItemDialog"
+    :tree-id="resultData.treeId"
+    @close="updateVisibleCreateTreeItemDialog(false)"
+    @create:tree-item="handleSaveTreeItem"
+  />
+  <tree-item-detail-dialog
+    v-if="visibleDetailTreeItemDialog && detailTreeItemTarget"
+    :visible="visibleDetailTreeItemDialog"
+    :target="detailTreeItemTarget"
+    @close="clearDetailTreeItemDialog()"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { TreeItemCreateFormData } from "@/composables/use-tree-item-create-controller";
 
 export default defineComponent({
   name: "ChukaPokaLinkContainer",
@@ -34,7 +51,9 @@ import { computed, defineProps, ref } from "vue";
 import { useFetchTreeDetailByLinkId } from "@/composables/use-tree-detail-api";
 import { useRouter } from "vue-router";
 import { ElNotification } from "element-plus";
-
+import TreeItemCreateDialog from "@/components/treeItem/create/TreeItemCreateDialog.vue";
+import TreeItemDetailDialog from "@/components/treeItem/detail/TreeItemDetailDialog.vue";
+import { useCreateTreeItem } from "@/composables/use-tree-item-create-api";
 const router = useRouter();
 
 const props = defineProps<{
@@ -58,8 +77,40 @@ const innerStyle = computed(() => {
   }
 });
 
-const visibleCreateTreeItemDialog = ref<boolean>(false);
+const { mutate: save } = useCreateTreeItem({
+  onSuccess: () => {
+    // reload
+    router.go(0);
+  },
+});
+const handleSaveTreeItem = (formData: TreeItemCreateFormData) => {
+  save(formData);
+};
 
+const handleClickTreeItem = (treeItemId: string) => {
+  detailTreeItemTarget.value = {
+    treeItemId: treeItemId,
+  };
+  updateVisibleDetailTreeItemDialog(true);
+};
+
+const detailTreeItemTarget = ref<
+  | {
+      treeItemId: string;
+    }
+  | undefined
+>(undefined);
+const visibleDetailTreeItemDialog = ref<boolean>(false);
+const updateVisibleDetailTreeItemDialog = (visible: boolean) => {
+  visibleDetailTreeItemDialog.value = visible;
+};
+
+const clearDetailTreeItemDialog = () => {
+  updateVisibleDetailTreeItemDialog(false);
+  detailTreeItemTarget.value = undefined;
+};
+
+const visibleCreateTreeItemDialog = ref<boolean>(false);
 const updateVisibleCreateTreeItemDialog = (visible: boolean) => {
   visibleCreateTreeItemDialog.value = visible;
 };

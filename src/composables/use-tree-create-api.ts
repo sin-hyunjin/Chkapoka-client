@@ -5,11 +5,11 @@ import { BgType, OwnerType, ShareType, TreeCreateFormData, TreeType } from "@/co
 
 /** POST api/tree START */
 export type TreeDetailTreeItem = {
-  id: string;
+  treeItemId: string;
   treeId: string;
   title: string;
   updatedAt: string;
-  isMyTreeItem: boolean;
+  myTreeItem: boolean;
 };
 
 export type TreeDetailResponseDto = {

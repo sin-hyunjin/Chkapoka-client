@@ -10,6 +10,7 @@
         :tree-type="treeType"
         :text="`${treeItem.title}`"
         :style="getTreeItemPosition(idx)"
+        @click="$emit('click:treeItem', treeItem.treeItemId)"
       />
     </template>
     <slot />
@@ -36,6 +37,10 @@ import { computed, ref } from "vue";
 const props = defineProps<{
   treeType: TreeType;
   treeItemList?: TreeDetailTreeItem[];
+}>();
+
+defineEmits<{
+  (e: "click:treeItem", treeItemId: string): void;
 }>();
 
 const treeRef = ref<HTMLDivElement>();
@@ -73,47 +78,47 @@ const getTreeItemPosition = (idx: number) => {
 
 const treeItemList = computed(() => {
   if (props.treeItemList) {
-    return [];
+    return props.treeItemList;
   } else {
     return [
       {
-        id: "treeItem1",
+        treeItemId: "treeItem1",
         title: "편지1",
       },
       {
-        id: "treeItem2",
+        treeItemId: "treeItem2",
         title: "편지2",
       },
       {
-        id: "treeItem3",
+        treeItemId: "treeItem3",
         title: "편지3",
       },
       {
-        id: "treeItem4",
+        treeItemId: "treeItem4",
         title: "편지4",
       },
       {
-        id: "treeItem5",
+        treeItemId: "treeItem5",
         title: "편지5",
       },
       {
-        id: "treeItem6",
+        treeItemId: "treeItem6",
         title: "편지6",
       },
       {
-        id: "treeItem7",
+        treeItemId: "treeItem7",
         title: "편지7",
       },
       {
-        id: "treeItem8",
+        treeItemId: "treeItem8",
         title: "편지8",
       },
       {
-        id: "treeItem9",
+        treeItemId: "treeItem9",
         title: "편지9",
       },
       {
-        id: "treeItem10",
+        treeItemId: "treeItem10",
         title: "편지10",
       },
     ];

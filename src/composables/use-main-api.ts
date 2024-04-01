@@ -2,6 +2,7 @@ import { BaseErrorResponse, BaseResultResponse, useAxios } from "@/plugins/axios
 import { computed } from "vue";
 import { useQuery, UseQueryOptions } from "vue-query";
 import { TreeDetailResponseDto } from "@/composables/use-tree-create-api";
+import { BgType } from "@/composables/use-tree-item-create-controller";
 
 
 /** GET api/tree Start */
@@ -33,12 +34,11 @@ export const useFetchTreeList = (
 /** GET api/treeItem Start */
 export type TreeItemListItem = {
   /** 트리 아이템 상세정보 */
-  id: string;
+  treeItemId: string;
   treeId: string;
   title: string;
   content: string;
-  treeItemColor: string;
-  updatedBy: string;
+  bgType: BgType;
   updatedAt: string;
 };
 

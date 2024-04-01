@@ -12,6 +12,7 @@
       <tree-image-view
         :tree-type="data.treeType"
         :tree-item-list="data.treeItemList"
+        @click:tree-item="$emit('click:treeItem', $event)"
       ></tree-image-view>
     </div>
   </div>
@@ -32,6 +33,10 @@ import TreeImageView from "@/components/tree/TreeImageView.vue";
 
 defineProps<{
   data: TreeDetailResponseDto;
+}>();
+
+defineEmits<{
+  (e: "click:treeItem", treeItemId: string): void;
 }>();
 </script>
 

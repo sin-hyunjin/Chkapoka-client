@@ -4,32 +4,12 @@ import ChukaPokaMain from "@/views/main/index.vue";
 import ChukaPokaLink from "@/views/link/index.vue";
 import TreeDetail from "@/views/tree/detail/index.vue";
 import TreeCreate from "@/views/tree/create/index.vue";
-import TreeItemDetail from "@/views/treeitem/detail/index.vue";
-import TreeItemCreate from "@/views/treeitem/create/index.vue";
-import TreeItemEdit from "@/views/treeitem/edit/index.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/", name: "ChukaPokaInit", component: ChukaPokaInit, props: true, },
   { path: "/main", name: "ChukaPokaMain", component: ChukaPokaMain },
   { path: "/tree/:id", name: "TreeDetail", component: TreeDetail, props: true },
   { path: "/tree/create", name: "TreeCreate", component: TreeCreate },
-  {
-    path: "/treeitem/:id",
-    name: "TreeItemDetail",
-    component: TreeItemDetail,
-    props: true,
-  },
-  {
-    path: "/treeitem/create",
-    name: "TreeItemCreate",
-    component: TreeItemCreate,
-  },
-  {
-    path: "/treeitem/:id/edit",
-    name: "TreeItemEdit",
-    component: TreeItemEdit,
-    props: true,
-  },
   { path: "/link/:linkId", name: "ChukaPokaLink", component: ChukaPokaLink, props: true },
 
 ];

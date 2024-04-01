@@ -107,6 +107,15 @@
           </div>
           <tree-item-empty />
         </template>
+        <template v-else>
+          <div class="tree-item-tab-content-wrap">
+            <tree-item-preview
+              v-for="(item, idx) in treeItemList"
+              :key="idx"
+              :data="item"
+            />
+          </div>
+        </template>
       </template>
     </div>
   </div>
@@ -127,6 +136,7 @@ import CpRadioGroup from "@/components/commons/CpRadioGroup.vue";
 import TreeEmpty from "@/components/main/TreeEmpty.vue";
 import TreeItemEmpty from "@/components/main/TreeItemEmpty.vue";
 import TreePreview from "@/components/main/TreePreview.vue";
+import TreeItemPreview from "@/components/main/TreeItemPreview.vue";
 import { TreeItemListItem } from "@/composables/use-main-api";
 
 const props = defineProps<{
@@ -193,6 +203,16 @@ const notYetSendTree = computed<TreeDetailResponseDto[]>(() => {
       margin: var(--cp-number-16);
     }
     .tree-tab-content-wrap {
+      flex: 1;
+      width: 100%;
+      display: grid;
+      overflow-y: scroll;
+      margin-top: var(--cp-number-12);
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: var(--cp-number-12);
+    }
+
+    .tree-item-tab-content-wrap {
       flex: 1;
       width: 100%;
       display: grid;
