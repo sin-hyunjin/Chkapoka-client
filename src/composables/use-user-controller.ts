@@ -1,5 +1,5 @@
 import invariant from "tiny-invariant";
-import { ref } from "vue";
+import { ComputedRef, ref, unref } from "vue";
 import {
   EmailType,
   NextActionType,
@@ -30,7 +30,7 @@ export type SignFormData = {
 };
 
 /** 로그인 & 회원가입 페이지의 composable */
-export const useJoinLoginProcess = () => {
+export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => {
   const router = useRouter();
 
   /** 이미 브라우저의 localstorage에 access token이 존재하면,
@@ -196,7 +196,15 @@ export const useJoinLoginProcess = () => {
       const accessToken = res.data.data.token.accessToken;
       if (accessToken !== undefined && accessToken !== "") {
         setAccessToken(accessToken);
-        router.push({ name: "ChukaPokaMain" });
+
+        const _linkId = unref(linkId);
+        if (!_linkId) {
+          router.push({ name: "ChukaPokaMain" });
+        } else {
+          /** link 페이지에서 이동된 경우 */
+          router.push({ name: "ChukaPokaLink", params: { linkId: _linkId } });
+        }
+
       }
     },
     onError(error) {

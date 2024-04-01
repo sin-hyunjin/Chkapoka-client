@@ -38,8 +38,7 @@ const { resultData } = useFetchTreeDetail(computed(() => props.id));
 const handleLink = () => {
   if (resultData.value) {
     navigator.clipboard
-      // .writeText(`https://chukapoka.xyz/link/${resultData.value.linkId}`)
-      .writeText(`https://localhost:8080/link/${resultData.value.linkId}`)
+      .writeText(`http://localhost:8080/link/${resultData.value.linkId}`)
       .then(() => {
         ElNotification({
           title: "링크 복사 성공!",

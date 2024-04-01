@@ -31,3 +31,28 @@ export const useFetchTreeDetail = (
 
 /** GET api/tree/{id} END */
 
+/** GET api/tree/link/{linkId} START */
+export const useFetchTreeDetailByLinkId = (
+  linkId: ComputedRef<string>,
+  options?: UseQueryOptions<BaseResultResponse<TreeDetailResponseDto>, BaseErrorResponse>
+) => {
+  const api = useAxios();
+  const { data, refetch } = useQuery<BaseResultResponse<TreeDetailResponseDto>, BaseErrorResponse>(
+    ["useFetchTreeDetailByLinkId", linkId],
+    () => {
+      return api.get(`/api/tree/link/${unref(linkId)}`);
+    },
+    options,
+  );
+
+  const resultData = computed(() => {
+    return data.value?.data.data;
+  });
+
+  return {
+    refetch,
+    data,
+    resultData,
+  };
+};
+/** GET api/tree/link/{linkId} END */
