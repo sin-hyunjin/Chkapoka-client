@@ -10,6 +10,9 @@ export const useValidateInputValue = (value: {
   email?: Ref<string> | string;
   password?: Ref<string> | string;
   verifyNumber?: Ref<string> | string;
+  letterPaper?: Ref<string> | string;
+  title?: Ref<string> | string;
+  content?: Ref<string> | string;
 }) => {
   const isValidEmailValue = computed<boolean>(() => {
     const v = unref(value.email);
@@ -42,9 +45,41 @@ export const useValidateInputValue = (value: {
       return false;
     }
   });
+
+  // write form
+  const isValidLetterPaperValue = computed<boolean>(() => {
+    const v = unref(value.letterPaper);
+    if (v !== undefined) {
+      // If letter paper is not selected
+      return v.length === 0;
+    } else {
+      return false;
+    }
+  });
+  const isValidTitleValue = computed<boolean>(() => {
+    const v = unref(value.title);
+    if (v !== undefined) {
+      // If title input is empty
+      return v.length === 0;
+    } else {
+      return false;
+    }
+  });
+  const isValidContentValue = computed<boolean>(() => {
+    const v = unref(value.content);
+    if (v !== undefined) {
+      // If content input is empty
+      return v.length === 0;
+    } else {
+      return false;
+    }
+  });
   return {
     isValidEmailValue,
     isValidPasswordValue,
     isValidVerifyNumberValue,
+    isValidLetterPaperValue,
+    isValidTitleValue,
+    isValidContentValue,
   };
 };
