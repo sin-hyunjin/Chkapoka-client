@@ -1,6 +1,7 @@
 <template>
   <cp-dialog
-    :model-value="visible && resultData"
+    v-if="resultData"
+    :model-value="visible"
     margin-top="50px"
     :before-close="() => $emit('close')"
     @close="$emit('close')"
