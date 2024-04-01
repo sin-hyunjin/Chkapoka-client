@@ -1,0 +1,66 @@
+<template>
+  <cp-dialog
+    :model-value="visible"
+    margin-top="50px"
+    :fullscreen="false"
+    align-center
+  >
+    <template #header>
+      <div class="header cp-text-head-4">
+        로그인/회원가입이 필요한 페이지입니다.
+      </div>
+    </template>
+    <template #default>
+      <div class="body"></div>
+    </template>
+    <template #footer>
+      <div class="footer">
+        <cp-button type="solid" @click="$emit('go')">
+          로그인/회원가입
+        </cp-button>
+      </div>
+    </template>
+  </cp-dialog>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "GoToInitDialog",
+});
+</script>
+
+<script setup lang="ts">
+import CpDialog from "@/components/commons/CpDialog.vue";
+import CpButton from "@/components/commons/CpButton.vue";
+
+defineProps<{
+  visible: boolean;
+}>();
+
+defineEmits<{
+  (e: "go"): void;
+}>();
+</script>
+
+<style scoped lang="scss">
+.header {
+  display: flex;
+  align-items: center;
+  color: var(--cp-color-black);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+</style>

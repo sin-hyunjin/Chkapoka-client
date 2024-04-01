@@ -27,7 +27,11 @@
       </div>
     </nav>
     <div class="buttons">
-      <cp-icon-button type="withText" text-align="start">
+      <cp-icon-button
+        type="withText"
+        text-align="start"
+        @click="$emit('create:tree')"
+      >
         <template #icon>
           <icon-tree-green fill-color="var(--cp-color-white)" />
         </template>
@@ -64,6 +68,10 @@ import IconLetterPink from "@/components/commons/images/IconLetterPink.vue";
 import MainHeaderModal from "@/components/main/MainHeaderModal.vue";
 
 const visible = ref(false);
+
+defineEmits<{
+  (e: "create:tree"): void;
+}>();
 </script>
 
 <style scoped lang="scss">

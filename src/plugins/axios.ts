@@ -1,5 +1,19 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useAccessTokenStore } from "@/store";
+
+export type ResultCode = "SUCCESS" | "ERROR";
+export type BaseErrorResponse = AxiosError<{
+  resultCode: ResultCode;
+  data: Record<string, string>;
+  message?: string;
+}>;
+
+export type BaseResultResponse<T> = AxiosResponse<{
+  resultCode: ResultCode;
+  data: T;
+  message?: string;
+}>;
+
 const TOKEN_REISSUE_URL = "/api/user/reissue";
 
 export const useAxios = () => {

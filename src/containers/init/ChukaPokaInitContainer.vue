@@ -32,11 +32,14 @@ import {
   SignFormStepType,
   useJoinLoginProcess,
 } from "@/composables/use-user-controller";
+import { computed } from "vue";
 
-defineProps<{
+const props = defineProps<{
   layoutType: LayoutType;
+  linkId?: string; // link 페이지에서 회원가입/로그인 화면으로 이동한 경우
 }>();
 
-const { signFormCurrentStep, handleSend, navigate, back } =
-  useJoinLoginProcess();
+const { signFormCurrentStep, handleSend, navigate, back } = useJoinLoginProcess(
+  computed(() => props.linkId),
+);
 </script>

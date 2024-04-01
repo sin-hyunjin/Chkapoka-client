@@ -1,31 +1,17 @@
-import { useAxios } from "@/plugins/axios";
-import { AxiosError, AxiosResponse } from "axios";
+import { BaseErrorResponse, BaseResultResponse, ResultCode, useAxios } from "@/plugins/axios";
 import { computed } from "vue";
 import { UseMutationOptions, useMutation } from "vue-query";
 
-export type ResultCode = "SUCCESS" | "ERROR";
-export type TokenResponse = {
-  accessToken: string;
-};
-export type BaseErrorResponse = {
-  resultCode: ResultCode;
-  data: Record<string, string>;
-  message?: string;
-};
 
 /** api/user/reissue START */
-export type ReissueSuccessResponse = {
-  resultCode: ResultCode;
-  data: {
-    accessToken: string;
-  };
-  message?: string;
+export type TokenResponse = {
+  accessToken: string;
 };
 
 export const useReissue = (
   options?: UseMutationOptions<
-    AxiosResponse<ReissueSuccessResponse>,
-    AxiosError<BaseErrorResponse>,
+    BaseResultResponse<{ accessToken: string; }>,
+    BaseErrorResponse,
     void,
     unknown
   >,
@@ -68,19 +54,14 @@ export type EmailCheckRequest = {
   emailType: string;
 };
 
-export type EmailCheckSuccessResponse = {
-  resultCode: ResultCode;
-  data: {
-    nextAction: NextActionTypes;
-    email: string;
-  };
-  message?: string;
-};
 
 export const useEmailCheck = (
   options?: UseMutationOptions<
-    AxiosResponse<EmailCheckSuccessResponse>,
-    AxiosError<BaseErrorResponse>,
+    BaseResultResponse<{
+      nextAction: NextActionTypes;
+      email: string;
+    }>,
+    BaseErrorResponse,
     EmailCheckRequest,
     unknown
   >,
@@ -108,22 +89,17 @@ export const useEmailCheck = (
 export type AuthNumberRequest = {
   email: string;
 };
-export type AuthNumberSuccessResponse = {
-  resultCode: ResultCode;
-  data: {
-    resultCode: ResultCode;
-    email: string;
-    authNum: string;
-    createdAt: string;
-    expireAt: string;
-  };
-  message?: string;
-};
 
 export const useAuthNumber = (
   options?: UseMutationOptions<
-    AxiosResponse<AuthNumberSuccessResponse>,
-    AxiosError<BaseErrorResponse>,
+    BaseResultResponse<{
+      resultCode: ResultCode;
+      email: string;
+      authNum: string;
+      createdAt: string;
+      expireAt: string;
+    }>,
+    BaseErrorResponse,
     AuthNumberRequest,
     unknown
   >,
@@ -160,21 +136,15 @@ export type JoinLoginRequest = {
   actionType: NextActionTypes;
 };
 
-export type JoinLoginSuccessResponse = {
-  resultCode: ResultCode;
-  data: {
-    resultType: ResultCode;
-    email: string;
-    userId: number;
-    token: TokenResponse;
-  };
-  message?: string;
-};
-
 export const useJoinLogin = (
   options?: UseMutationOptions<
-    AxiosResponse<JoinLoginSuccessResponse>,
-    AxiosError<BaseErrorResponse>,
+    BaseResultResponse<{
+      resultType: ResultCode;
+      email: string;
+      userId: number;
+      token: TokenResponse;
+    }>,
+    BaseErrorResponse,
     JoinLoginRequest,
     unknown
   >,
@@ -203,8 +173,8 @@ export type LogoutSuccessResponse = {
 
 export const useLogout = (
   options?: UseMutationOptions<
-    AxiosResponse<LogoutSuccessResponse>,
-    AxiosError<BaseErrorResponse>,
+    BaseResultResponse<ResultCode>,
+    BaseErrorResponse,
     void,
     unknown
   >,
