@@ -17,15 +17,26 @@
           <template #icon>
             <icon-menu
               fill-color="var(--cp-color-white)"
-              @click="visible = true"
+              @click="updateVisibleMenuModel(true)"
             >
             </icon-menu>
-            <main-header-modal
-              :visible="visible"
-              @close="visible = false"
-            ></main-header-modal>
           </template>
         </cp-icon-button>
+        <cp-menu-modal
+          v-if="visibleMenuModel"
+          :visible="visibleMenuModel"
+          @close="updateVisibleMenuModel(false)"
+        >
+          <div class="menu-modal">
+            <div><cp-button type="solid" width="100%">로그아웃</cp-button></div>
+            <div>
+              <cp-button type="solid" width="100%">개발진정보</cp-button>
+            </div>
+            <div>
+              <cp-button type="solid" width="100%">개인정보처리방침</cp-button>
+            </div>
+          </div>
+        </cp-menu-modal>
         <!-- 메뉴버튼  끝 -->
       </div>
     </nav>
@@ -68,15 +79,20 @@ export default defineComponent({
 </script>
 <script setup lang="ts">
 import { ref } from "vue";
+import CpButton from "@/components/commons/CpButton.vue";
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconNotification from "@/components/commons/images/IconNotification.vue";
 import IconMenu from "@/components/commons/images/IconMenu.vue";
 import IconTreeGreen from "@/components/commons/images/IconTreeGreen.vue";
 import IconLetterPink from "@/components/commons/images/IconLetterPink.vue";
-import MainHeaderModal from "@/components/main/MainHeaderModal.vue";
-
-const visible = ref(false);
+import CpMenuModal from "@/components/commons/CpMenuModal.vue";
 import NotificationDialog from "@/components/main/NotificationDialog.vue";
+
+const visibleMenuModel = ref(false);
+
+const updateVisibleMenuModel = (visible: boolean) => {
+  visibleMenuModel.value = visible;
+};
 
 const visibleNotificationDialog = ref<boolean>(false);
 
