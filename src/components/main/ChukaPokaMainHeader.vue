@@ -3,7 +3,10 @@
     <nav class="nav">
       <div class="left cp-text-head-4">CHUKAPOKA</div>
       <div class="right">
-        <cp-icon-button type="icon">
+        <cp-icon-button
+          type="icon"
+          @click="updateVisibleNotificationDialog(true)"
+        >
           <template #icon>
             <icon-notification fill-color="var(--cp-color-white)" />
           </template>
@@ -48,6 +51,11 @@
         </template>
       </cp-icon-button>
     </div>
+    <!-- notification dialog -->
+    <notification-dialog
+      v-if="visibleNotificationDialog"
+      :visible="visibleNotificationDialog"
+    />
   </header>
 </template>
 
@@ -68,6 +76,14 @@ import IconLetterPink from "@/components/commons/images/IconLetterPink.vue";
 import MainHeaderModal from "@/components/main/MainHeaderModal.vue";
 
 const visible = ref(false);
+import NotificationDialog from "@/components/main/NotificationDialog.vue";
+
+const visibleNotificationDialog = ref<boolean>(false);
+
+// if clicked, open notification dialog
+const updateVisibleNotificationDialog = (visible: boolean) => {
+  visibleNotificationDialog.value = visible;
+};
 
 defineEmits<{
   (e: "create:tree"): void;
