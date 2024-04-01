@@ -25,7 +25,7 @@ export const TreeCard: StoryObj<{
     setup() {
       return { args };
     },
-    template: `<tree-edit-select-tree-card v-bind="args"><icon-tree-preview-sm/></tree-edit-select-tree-card`,
+    template: `<tree-edit-select-tree-card v-bind="args"><icon-tree-preview-sm/></tree-edit-select-tree-card>`,
   }),
   args: {
     type: "treeCard",

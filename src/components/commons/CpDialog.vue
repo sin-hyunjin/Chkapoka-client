@@ -4,6 +4,7 @@
       'cp-dialog',
       !useHeader ? 'no-header' : '',
       !useFooter ? 'no-footer' : '',
+      fullscreen ? 'fullscreen' : '',
     ]"
     v-bind="props"
     :style="innerStyle"
@@ -72,7 +73,7 @@ const innerStyle = computed(() => {
 
   return {
     "--el-dialog-margin-top": props.marginTop,
-    "--el-dialog-width": getMaxWidth(),
+    "--el-dialog-width": props.fullscreen ? getMaxWidth() : undefined,
   };
 });
 </script>
@@ -82,7 +83,6 @@ const innerStyle = computed(() => {
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  height: 90vh !important;
 
   .header,
   .footer {
@@ -90,6 +90,10 @@ const innerStyle = computed(() => {
     flex-direction: column;
     text-align: start;
   }
+}
+
+.cp-dialog.fullscreen {
+  height: 90vh !important;
 
   .el-dialog__body {
     flex: 1;

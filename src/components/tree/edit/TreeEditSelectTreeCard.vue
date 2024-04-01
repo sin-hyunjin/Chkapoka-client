@@ -3,21 +3,15 @@
     정은우 
  -->
 <template>
-  <div class="wrap">
-    <el-button
-      plain
-      :class="classArr"
-      :style="innerStyle"
-      :disabled="disabled"
-      @click="$emit('click')"
-    >
+  <div :class="['wrap', isSelected ? 'is-selected' : '']">
+    <el-button plain :class="classArr" :style="innerStyle" :disabled="disabled">
       <slot />
     </el-button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, computed, withDefaults } from "vue";
+import { defineProps, computed } from "vue";
 import { ElButton } from "element-plus";
 
 const props = withDefaults(
@@ -31,6 +25,7 @@ const props = withDefaults(
     width?: string;
     height?: string;
     disabled?: boolean;
+    isSelected?: boolean;
   }>(),
   {
     classArr: () => ["cp-text-main-4"],
@@ -42,11 +37,9 @@ const props = withDefaults(
     width: "100px",
     height: "100px",
     disabled: false,
+    isSelected: false,
   },
 );
-defineEmits<{
-  (e: "click"): void;
-}>();
 
 const innerStyle = computed(() => {
   const common = {};
@@ -96,6 +89,12 @@ const innerStyle = computed(() => {
     span {
       width: 100%;
     }
+  }
+}
+
+.wrap.is-selected {
+  > .el-button {
+    border: 3px solid var(--el-button-hover-border-color);
   }
 }
 </style>

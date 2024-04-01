@@ -3,7 +3,10 @@
     <nav class="nav">
       <div class="left cp-text-head-4">CHUKAPOKA</div>
       <div class="right">
-        <cp-icon-button type="icon" @click="updateVisible">
+        <cp-icon-button
+          type="icon"
+          @click="updateVisibleNotificationDialog(true)"
+        >
           <template #icon>
             <icon-notification fill-color="var(--cp-color-white)" />
           </template>
@@ -16,7 +19,11 @@
       </div>
     </nav>
     <div class="buttons">
-      <cp-icon-button type="withText" text-align="start">
+      <cp-icon-button
+        type="withText"
+        text-align="start"
+        @click="$emit('create:tree')"
+      >
         <template #icon>
           <icon-tree-green fill-color="var(--cp-color-white)" />
         </template>
@@ -34,9 +41,10 @@
       </cp-icon-button>
     </div>
     <!-- notification dialog -->
-    <template v-if="visible == true">
-      <div><notification-dialog /></div>
-    </template>
+    <notification-dialog
+      v-if="visibleNotificationDialog"
+      :visible="visibleNotificationDialog"
+    />
   </header>
 </template>
 
@@ -54,14 +62,18 @@ import IconNotification from "@/components/commons/images/IconNotification.vue";
 import IconMenu from "@/components/commons/images/IconMenu.vue";
 import IconTreeGreen from "@/components/commons/images/IconTreeGreen.vue";
 import IconLetterPink from "@/components/commons/images/IconLetterPink.vue";
-import NotificationDialog from "./NotificationDialog.vue";
+import NotificationDialog from "@/components/main/NotificationDialog.vue";
 
-const visible = ref<boolean>(false);
+const visibleNotificationDialog = ref<boolean>(false);
 
 // if clicked, open notification dialog
-const updateVisible = () => {
-  visible.value = true;
+const updateVisibleNotificationDialog = (visible: boolean) => {
+  visibleNotificationDialog.value = visible;
 };
+
+defineEmits<{
+  (e: "create:tree"): void;
+}>();
 </script>
 
 <style scoped lang="scss">

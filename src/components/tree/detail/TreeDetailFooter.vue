@@ -1,12 +1,6 @@
 <template>
   <div class="tree-detail-footer">
-    <!-- <template>
-      <cp-button type="solid">초대하기</cp-button>
-    </template> -->
-    <cp-icon-circle-button class="menu__container">
-      <icon-plus />
-    </cp-icon-circle-button>
-
+    <cp-button type="solid" @click="$emit('link')"> 초대하기 </cp-button>
   </div>
 </template>
 
@@ -19,22 +13,17 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
+import CpButton from "@/components/commons/CpButton.vue";
 
-import CpIconCircleButton from "@/components/commons/CpIconCircleButton.vue";
-import IconPlus from "@/components/commons/images/IconPlus.vue";
-
-
-import { defineProps } from "vue";
-defineProps<{
-  id: string;
+defineEmits<{
+  (e: "link"): void;
 }>();
-
 </script>
 
 <style scoped lang="scss">
 .tree-detail-footer {
   height: 20%;
-  background-color: #cbe8bf;
+  background-color: var(--ground-color);
 
   display: flex;
   justify-content: center;
@@ -49,5 +38,4 @@ defineProps<{
     }
   }
 }
-
 </style>

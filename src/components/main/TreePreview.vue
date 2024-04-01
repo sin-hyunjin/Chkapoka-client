@@ -1,33 +1,33 @@
 <template>
   <div class="tree-preview-container">
     <div class="freestyle">
-      <icon-tree-preview class="tree-image" />
+      <icon-tree-preview
+        class="tree-image"
+        :tree-type="data.treeType"
+        :bg-type="data.bgType"
+      />
       <div class="tree-name">{{ data.title }}</div>
-      <div class="tree-updated-at">{{ data.updatedAt }}</div>
+      <div class="tree-updated-at">
+        {{ new Date(Date.parse(data.updatedAt)).toLocaleString() }}
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { TreeDetailResponseDto } from "@/composables/use-tree-create-api";
 
 export default defineComponent({
   name: "TreePreview",
 });
 </script>
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
+import { defineProps } from "vue";
 import IconTreePreview from "@/components/commons/images/IconTreePreview.vue";
 
 defineProps<{
-  data: {
-    title: string;
-    updatedAt: string;
-  };
-}>();
-
-defineEmits<{
-  (e: "click"): void;
+  data: TreeDetailResponseDto;
 }>();
 </script>
 
@@ -35,7 +35,6 @@ defineEmits<{
 .tree-preview-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
   &:hover {
