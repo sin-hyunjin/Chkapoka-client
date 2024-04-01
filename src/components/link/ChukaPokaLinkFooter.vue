@@ -34,14 +34,7 @@ defineEmits<{
   justify-content: center;
   align-items: center;
 
-  .menu {
-    &__container:focus {
-      transform: rotate(45deg);
-    }
-    &__item:active {
-      transform: scale(0.95);
-    }
-  }
+  gap: var(--cp-number-16);
 
   ::v-deep(.el-button) {
     margin: 0px;
