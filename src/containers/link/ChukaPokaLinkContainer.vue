@@ -35,6 +35,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { TreeItemCreateFormData } from "@/composables/use-tree-item-create-controller";
+import { getBgColor } from "@/composables/use-tree-create-controller";
 
 export default defineComponent({
   name: "ChukaPokaLinkContainer",
@@ -63,16 +64,11 @@ const props = defineProps<{
 const { resultData } = useFetchTreeDetailByLinkId(computed(() => props.linkId));
 
 const innerStyle = computed(() => {
-  if (resultData.value?.bgType === "BG_TYPE_01") {
+  if (resultData.value) {
+    const { background, ground } = getBgColor(resultData.value.bgType);
     return {
-      "--background-color": "#fefcf8",
-      "--ground-color": "#cbe8bf",
-    };
-  } else {
-    /** TODO: bgType관련 디자인 추가되면 추가 작업 */
-    return {
-      "--background-color": "#fefcf8",
-      "--ground-color": "#cbe8bf",
+      "--background-color": background,
+      "--ground-color": ground,
     };
   }
 });
@@ -135,7 +131,7 @@ const back = () => {
 
 <style scoped lang="scss">
 .chuka-poka-link-container {
-  background-color: var(--background-color);
+  background: var(--background-color);
   height: calc(100vh - 2rem);
 
   display: flex;

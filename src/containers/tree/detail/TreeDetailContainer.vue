@@ -10,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { getBgColor } from "@/composables/use-tree-create-controller";
 
 export default defineComponent({
   name: "TreeDetailContainer",
@@ -49,26 +50,11 @@ const handleLink = () => {
 };
 
 const innerStyle = computed(() => {
-  if (resultData.value?.bgType === "BG_TYPE_01") {
+  if (resultData.value) {
+    const { background, ground } = getBgColor(resultData.value.bgType);
     return {
-      "--background-color": "#fefcf8",
-      "--ground-color": "#cbe8bf",
-    };
-  } else if (resultData.value?.bgType === "BG_TYPE_02") {
-    return {
-      "--background-color":
-        "linear-gradient(180deg, #1986D5 0%, rgba(83, 234, 255, 0) 100%)",
-      "--ground-color": "#41C183",
-    };
-  } else if (resultData.value?.bgType === "BG_TYPE_03") {
-    return {
-      "--background-color": "#E2FFF5",
-      "--ground-color": "#A7614F",
-    };
-  } else if (resultData.value?.bgType === "BG_TYPE_04") {
-    return {
-      "--background-color": "#FFD19A",
-      "--ground-color": "#D16464",
+      "--background-color": background,
+      "--ground-color": ground,
     };
   }
 });

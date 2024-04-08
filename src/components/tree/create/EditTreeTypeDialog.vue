@@ -132,7 +132,7 @@ const treeTypeList: TreeType[] = [
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background-color: var(--background-color);
+      background: var(--background-color);
       .tree {
         align-self: center;
         margin: 10% 10% 0 10%;
@@ -167,4 +167,3 @@ const treeTypeList: TreeType[] = [
   justify-content: center;
 }
 </style>
-@/composables/use-tree-create-controller

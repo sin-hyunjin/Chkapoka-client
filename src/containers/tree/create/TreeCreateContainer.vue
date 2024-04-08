@@ -53,7 +53,10 @@ import TreeCreateFooter from "@/components/tree/create/TreeCreateFooter.vue";
 import { defineProps, computed, ref } from "vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import CpLayout from "@/components/commons/CpLayout.vue";
-import { useTreeCreateController } from "@/composables/use-tree-create-controller";
+import {
+  getBgColor,
+  useTreeCreateController,
+} from "@/composables/use-tree-create-controller";
 import SelectOptionsDialog from "@/components/tree/create/SelectOptionsDialog.vue";
 import { useCreateTree } from "@/composables/use-tree-create-api";
 import { useRouter } from "vue-router";
@@ -85,28 +88,11 @@ const updateVisibleEditTreeTitleDialog = (visible: boolean) => {
 };
 
 const innerStyle = computed(() => {
-  if (formData.value.bgType === "BG_TYPE_01") {
-    return {
-      "--background-color": "#fefcf8",
-      "--ground-color": "#cbe8bf",
-    };
-  } else if (formData.value.bgType === "BG_TYPE_02") {
-    return {
-      "--background-color":
-        "linear-gradient(180deg, #1986D5 0%, rgba(83, 234, 255, 0) 100%)",
-      "--ground-color": "#41C183",
-    };
-  } else if (formData.value.bgType === "BG_TYPE_03") {
-    return {
-      "--background-color": "#E2FFF5",
-      "--ground-color": "#A7614F",
-    };
-  } else if (formData.value.bgType === "BG_TYPE_04") {
-    return {
-      "--background-color": "#FFD19A",
-      "--ground-color": "#D16464",
-    };
-  }
+  const { background, ground } = getBgColor(formData.value.bgType);
+  return {
+    "--background-color": background,
+    "--ground-color": ground,
+  };
 });
 
 const back = () => {

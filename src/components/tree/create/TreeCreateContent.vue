@@ -157,4 +157,3 @@ const updateVisibleEditBgTypeDialog = (visible: boolean) => {
   }
 }
 </style>
-@/composables/use-tree-create-controller

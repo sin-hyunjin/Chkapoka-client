@@ -85,8 +85,7 @@
 </template>
 
 <script lang="ts">
-import { BgType, TreeType } from "@/composables/use-tree-create-controller";
-import { computed, defineComponent } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "IconTreePreview",
@@ -94,40 +93,36 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
+import { computed } from "vue";
+
+import {
+  BgType,
+  getBgColor,
+  TreeType,
+} from "@/composables/use-tree-create-controller";
 const props = defineProps<{
   treeType: TreeType;
   bgType: BgType;
 }>();
 
 const computedColor = computed(() => {
-  if (props.bgType === "BG_TYPE_01") {
-    return {
-      groundColor: "#cbe8bf",
-    };
-  } else {
-    return {
-      groundColor: "#cbe8bf",
-    };
-  }
+  const { ground } = getBgColor(props.bgType);
+  return {
+    groundColor: ground,
+  };
 });
 
 // background color
 const innerStyle = computed(() => {
-  if (props.bgType === "BG_TYPE_01") {
-    return {
-      "--background-color": "#fefcf8",
-    };
-  } else {
-    /** TODO: bgType관련 디자인 추가되면 추가 작업 */
-    return {
-      "--background-color": "#fefcf8",
-    };
-  }
+  const { background } = getBgColor(props.bgType);
+  return {
+    "--background-color": background,
+  };
 });
 </script>
 
 <style lang="scss" scoped>
 svg {
-  background-color: var(--background-color);
+  background: var(--background-color);
 }
 </style>

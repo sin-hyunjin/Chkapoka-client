@@ -51,4 +51,3 @@ defineProps<{
   }
 }
 </style>
-@/composables/use-tree-create-controller

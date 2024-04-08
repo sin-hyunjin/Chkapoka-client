@@ -26,10 +26,6 @@
                 :is-selected="item === innerBgType"
                 @click="innerBgType = item"
               >
-                <!-- <icon-tree-01-preview-sm v-if="item === 'BG_TYPE_01'" />
-                <icon-tree-02-preview-sm v-else-if="item === 'BG_TYPE_02'" />
-                <icon-tree-03-preview-sm v-else-if="item === 'BG_TYPE_03'" />
-                <icon-tree-04-preview-sm v-else-if="item === 'BG_TYPE_04'" /> -->
                 <div class="btn-content" :style="getCurrentStyle(item)">
                   <div class="tree"></div>
                   <div class="ground"></div>
@@ -76,7 +72,11 @@ import CpButton from "@/components/commons/CpButton.vue";
 import IconRefresh from "@/components/commons/images/IconRefresh.vue";
 import TreeImageView from "@/components/tree/TreeImageView.vue";
 import TreeEditSelectTreeCard from "@/components/tree/edit/TreeEditSelectTreeCard.vue";
-import { BgType, TreeType } from "@/composables/use-tree-create-controller";
+import {
+  BgType,
+  getBgColor,
+  TreeType,
+} from "@/composables/use-tree-create-controller";
 
 const props = defineProps<{
   visible: boolean;
@@ -96,56 +96,24 @@ const bgTypeList: BgType[] = [
   "BG_TYPE_02",
   "BG_TYPE_03",
   "BG_TYPE_04",
+  "BG_TYPE_05",
+  "BG_TYPE_06",
 ];
 
 const innerStyle = computed(() => {
-  if (innerBgType.value === "BG_TYPE_01") {
-    return {
-      "--inner-background-color": "#fefcf8",
-      "--inner-ground-color": "#cbe8bf",
-    };
-  } else if (innerBgType.value === "BG_TYPE_02") {
-    return {
-      "--inner-background-color":
-        "linear-gradient(180deg, #1986D5 0%, rgba(83, 234, 255, 0) 100%)",
-      "--inner-ground-color": "#41C183",
-    };
-  } else if (innerBgType.value === "BG_TYPE_03") {
-    return {
-      "--inner-background-color": "#E2FFF5",
-      "--inner-ground-color": "#A7614F",
-    };
-  } else if (innerBgType.value === "BG_TYPE_04") {
-    return {
-      "--inner-background-color": "#FFD19A",
-      "--inner-ground-color": "#D16464",
-    };
-  }
+  const { background, ground } = getBgColor(innerBgType.value);
+  return {
+    "--inner-background-color": background,
+    "--inner-ground-color": ground,
+  };
 });
 
 const getCurrentStyle = (bgType: BgType) => {
-  if (bgType === "BG_TYPE_01") {
-    return {
-      "--current-background-color": "#fefcf8",
-      "--current-ground-color": "#cbe8bf",
-    };
-  } else if (bgType === "BG_TYPE_02") {
-    return {
-      "--current-background-color":
-        "linear-gradient(180deg, #1986D5 0%, rgba(83, 234, 255, 0) 100%)",
-      "--current-ground-color": "#41C183",
-    };
-  } else if (bgType === "BG_TYPE_03") {
-    return {
-      "--current-background-color": "#E2FFF5",
-      "--current-ground-color": "#A7614F",
-    };
-  } else if (bgType === "BG_TYPE_04") {
-    return {
-      "--current-background-color": "#FFD19A",
-      "--current-ground-color": "#D16464",
-    };
-  }
+  const { background, ground } = getBgColor(bgType);
+  return {
+    "--current-background-color": background,
+    "--current-ground-color": ground,
+  };
 };
 </script>
 
