@@ -56,6 +56,17 @@
     "
     @close="updateVisibleEditTreeTypeDialog(false)"
   />
+  <edit-bg-type-dialog
+    v-if="visibleEditBgTypeDialog"
+    :visible="visibleEditBgTypeDialog"
+    :tree-type="formData.treeType"
+    :bg-type="formData.bgType"
+    @edit="
+      emits('update:formData', 'bgType', $event);
+      updateVisibleEditBgTypeDialog(false);
+    "
+    @close="updateVisibleEditBgTypeDialog(false)"
+  />
 </template>
 
 <script lang="ts">
@@ -73,6 +84,7 @@ import IconEditButton from "@/components/commons/images/IconEditButton.vue";
 import TreeImageView from "@/components/tree/TreeImageView.vue";
 import { TreeCreateFormData } from "@/composables/use-tree-create-controller";
 import EditTreeTypeDialog from "@/components/tree/create/EditTreeTypeDialog.vue";
+import EditBgTypeDialog from "@/components/tree/create/EditBgTypeDialog.vue";
 import { ref } from "vue";
 import IconEditPen from "@/components/commons/images/IconEditPen.vue";
 
