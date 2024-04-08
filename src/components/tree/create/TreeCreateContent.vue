@@ -3,16 +3,14 @@
     <!-- Content Header 부분 -->
     <div class="info">
       <div class="text">
-        <cp-input
-          class="input title"
-          :model-value="formData.title"
-          width="auto"
-          height="auto"
-          bgColor="var(--cp-color-white)"
-          placeholder="트리제목 입력해주세요! 🌲"
-          placeholderTextColor="var(--cp-color-gray-500)"
-          @update:model-value="emits('update:formData', 'title', $event)"
-        />
+        <div class="title cp-text-head-2">
+          <span>{{ formData.title }}</span>
+          <cp-icon-button type="icon" @click="$emit('edit:title')">
+            <template #icon>
+              <icon-edit-pen />
+            </template>
+          </cp-icon-button>
+        </div>
         <div class="date cp-text-main-4">{{ new Date().toLocaleString() }}</div>
       </div>
     </div>
@@ -69,19 +67,21 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import CpInput from "@/components/commons/CpInput.vue";
+// import CpInput from "@/components/commons/CpInput.vue";
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import IconEditButton from "@/components/commons/images/IconEditButton.vue";
 import TreeImageView from "@/components/tree/TreeImageView.vue";
 import { TreeCreateFormData } from "@/composables/use-tree-create-controller";
 import EditTreeTypeDialog from "@/components/tree/create/EditTreeTypeDialog.vue";
 import { ref } from "vue";
+import IconEditPen from "@/components/commons/images/IconEditPen.vue";
 
 defineProps<{
   formData: TreeCreateFormData;
 }>();
 
 const emits = defineEmits<{
+  (e: "edit:title"): void;
   <K extends keyof TreeCreateFormData>(
     e: "update:formData",
     key: K,
@@ -109,9 +109,12 @@ const updateVisibleEditBgTypeDialog = (visible: boolean) => {
   .info .text {
     padding: 32px 0px 12px 16px;
 
+    .title {
+      color: #644444;
+    }
+
     .date {
       margin-top: 12px;
-      margin-left: 8px;
       color: #adadad;
     }
   }

@@ -73,7 +73,7 @@ const innerStyle = computed(() => {
 
   return {
     "--el-dialog-margin-top": props.marginTop,
-    "--el-dialog-width": props.fullscreen ? getMaxWidth() : undefined,
+    "--el-dialog-width": props.fullscreen ? getMaxWidth() : "auto",
   };
 });
 </script>

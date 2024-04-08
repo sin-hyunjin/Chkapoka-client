@@ -5,12 +5,23 @@
       <tree-create-content
         :form-data="formData"
         @update:form-data="updateFormData"
+        @edit:title="updateVisibleEditTreeTitleDialog(true)"
       />
       <tree-create-footer
         :is-valid="isValid"
         @create="updateVisibleSelectOptionsDialog(true)"
       />
     </div>
+    <edit-tree-title-dialog
+      v-if="visibleEditTreeTitleDialog"
+      :visible="visibleEditTreeTitleDialog"
+      :title="formData.title"
+      @save="
+        formData.title = $event;
+        updateVisibleEditTreeTitleDialog(false);
+      "
+      @close="updateVisibleEditTreeTitleDialog(false)"
+    />
     <select-options-dialog
       v-if="visibleSelectOptionsDialog"
       :visible="visibleSelectOptionsDialog"
@@ -46,9 +57,9 @@ import { useTreeCreateController } from "@/composables/use-tree-create-controlle
 import SelectOptionsDialog from "@/components/tree/create/SelectOptionsDialog.vue";
 import { useCreateTree } from "@/composables/use-tree-create-api";
 import { useRouter } from "vue-router";
+import EditTreeTitleDialog from "@/components/tree/create/EditTreeTitleDialog.vue";
 
 const router = useRouter();
-
 defineProps<{
   layoutType: LayoutType;
 }>();
@@ -67,6 +78,12 @@ const visibleSelectOptionsDialog = ref<boolean>(false);
 const updateVisibleSelectOptionsDialog = (visible: boolean) => {
   visibleSelectOptionsDialog.value = visible;
 };
+
+const visibleEditTreeTitleDialog = ref<boolean>(true);
+const updateVisibleEditTreeTitleDialog = (visible: boolean) => {
+  visibleEditTreeTitleDialog.value = visible;
+};
+
 const innerStyle = computed(() => {
   if (formData.value.bgType === "BG_TYPE_01") {
     return {
