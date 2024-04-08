@@ -3,7 +3,12 @@ body * {
     --el-font-family:"Pretendard-Regular";
     @font-face {
       font-family: "Pretendard-Regular";
-        src: url("assets/fonts/Pretendard-Regular.ttf") format("truetype");
+        src: url("./fonts/Pretendard-Regular.ttf") format("truetype");
+        src: url("./fonts/Pretendard-Regular.eot"); /* IE9 Compat Modes */
+        src: url("./fonts/Pretendard-Regular.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+             url("./fonts/Pretendard-Regular.woff2") format("woff2"), /* Super Modern Browsers */
+            url("./fonts/Pretendard-Regular.woff") format("woff"), /* Pretty Modern Browsers */
+            url("./fonts/Pretendard-Regular.svg#svgFontName") format("svg"); /* Legacy iOS */
     }
   }
 
