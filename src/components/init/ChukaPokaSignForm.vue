@@ -1,16 +1,12 @@
 <template>
   <div :class="['sign-container', layoutTypeClass]">
     <div class="top">
-      <cp-button
-        type="solid"
-        :icon="IconArrowLeft"
-        width="auto"
-        height="auto"
-        bg-color="transparent"
-        text-color="var(--cp-color-black)"
-        @click="$emit('back')"
-        >뒤로가기</cp-button
-      >
+      <cp-icon-button type="withText" @click="$emit('back')" text-align="end">
+        <template #icon>
+          <icon-arrow-left class="icon" />
+        </template>
+        <template #text>뒤로가기</template>
+      </cp-icon-button>
     </div>
     <div class="top-text">
       <template v-if="currentStep === SignFormStepType.EMAIL">
@@ -113,6 +109,7 @@ export default defineComponent({
 <script setup lang="ts">
 import { ref, defineProps, computed, defineEmits } from "vue";
 import CpEmailNumberInput from "@/components/commons/CpEmailNumberInput.vue";
+import CpIconButton from "@/components/commons/CpIconButton.vue";
 import CpButton from "@/components/commons/CpButton.vue";
 import CpInput from "@/components/commons/CpInput.vue";
 import IconArrowLeft from "@/components/commons/images/IconArrowLeft.vue";
@@ -146,8 +143,8 @@ const layoutTypeClass = computed<string | undefined>(() => {
   }
 });
 
-const emailValue = ref<string>("example@example.com");
-const passwordValue = ref<string>("pass1234");
+const emailValue = ref<string>("");
+const passwordValue = ref<string>("");
 const verifyNumberValue = ref<string>("");
 const { isValidEmailValue, isValidPasswordValue, isValidVerifyNumberValue } =
   useValidateInputValue({
@@ -272,5 +269,10 @@ const sendFormData = (type: SignFormStepTypes, value?: string | number) => {
       height: 100%;
     }
   }
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
 }
 </style>

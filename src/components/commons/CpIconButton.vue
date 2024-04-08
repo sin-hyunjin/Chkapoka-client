@@ -1,5 +1,5 @@
 <template>
-  <el-button :class="classArr" :style="innerStyle">
+  <el-button class="cp-icon-button" :class="classArr" :style="innerStyle">
     <template v-if="type === 'icon'">
       <slot name="icon"></slot>
     </template>
@@ -125,23 +125,25 @@ const innerStyle = computed(() => {
 });
 </script>
 <style scoped lang="scss">
-.top {
-  .text {
-    margin-bottom: 8px;
+.cp-icon-button {
+  .top {
+    .text {
+      margin-bottom: 8px;
+    }
   }
-}
 
-.bottom {
-  .icon {
-    margin-bottom: 8px;
+  .bottom {
+    .icon {
+      margin-bottom: 8px;
+    }
   }
-}
 
-.start.text {
-  margin-right: 8px;
-}
+  .start.text {
+    margin-right: 8px;
+  }
 
-.end.icon {
-  margin-right: 8px;
+  .end.icon {
+    margin-right: 8px;
+  }
 }
 </style>
