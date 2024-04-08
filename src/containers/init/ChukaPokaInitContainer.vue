@@ -3,6 +3,7 @@
     <chuka-poka-init-form
       v-if="signFormCurrentStep === SignFormStepType.PREV_EMAIL"
       @start="navigate(SignFormStepType.EMAIL)"
+      @open:text-dialog="openTextDialog"
     />
     <chuka-poka-sign-form
       v-else-if="signFormCurrentStep !== SignFormStepType.LOGIN_SUCCESS"
@@ -11,6 +12,12 @@
       @send="handleSend"
       @navigate="navigate"
       @back="back"
+    />
+    <text-dialog
+      v-if="visibleTextDialog && textDialogTarget"
+      :visible="visibleTextDialog"
+      :type="textDialogTarget"
+      @close="closeTextDialog"
     />
   </cp-layout>
 </template>
@@ -27,12 +34,13 @@ export default defineComponent({
 import CpLayout from "@/components/commons/CpLayout.vue";
 import ChukaPokaInitForm from "@/components/init/ChukaPokaInitForm.vue";
 import ChukaPokaSignForm from "@/components/init/ChukaPokaSignForm.vue";
+import TextDialog from "@/components/init/TextDialog.vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import {
   SignFormStepType,
   useJoinLoginProcess,
 } from "@/composables/use-user-controller";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps<{
   layoutType: LayoutType;
@@ -42,4 +50,16 @@ const props = defineProps<{
 const { signFormCurrentStep, handleSend, navigate, back } = useJoinLoginProcess(
   computed(() => props.linkId),
 );
+
+const visibleTextDialog = ref<boolean>(false);
+const textDialogTarget = ref<"tos" | "pp" | undefined>(undefined);
+const openTextDialog = (type: "tos" | "pp") => {
+  visibleTextDialog.value = true;
+  textDialogTarget.value = type;
+};
+
+const closeTextDialog = () => {
+  visibleTextDialog.value = false;
+  textDialogTarget.value = undefined;
+};
 </script>

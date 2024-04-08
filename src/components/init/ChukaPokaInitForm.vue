@@ -21,9 +21,12 @@
           >
           <div class="more-info cp-text-main-4">
             시작하기를 누르면
-            <span>이용약관</span>
+            <span @click="$emit('open:textDialog', 'tos')">이용약관</span>
             /
-            <span>개인정보 처리방침</span> 동의로 간주합니다.
+            <span @click="$emit('open:textDialog', 'pp')"
+              >개인정보 처리방침</span
+            >
+            동의로 간주합니다.
           </div>
         </div>
       </div>
@@ -48,6 +51,7 @@ const isInit = ref(false);
 
 defineEmits<{
   (e: "start"): void;
+  (e: "open:textDialog", type: "tos" | "pp"): void; // terms of service, privacy policy
 }>();
 
 onMounted(() => {
