@@ -31,7 +31,7 @@ withDefaults(
     fillColor?: string;
   }>(),
   {
-    fillColor: "var(--cp-color-white)",
+    fillColor: "var(--cp-color-black)",
   },
 );
 </script>
