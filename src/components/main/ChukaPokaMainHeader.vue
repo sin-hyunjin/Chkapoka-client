@@ -3,15 +3,15 @@
     <nav class="nav">
       <div class="left cp-text-head-4">CHUKAPOKA</div>
       <div class="right">
-        <cp-icon-button
+        <!-- TODO: 알림버튼 일단 삭제, 추후 대응할 수 있으면 다시 추가할 예정 -->
+        <!-- <cp-icon-button
           type="icon"
           @click="updateVisibleNotificationDialog(true)"
         >
           <template #icon>
             <icon-notification fill-color="var(--cp-color-white)" />
           </template>
-        </cp-icon-button>
-
+        </cp-icon-button> -->
         <!-- 현진 : menu 버튼  -->
         <cp-icon-button type="icon">
           <template #icon>
@@ -63,10 +63,10 @@
       </cp-icon-button>
     </div>
     <!-- notification dialog -->
-    <notification-dialog
+    <!-- <notification-dialog
       v-if="visibleNotificationDialog"
       :visible="visibleNotificationDialog"
-    />
+    /> -->
   </header>
 </template>
 
@@ -81,12 +81,12 @@ export default defineComponent({
 import { ref } from "vue";
 import CpButton from "@/components/commons/CpButton.vue";
 import CpIconButton from "@/components/commons/CpIconButton.vue";
-import IconNotification from "@/components/commons/images/IconNotification.vue";
+// import IconNotification from "@/components/commons/images/IconNotification.vue";
 import IconMenu from "@/components/commons/images/IconMenu.vue";
 import IconTreeGreen from "@/components/commons/images/IconTreeGreen.vue";
 import IconLetterPink from "@/components/commons/images/IconLetterPink.vue";
 import CpMenuModal from "@/components/commons/CpMenuModal.vue";
-import NotificationDialog from "@/components/main/NotificationDialog.vue";
+// import NotificationDialog from "@/components/main/NotificationDialog.vue";
 
 const visibleMenuModel = ref(false);
 
@@ -94,12 +94,11 @@ const updateVisibleMenuModel = (visible: boolean) => {
   visibleMenuModel.value = visible;
 };
 
-const visibleNotificationDialog = ref<boolean>(false);
-
+// const visibleNotificationDialog = ref<boolean>(false);
 // if clicked, open notification dialog
-const updateVisibleNotificationDialog = (visible: boolean) => {
-  visibleNotificationDialog.value = visible;
-};
+// const updateVisibleNotificationDialog = (visible: boolean) => {
+//   visibleNotificationDialog.value = visible;
+// };
 
 defineEmits<{
   (e: "create:tree"): void;

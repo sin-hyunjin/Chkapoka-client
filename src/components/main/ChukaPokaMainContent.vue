@@ -100,12 +100,18 @@
         </template>
       </template>
       <template v-else-if="activeMainTab === 'myTreeItem'">
-        <!-- TODO: 트리 아이템 empty 화면 논의 필요 -->
         <template v-if="treeItemList.length === 0">
-          <div class="title cp-text-head-4">
-            아직 편지를 작성하지 않으셨군요!
+          <div class="tree-item-tab-content-empty-container">
+            <div class="content">
+              <icon-tree-item-empty />
+              <div class="description cp-text-title-1">
+                아직 아무런 편지가 없어요.
+              </div>
+              <cp-button type="outlined" width="auto" height="auto"
+                >편지 쓰러가기</cp-button
+              >
+            </div>
           </div>
-          <tree-item-empty />
         </template>
         <template v-else>
           <div class="tree-item-tab-content-wrap">
@@ -123,7 +129,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { TreeDetailResponseDto } from "@/composables/use-tree-create-api";
 
 export default defineComponent({
   name: "ChukaPokaMainContent",
@@ -134,10 +139,12 @@ import { computed, ref } from "vue";
 import CpTabs from "@/components/commons/CpTabs.vue";
 import CpRadioGroup from "@/components/commons/CpRadioGroup.vue";
 import TreeEmpty from "@/components/main/TreeEmpty.vue";
-import TreeItemEmpty from "@/components/main/TreeItemEmpty.vue";
+import IconTreeItemEmpty from "@/components/commons/images/IconTreeItemEmpty.vue";
 import TreePreview from "@/components/main/TreePreview.vue";
 import TreeItemPreview from "@/components/main/TreeItemPreview.vue";
 import { TreeItemListItem } from "@/composables/use-main-api";
+import CpButton from "@/components/commons/CpButton.vue";
+import { TreeDetailResponseDto } from "@/composables/use-tree-create-api";
 
 const props = defineProps<{
   treeList: TreeDetailResponseDto[];
@@ -220,6 +227,25 @@ const notYetSendTree = computed<TreeDetailResponseDto[]>(() => {
       margin-top: var(--cp-number-12);
       grid-template-columns: repeat(2, 1fr);
       grid-gap: var(--cp-number-12);
+    }
+
+    .tree-item-tab-content-empty-container {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .description {
+          margin: var(--cp-number-8) 0;
+          color: var(--cp-color-gray-500);
+        }
+      }
     }
   }
 }
