@@ -7,10 +7,8 @@ import {
   useAuthNumber,
   useEmailCheck,
   useJoinLogin,
-  useReissue,
 } from "@/composables/use-user-api";
 import { useAccessTokenStore } from "@/store";
-import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { ElNotification } from "element-plus";
 
@@ -33,34 +31,12 @@ export type SignFormData = {
 /** 로그인 & 회원가입 페이지의 composable */
 export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => {
   const router = useRouter();
-
-  /** 이미 브라우저의 localstorage에 access token이 존재하면,
-   * 자동로그인이므로, reissue를 요청하고, 성공시 메인 페이지로 이동
-   */
-  onMounted(() => {
-    const { mutate: reissue } = useReissue({
-      onSuccess: (data) => {
-        setAccessToken(data.data.data.accessToken);
-        router.push({ name: "ChukaPokaMain" });
-      },
-      onError: (error) => {
-        /** useReissue는 localstorage에 access token 값이 존재할 때만 진행되는데  */
-        console.error(error);
-        if (getAccessToken()) {
-          clearAccessToken();
-        }
-      },
-    });
-
-    /** localstorage에 access token 값이 존재할 때만 reissue 호출 */
-    if (getAccessToken()) {
-      reissue();
-    }
-  });
+  const { setAccessToken, getAccessToken, clearAccessToken } =
+    useAccessTokenStore();
 
   /** 현재 로그인 & 회원가입 스텝
-   * PREV_EMAIL, EMAIL, REQUEST_EMAIL_VERIFY, CHECK_EMAIL_NUMBER, PASSWORD, LOGIN_SUCCESS
-   */
+ * PREV_EMAIL, EMAIL, REQUEST_EMAIL_VERIFY, CHECK_EMAIL_NUMBER, PASSWORD, LOGIN_SUCCESS
+ */
   const signFormCurrentStep = ref<SignFormStepTypes>(
     SignFormStepType.PREV_EMAIL,
   );
@@ -218,8 +194,7 @@ export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => 
       }
     },
   });
-  const { setAccessToken, getAccessToken, clearAccessToken } =
-    useAccessTokenStore();
+
 
   const navigate = (target: SignFormStepTypes) => {
     signFormCurrentStep.value = target;

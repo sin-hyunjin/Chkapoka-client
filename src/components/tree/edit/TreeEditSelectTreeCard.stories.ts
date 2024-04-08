@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import TreeEditSelectTreeCard from "./TreeEditSelectTreeCard.vue";
-import IconTreePreviewSm from "@/components/commons/images/IconTreePreviewSm.vue";
+import IconTree01PreviewSm from "@/components/commons/images/IconTree01PreviewSm.vue";
 
 const meta: Meta<typeof TreeEditSelectTreeCard> = {
   title: "TreeEditSelectTreeCard",
@@ -21,11 +21,11 @@ export const TreeCard: StoryObj<{
   type: string;
 }> = {
   render: (args) => ({
-    components: { TreeEditSelectTreeCard, IconTreePreviewSm },
+    components: { TreeEditSelectTreeCard, IconTree01PreviewSm },
     setup() {
       return { args };
     },
-    template: `<tree-edit-select-tree-card v-bind="args"><icon-tree-preview-sm/></tree-edit-select-tree-card>`,
+    template: `<tree-edit-select-tree-card v-bind="args"><icon-tree-01-preview-sm/></tree-edit-select-tree-card>`,
   }),
   args: {
     type: "treeCard",

@@ -58,7 +58,7 @@ const innerStyle = computed(() => {
         "--el-button-active-text-color": props.textColor,
         "--el-button-bg-color": props.bgColor,
         "--el-button-hover-bg-color": props.hoverColor,
-        "--el-button-active-bg-color": props.hoverColor,
+        "--el-button-active-bg-color": props.bgColor,
         "--el-button-hover-color": props.bgColor,
         "--el-button-active-border-color": props.hoverColor,
         "--el-button-hover-border-color": props.hoverColor,
@@ -84,3 +84,9 @@ const innerStyle = computed(() => {
   }
 });
 </script>
+
+<style scoped lang="scss">
+.el-button:focus {
+  background-color: var(--el-button-active-bg-color);
+}
+</style>
