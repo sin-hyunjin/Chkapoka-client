@@ -12,6 +12,7 @@ import {
 import { useAccessTokenStore } from "@/store";
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { ElNotification } from "element-plus";
 
 export const SignFormStepType = {
   PREV_EMAIL: "PREV_EMAIL",
@@ -116,13 +117,15 @@ export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => 
         requestEmailVerify({
           email: formData.value.email,
         });
+        // 일단 인증번호 전송 화면으로 이동
+        navigate(SignFormStepType.CHECK_EMAIL_NUMBER);
         break;
       }
       case SignFormStepType.CHECK_EMAIL_NUMBER: {
         if (formData.value.verifyNumber === authNumber.value) {
           navigate(SignFormStepType.PASSWORD);
         } else {
-          notify("verify-fail");
+          notify("잘못된 인증번호입니다. 다시 입력해주세요.");
         }
         break;
       }
@@ -174,9 +177,9 @@ export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => 
     },
   });
 
-  const { mutate: requestEmailVerify, authNumber } = useAuthNumber({
+  const { mutate: requestEmailVerify, authNumber, isLoading: isLoadingRequestEmailVerify } = useAuthNumber({
     onSuccess: () => {
-      navigate(SignFormStepType.CHECK_EMAIL_NUMBER);
+
     },
     onError: (error) => {
       console.error(error.response?.data);
@@ -208,7 +211,7 @@ export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => 
       }
     },
     onError(error) {
-      notify("login-fail");
+      notify("로그인에 실패했습니다. 다시 입력해주세요.");
       console.error(error.response?.data);
       if (getAccessToken()) {
         clearAccessToken();
@@ -253,8 +256,10 @@ export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => 
   };
 
   const notify = (text: string) => {
-    // TODO: 알림 처리
-    console.log(text);
+    ElNotification({
+      title: text,
+      // message: text,
+    });
   };
 
   return {
@@ -270,5 +275,6 @@ export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => 
     navigate,
     back,
     notify,
+    isLoadingRequestEmailVerify,
   };
 };

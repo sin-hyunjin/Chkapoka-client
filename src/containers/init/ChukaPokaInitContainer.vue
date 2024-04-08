@@ -7,8 +7,10 @@
     />
     <chuka-poka-sign-form
       v-else-if="signFormCurrentStep !== SignFormStepType.LOGIN_SUCCESS"
+      v-loading="isLoadingRequestEmailVerify"
       :layout-type="layoutType"
       :current-step="signFormCurrentStep"
+      :is-loading-request-email-verify="isLoadingRequestEmailVerify"
       @send="handleSend"
       @navigate="navigate"
       @back="back"
@@ -47,9 +49,13 @@ const props = defineProps<{
   linkId?: string; // link 페이지에서 회원가입/로그인 화면으로 이동한 경우
 }>();
 
-const { signFormCurrentStep, handleSend, navigate, back } = useJoinLoginProcess(
-  computed(() => props.linkId),
-);
+const {
+  signFormCurrentStep,
+  handleSend,
+  navigate,
+  back,
+  isLoadingRequestEmailVerify,
+} = useJoinLoginProcess(computed(() => props.linkId));
 
 const visibleTextDialog = ref<boolean>(false);
 const textDialogTarget = ref<"tos" | "pp" | undefined>(undefined);

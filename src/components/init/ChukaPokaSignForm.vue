@@ -64,6 +64,7 @@
           v-model="verifyNumberValue"
         ></cp-email-number-input>
         <div class="resend-btn">
+          <span class="limit-time">남은 시간: {{ limitTimeText }}</span>
           <cp-button
             :class-arr="['cp-text-main-4']"
             type="solid"
@@ -73,6 +74,7 @@
             bg-color="var(--cp-color-gray-100)"
             text-color="var(--cp-color-gray-700)"
             hover-color="var(--cp-color-gray-300)"
+            @click="sendFormData('REQUEST_EMAIL_VERIFY', emailValue)"
             >코드 다시 받기</cp-button
           >
         </div>
@@ -107,7 +109,7 @@ export default defineComponent({
 });
 </script>
 <script setup lang="ts">
-import { ref, defineProps, computed, defineEmits } from "vue";
+import { ref, defineProps, computed, defineEmits, watch } from "vue";
 import CpEmailNumberInput from "@/components/commons/CpEmailNumberInput.vue";
 import CpIconButton from "@/components/commons/CpIconButton.vue";
 import CpButton from "@/components/commons/CpButton.vue";
@@ -123,6 +125,7 @@ import {
 const props = defineProps<{
   layoutType: LayoutType;
   currentStep: SignFormStepTypes;
+  isLoadingRequestEmailVerify: boolean;
 }>();
 
 const emits = defineEmits<{
@@ -196,6 +199,29 @@ const current = computed(() => {
 const sendFormData = (type: SignFormStepTypes, value?: string | number) => {
   emits("send", type, value);
 };
+
+const emailVerifyLimitTime = ref<number>(300);
+const limitTimeText = computed(() => {
+  const minutes = Math.floor(emailVerifyLimitTime.value / 60);
+  const second = String(emailVerifyLimitTime.value % 60).padStart(2, "0");
+  return `${minutes}:${second}`;
+});
+watch(
+  () => props.isLoadingRequestEmailVerify,
+  () => {
+    /** 인증번호 이메일 전송 완료 */
+    if (!props.isLoadingRequestEmailVerify) {
+      emailVerifyLimitTime.value = 300;
+      const emailVerifyCountTime = setInterval(() => {
+        if (emailVerifyLimitTime.value > 0) {
+          emailVerifyLimitTime.value = emailVerifyLimitTime.value - 1;
+        } else {
+          clearInterval(emailVerifyCountTime);
+        }
+      }, 1000); // 1초마다
+    }
+  },
+);
 </script>
 
 <style scoped lang="scss">
@@ -234,6 +260,11 @@ const sendFormData = (type: SignFormStepTypes, value?: string | number) => {
     margin-top: var(--cp-number-12);
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+
+    .limit-time {
+      margin-right: var(--cp-number-8);
+    }
   }
   .resend-btn > .el-button {
     border: none;

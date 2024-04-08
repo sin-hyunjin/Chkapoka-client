@@ -105,7 +105,7 @@ export const useAuthNumber = (
   >,
 ) => {
   const api = useAxios();
-  const { mutate, data } = useMutation(
+  const { mutate, data, isLoading } = useMutation(
     ["auth-number"],
     (payload: AuthNumberRequest) => {
       return api.get("/api/user/authNumber", {
@@ -122,6 +122,7 @@ export const useAuthNumber = (
   return {
     mutate,
     authNumber,
+    isLoading,
   };
 };
 /** api/user/authNumber END */
