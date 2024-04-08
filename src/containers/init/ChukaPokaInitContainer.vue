@@ -63,7 +63,6 @@ const openTextDialog = (type: "tos" | "pp") => {
   visibleTextDialog.value = true;
   textDialogTarget.value = type;
 };
-
 const closeTextDialog = () => {
   visibleTextDialog.value = false;
   textDialogTarget.value = undefined;

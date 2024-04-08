@@ -3,7 +3,6 @@
     :model-value="visible"
     :before-close="() => $emit('close')"
     @close="$emit('close')"
-    size="50%"
   >
     <slot />
   </el-drawer>

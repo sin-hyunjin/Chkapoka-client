@@ -1,7 +1,7 @@
 <template>
   <cp-layout :layout-type="LayoutType.Mobile">
     <div v-if="treeListData && treeItemListData" class="main-container-wrap">
-      <chuka-poka-main-header @create:tree="createTree" />
+      <chuka-poka-main-header @create:tree="createTree" @logout="logout" />
       <chuka-poka-main-content
         :tree-list="treeListData.treeList"
         :tree-item-list="treeItemListData.treeItemList"
@@ -14,6 +14,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useLogout } from "@/composables/use-user-api";
+import { useAccessTokenStore } from "@/store";
 
 export default defineComponent({
   name: "ChukaPokaMainContainer",
@@ -46,6 +48,14 @@ const createTree = () => {
 const clickTree = (treeId: string) => {
   router.push({ name: "TreeDetail", params: { id: treeId } });
 };
+
+const { mutate: logout } = useLogout({
+  onSuccess: () => {
+    const { clearAccessToken } = useAccessTokenStore();
+    clearAccessToken();
+    router.push({ name: "ChukaPokaInit" });
+  },
+});
 </script>
 
 <style scoped lang="scss">
