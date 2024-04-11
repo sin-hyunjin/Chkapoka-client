@@ -31,7 +31,7 @@ const props = withDefaults(
   {
     classArr: () => ["cp-text-title-2"],
     bgColor: "var(--cp-color-red)",
-    hoverBgColor: "var(--cp-color-pink)",
+    hoverBgColor: "var(--cp-color-red)",
     borderRadius: "100%",
     width: "56px",
     height: "56px",

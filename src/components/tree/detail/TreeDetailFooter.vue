@@ -1,11 +1,40 @@
 <template>
   <div class="tree-detail-footer">
-    <cp-button type="solid" @click="$emit('link')"> 초대하기 </cp-button>
+    <div :class="['sub-button-group', isOpen ? 'visible' : 'hidden']">
+      <cp-icon-circle-button
+        class="create-tree-item"
+        bg-color="var(--cp-color-white)"
+        hover-bg-color="var(--cp-color-white)"
+        @click="$emit('create:treeItem')"
+      >
+        <icon-add-post />
+      </cp-icon-circle-button>
+      <cp-icon-circle-button
+        class="tree-link"
+        bg-color="var(--cp-color-white)"
+        hover-bg-color="var(--cp-color-white)"
+        @click="$emit('link')"
+      >
+        <icon-invite />
+      </cp-icon-circle-button>
+      <cp-icon-circle-button
+        class="tree-share"
+        bg-color="var(--cp-color-white)"
+        hover-bg-color="var(--cp-color-white)"
+        @click="$emit('share')"
+      >
+        <icon-share />
+      </cp-icon-circle-button>
+    </div>
+    <cp-icon-circle-button class="entire-button" @click="isOpen = !isOpen">
+      <icon-plus v-if="!isOpen" fillColor="var(--cp-color-white)" />
+      <icon-close v-else fillColor="var(--cp-color-white)" />
+    </cp-icon-circle-button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "TreeDetailFooter",
@@ -13,11 +42,20 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import CpButton from "@/components/commons/CpButton.vue";
+import CpIconCircleButton from "@/components/commons/CpIconCircleButton.vue";
+import IconPlus from "@/components/commons/images/IconPlus.vue";
+import IconAddPost from "@/components/commons/images/IconAddPost.vue";
+import IconInvite from "@/components/commons/images/IconInvite.vue";
+import IconShare from "@/components/commons/images/IconShare.vue";
+import IconClose from "@/components/commons/images/IconClose.vue";
 
 defineEmits<{
+  (e: "create:treeItem"): void;
   (e: "link"): void;
+  (e: "share"): void;
 }>();
+
+const isOpen = ref<boolean>(false);
 </script>
 
 <style scoped lang="scss">
@@ -26,15 +64,16 @@ defineEmits<{
   background-color: var(--ground-color);
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  .menu {
-    &__container:focus {
-      transform: rotate(45deg);
+  .sub-button-group {
+    margin-bottom: var(--cp-number-8);
+    &.visible {
+      visibility: visible;
     }
-    &__item:active {
-      transform: scale(0.95);
+    &.hidden {
+      visibility: hidden;
     }
   }
 }

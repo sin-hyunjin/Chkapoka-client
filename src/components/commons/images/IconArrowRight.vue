@@ -1,15 +1,15 @@
 <template>
   <svg
-    width="32"
-    height="32"
-    viewBox="0 0 32 32"
+    width="13"
+    height="24"
+    viewBox="0 0 13 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M10 4L22 16L10 28"
-      stroke="#A2A2A2"
-      stroke-width="2"
+      d="M2 2L11 12.1538L2 22"
+      :stroke="fillColor"
+      stroke-width="3"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
@@ -22,4 +22,17 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "IconArrowRight",
 });
+</script>
+
+<script setup lang="ts">
+import { defineProps, withDefaults } from "vue";
+
+withDefaults(
+  defineProps<{
+    fillColor?: string;
+  }>(),
+  {
+    fillColor: "var(--cp-color-black)",
+  },
+);
 </script>

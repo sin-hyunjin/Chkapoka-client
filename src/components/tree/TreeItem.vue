@@ -1,6 +1,17 @@
 <template>
   <div class="tree-item">
-    <div class="text cp-text-main-4">{{ text }}</div>
+    <div
+      :class="[
+        'text cp-text-main-4',
+        readable !== undefined
+          ? readable
+            ? 'readable'
+            : 'un-readable'
+          : undefined,
+      ]"
+    >
+      {{ text }}
+    </div>
     <div class="flower-icon">
       <icon-flower-01 v-if="treeType === 'TREE_TYPE_01'" />
       <icon-flower-02 v-if="treeType === 'TREE_TYPE_02'" />
@@ -26,6 +37,7 @@ import { TreeType } from "@/composables/use-tree-create-controller";
 defineProps<{
   text: string;
   treeType: TreeType;
+  readable?: boolean;
 }>();
 </script>
 <style scoped lang="scss">
@@ -43,6 +55,15 @@ defineProps<{
     -webkit-box-orient: vertical;
     word-break: break-word;
     text-align: center;
+  }
+
+  .text.readable {
+    color: var(--cp-color-black);
+    font-weight: 900;
+  }
+
+  .text.un-readable {
+    color: var(--cp-color-gray-500);
   }
 
   &:hover {

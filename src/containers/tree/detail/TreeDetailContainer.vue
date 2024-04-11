@@ -7,8 +7,16 @@
         @edit="edit"
         @delete="updateVisibleTreeDeleteDialog(true)"
       />
-      <tree-detail-content :data="resultData" />
-      <tree-detail-footer :data="resultData" @link="handleLink" />
+      <tree-detail-content
+        :data="resultData"
+        @click:tree-item="handleClickTreeItem"
+      />
+      <tree-detail-footer
+        :data="resultData"
+        @create:tree-item="updateVisibleCreateTreeItemDialog(true)"
+        @link="handleLink"
+        @share="handleShare"
+      />
       <tree-delete-dialog
         v-if="visibleTreeDeleteDialog"
         :visible="visibleTreeDeleteDialog"
@@ -17,12 +25,26 @@
       />
     </div>
   </cp-layout>
+  <tree-item-create-dialog
+    v-if="resultData && visibleCreateTreeItemDialog"
+    :visible="visibleCreateTreeItemDialog"
+    :tree-id="resultData.treeId"
+    @close="updateVisibleCreateTreeItemDialog(false)"
+    @create:tree-item="handleSaveTreeItem"
+  />
+  <tree-item-detail-dialog
+    v-if="visibleDetailTreeItemDialog && detailTreeItemTarget"
+    :visible="visibleDetailTreeItemDialog"
+    :target="detailTreeItemTarget"
+    @close="clearDetailTreeItemDialog()"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { getBgColor } from "@/composables/use-tree-create-controller";
 import { useDeleteTreeDetail } from "@/composables/use-tree-delete-api";
+import { TreeItemCreateFormData } from "@/composables/use-tree-item-create-controller";
 
 export default defineComponent({
   name: "TreeDetailContainer",
@@ -40,6 +62,10 @@ import CpLayout from "@/components/commons/CpLayout.vue";
 import { useFetchTreeDetail } from "@/composables/use-tree-detail-api";
 import { useRouter } from "vue-router";
 import { ElNotification } from "element-plus";
+import TreeItemCreateDialog from "@/components/treeItem/create/TreeItemCreateDialog.vue";
+import TreeItemDetailDialog from "@/components/treeItem/detail/TreeItemDetailDialog.vue";
+import { useCreateTreeItem } from "@/composables/use-tree-item-create-api";
+
 const router = useRouter();
 
 const props = defineProps<{
@@ -58,14 +84,67 @@ const { mutate: mutateDelete } = useDeleteTreeDetail(
   },
 );
 
+const { mutate: save } = useCreateTreeItem({
+  onSuccess: () => {
+    // reload
+    router.go(0);
+  },
+});
+
+const handleSaveTreeItem = (formData: TreeItemCreateFormData) => {
+  save(formData);
+};
+
+const handleClickTreeItem = (treeItemId: string) => {
+  detailTreeItemTarget.value = {
+    treeItemId: treeItemId,
+  };
+  updateVisibleDetailTreeItemDialog(true);
+};
+
+const detailTreeItemTarget = ref<
+  | {
+      treeItemId: string;
+    }
+  | undefined
+>(undefined);
+const visibleDetailTreeItemDialog = ref<boolean>(false);
+const updateVisibleDetailTreeItemDialog = (visible: boolean) => {
+  visibleDetailTreeItemDialog.value = visible;
+};
+
+const clearDetailTreeItemDialog = () => {
+  updateVisibleDetailTreeItemDialog(false);
+  detailTreeItemTarget.value = undefined;
+};
+
+const visibleCreateTreeItemDialog = ref<boolean>(false);
+const updateVisibleCreateTreeItemDialog = (visible: boolean) => {
+  visibleCreateTreeItemDialog.value = visible;
+};
+
 const handleLink = () => {
   if (resultData.value) {
     navigator.clipboard
       .writeText(`http://localhost:8080/link/${resultData.value.linkId}`)
       .then(() => {
         ElNotification({
-          title: "링크 복사 성공!",
-          message: "링크 복사에 성공했습니다! 다른 사람들에게 공유해보세요!",
+          title: "공유 링크 복사 성공!",
+          message:
+            "공유 링크 복사에 성공했습니다! 다른 사람들에게 공유해보세요!",
+        });
+      });
+  }
+};
+
+const handleShare = () => {
+  if (resultData.value) {
+    navigator.clipboard
+      .writeText(`http://localhost:8080/link/${resultData.value.sendId}`)
+      .then(() => {
+        ElNotification({
+          title: "전달 링크 복사 성공!",
+          message: "전달 링크 복사에 성공했습니다! 트리 주인에게 전달해보세요!",
         });
       });
   }

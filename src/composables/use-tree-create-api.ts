@@ -26,6 +26,10 @@ export type TreeDetailResponseDto = {
   myTree: boolean;
 };
 
+export type TreeDetailTreeItemWithReadable = TreeDetailTreeItem & {
+  readable: boolean;
+};
+
 
 export const useCreateTree = (
   options?: UseMutationOptions<

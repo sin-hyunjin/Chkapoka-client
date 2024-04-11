@@ -4,14 +4,33 @@
     <tree-image-02 v-else-if="treeType === 'TREE_TYPE_02'" class="tree-icon" />
     <tree-image-03 v-else-if="treeType === 'TREE_TYPE_03'" class="tree-icon" />
     <tree-image-04 v-else-if="treeType === 'TREE_TYPE_04'" class="tree-icon" />
-    <template v-for="(treeItem, idx) in treeItemList" :key="idx">
-      <tree-item
-        class="tree-item"
-        :tree-type="treeType"
-        :text="`${treeItem.title}`"
-        :style="getTreeItemPosition(idx)"
-        @click="$emit('click:treeItem', treeItem.treeItemId)"
-      />
+
+    <!-- 트리 상세, 트리 링크 등 실제 트리 아이템이 표시되는 경우 -->
+    <template v-if="treeItemList">
+      <template v-for="(treeItem, idx) in treeItemList" :key="idx">
+        <tree-item
+          class="tree-item"
+          :tree-type="treeType"
+          :text="`${treeItem.title}`"
+          :readable="treeItem.readable"
+          :style="getTreeItemPosition(idx)"
+          @click="
+            treeItem.readable && $emit('click:treeItem', treeItem.treeItemId)
+          "
+        />
+      </template>
+    </template>
+    <!-- 샘플 트리 아이템이 표시되는 경우 -->
+    <template v-else>
+      <template v-for="(treeItem, idx) in templateTreeItemList" :key="idx">
+        <tree-item
+          class="tree-item"
+          :tree-type="treeType"
+          :text="`${treeItem.title}`"
+          :style="getTreeItemPosition(idx)"
+          @click="$emit('click:treeItem', treeItem.treeItemId)"
+        />
+      </template>
     </template>
     <slot />
   </div>
@@ -30,13 +49,13 @@ import TreeImage02 from "@/components/commons/images/TreeImage02.vue";
 import TreeImage03 from "@/components/commons/images/TreeImage03.vue";
 import TreeImage04 from "@/components/commons/images/TreeImage04.vue";
 import TreeItem from "@/components/tree/TreeItem.vue";
-import { TreeDetailTreeItem } from "@/composables/use-tree-create-api";
+import { TreeDetailTreeItemWithReadable } from "@/composables/use-tree-create-api";
 import { TreeType } from "@/composables/use-tree-create-controller";
 import { computed, ref } from "vue";
 
-const props = defineProps<{
+defineProps<{
   treeType: TreeType;
-  treeItemList?: TreeDetailTreeItem[];
+  treeItemList?: TreeDetailTreeItemWithReadable[];
 }>();
 
 defineEmits<{
@@ -76,54 +95,52 @@ const getTreeItemPosition = (idx: number) => {
   }
 };
 
-const treeItemList = computed(() => {
-  if (props.treeItemList) {
-    return props.treeItemList;
-  } else {
-    return [
-      {
-        treeItemId: "treeItem1",
-        title: "편지1",
-      },
-      {
-        treeItemId: "treeItem2",
-        title: "편지2",
-      },
-      {
-        treeItemId: "treeItem3",
-        title: "편지3",
-      },
-      {
-        treeItemId: "treeItem4",
-        title: "편지4",
-      },
-      {
-        treeItemId: "treeItem5",
-        title: "편지5",
-      },
-      {
-        treeItemId: "treeItem6",
-        title: "편지6",
-      },
-      {
-        treeItemId: "treeItem7",
-        title: "편지7",
-      },
-      {
-        treeItemId: "treeItem8",
-        title: "편지8",
-      },
-      {
-        treeItemId: "treeItem9",
-        title: "편지9",
-      },
-      {
-        treeItemId: "treeItem10",
-        title: "편지10",
-      },
-    ];
-  }
+const templateTreeItemList = computed(() => {
+  return [
+    {
+      treeItemId: "treeItem1",
+      title: "편지1",
+    },
+    {
+      treeItemId: "treeItem2",
+      title: "편지2",
+    },
+    {
+      treeItemId: "treeItem3",
+      title: "편지3",
+    },
+    {
+      treeItemId: "treeItem4",
+      title: "편지4",
+    },
+    {
+      treeItemId: "treeItem5",
+      title: "편지5",
+    },
+    {
+      treeItemId: "treeItem6",
+      title: "편지6",
+    },
+    {
+      treeItemId: "treeItem7",
+      title: "편지7",
+    },
+    {
+      treeItemId: "treeItem8",
+      title: "편지8",
+    },
+    {
+      treeItemId: "treeItem9",
+      title: "편지9",
+    },
+    {
+      treeItemId: "treeItem10",
+      title: "편지10",
+    },
+  ];
 });
+
+defineExpose({ treeSize });
 </script>
 
 <style scoped lang="scss">

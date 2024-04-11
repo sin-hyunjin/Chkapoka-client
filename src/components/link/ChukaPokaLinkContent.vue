@@ -11,7 +11,7 @@
     <div class="body">
       <tree-image-view
         :tree-type="data.treeType"
-        :tree-item-list="data.treeItemList"
+        :tree-item-list="treeItemListWithReadable"
         @click:tree-item="$emit('click:treeItem', $event)"
       ></tree-image-view>
     </div>
@@ -27,17 +27,37 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { TreeDetailResponseDto } from "@/composables/use-tree-create-api";
-import { defineProps } from "vue";
+import {
+  TreeDetailResponseDto,
+  TreeDetailTreeItemWithReadable,
+} from "@/composables/use-tree-create-api";
+import { computed, defineProps } from "vue";
 import TreeImageView from "@/components/tree/TreeImageView.vue";
 
-defineProps<{
+const props = defineProps<{
   data: TreeDetailResponseDto;
 }>();
 
 defineEmits<{
   (e: "click:treeItem", treeItemId: string): void;
 }>();
+
+const treeItemListWithReadable = computed<TreeDetailTreeItemWithReadable[]>(
+  () => {
+    return props.data.treeItemList.map((treeItem) => {
+      /** 읽기가능한 경우
+       * 1. 트리 유형이 내트리일 경우 && 로그인한 유저의 소유인 경우
+       * 2. 트리 아이템이 로그인한 유저의 소유인 경우
+       */
+      return {
+        ...treeItem,
+        readable:
+          (props.data.ownerType === "MINE" && props.data.myTree) ||
+          treeItem.myTreeItem,
+      };
+    });
+  },
+);
 </script>
 
 <style scoped lang="scss">

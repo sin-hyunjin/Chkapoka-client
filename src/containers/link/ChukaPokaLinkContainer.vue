@@ -12,8 +12,8 @@
       />
       <chuka-poka-link-footer
         :data="resultData"
-        @link="handleLink"
         @create:tree-item="updateVisibleCreateTreeItemDialog(true)"
+        @link="handleLink"
       />
     </div>
   </cp-layout>
