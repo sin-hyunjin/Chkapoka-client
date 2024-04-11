@@ -2,6 +2,7 @@
   <chuka-poka-init-container
     :layout-type="layoutType"
     :link-id="route.query['linkId'] as string | undefined"
+    :send-id="route.query['sendId'] as string | undefined"
   />
 </template>
 

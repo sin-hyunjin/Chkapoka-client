@@ -17,14 +17,14 @@
         @link="handleLink"
         @share="handleShare"
       />
-      <tree-delete-dialog
-        v-if="visibleTreeDeleteDialog"
-        :visible="visibleTreeDeleteDialog"
-        @delete="handleDelete"
-        @close="updateVisibleTreeDeleteDialog(false)"
-      />
     </div>
   </cp-layout>
+  <tree-delete-dialog
+    v-if="visibleTreeDeleteDialog"
+    :visible="visibleTreeDeleteDialog"
+    @delete="handleDelete"
+    @close="updateVisibleTreeDeleteDialog(false)"
+  />
   <tree-item-create-dialog
     v-if="resultData && visibleCreateTreeItemDialog"
     :visible="visibleCreateTreeItemDialog"
@@ -140,7 +140,7 @@ const handleLink = () => {
 const handleShare = () => {
   if (resultData.value) {
     navigator.clipboard
-      .writeText(`http://localhost:8080/link/${resultData.value.sendId}`)
+      .writeText(`http://localhost:8080/send/${resultData.value.sendId}`)
       .then(() => {
         ElNotification({
           title: "전달 링크 복사 성공!",

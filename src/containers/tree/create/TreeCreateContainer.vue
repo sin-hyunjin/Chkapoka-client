@@ -20,7 +20,11 @@
         formData.title = $event;
         updateVisibleEditTreeTitleDialog(false);
       "
-      @close="updateVisibleEditTreeTitleDialog(false)"
+      @close="
+        formData.title.length === 0
+          ? back()
+          : updateVisibleEditTreeTitleDialog(false)
+      "
     />
     <select-options-dialog
       v-if="visibleSelectOptionsDialog"

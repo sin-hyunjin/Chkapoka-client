@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import ChukaPokaInit from "@/views/init/index.vue";
 import ChukaPokaMain from "@/views/main/index.vue";
 import ChukaPokaLink from "@/views/link/index.vue";
+import ChukaPokaSend from "@/views/send/index.vue";
 import TreeDetail from "@/views/tree/detail/index.vue";
 import TreeCreate from "@/views/tree/create/index.vue";
 import TreeEdit from "@/views/tree/edit/index.vue";
@@ -14,6 +15,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/tree/edit/:id", name: "TreeEdit", component: TreeEdit, props: true },
   { path: "/tree/create", name: "TreeCreate", component: TreeCreate },
   { path: "/link/:linkId", name: "ChukaPokaLink", component: ChukaPokaLink, props: true },
+  { path: "/send/:sendId", name: "ChukaPokaSend", component: ChukaPokaSend, props: true },
 
 ];
 const router = createRouter({

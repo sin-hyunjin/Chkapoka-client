@@ -18,6 +18,7 @@
         <icon-invite />
       </cp-icon-circle-button>
       <cp-icon-circle-button
+        v-if="data.ownerType === 'NOT_YET_SEND'"
         class="tree-share"
         bg-color="var(--cp-color-white)"
         hover-bg-color="var(--cp-color-white)"
@@ -35,6 +36,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { TreeDetailResponseDto } from "@/composables/use-tree-create-api";
 
 export default defineComponent({
   name: "TreeDetailFooter",
@@ -48,7 +50,9 @@ import IconAddPost from "@/components/commons/images/IconAddPost.vue";
 import IconInvite from "@/components/commons/images/IconInvite.vue";
 import IconShare from "@/components/commons/images/IconShare.vue";
 import IconClose from "@/components/commons/images/IconClose.vue";
-
+defineProps<{
+  data: TreeDetailResponseDto;
+}>();
 defineEmits<{
   (e: "create:treeItem"): void;
   (e: "link"): void;

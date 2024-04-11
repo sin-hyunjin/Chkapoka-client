@@ -47,6 +47,7 @@ import { computed, ref } from "vue";
 const props = defineProps<{
   layoutType: LayoutType;
   linkId?: string; // link 페이지에서 회원가입/로그인 화면으로 이동한 경우
+  sendId?: string; // send 페이지에서 회원가입/로그인 화면으로 이동한 경우
 }>();
 
 const {
@@ -55,7 +56,10 @@ const {
   navigate,
   back,
   isLoadingRequestEmailVerify,
-} = useJoinLoginProcess(computed(() => props.linkId));
+} = useJoinLoginProcess(
+  computed(() => props.linkId),
+  computed(() => props.sendId),
+);
 
 const visibleTextDialog = ref<boolean>(false);
 const textDialogTarget = ref<"tos" | "pp" | undefined>(undefined);

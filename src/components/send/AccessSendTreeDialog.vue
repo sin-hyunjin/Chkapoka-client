@@ -10,7 +10,7 @@
   >
     <template #header>
       <div class="header cp-text-head-4">
-        로그인/회원가입이 필요한 페이지입니다.
+        누군가로부터 트리를 전달받았습니다!
       </div>
     </template>
     <template #default>
@@ -18,8 +18,8 @@
     </template>
     <template #footer>
       <div class="footer">
-        <cp-button type="solid" @click="$emit('go')">
-          로그인/회원가입
+        <cp-button type="solid" @click="$emit('access')">
+          트리 전달받기
         </cp-button>
       </div>
     </template>
@@ -43,7 +43,7 @@ defineProps<{
 }>();
 
 defineEmits<{
-  (e: "go"): void;
+  (e: "access"): void;
 }>();
 </script>
 

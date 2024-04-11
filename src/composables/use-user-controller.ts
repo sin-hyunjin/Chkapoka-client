@@ -29,7 +29,7 @@ export type SignFormData = {
 };
 
 /** 로그인 & 회원가입 페이지의 composable */
-export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => {
+export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>, sendId: ComputedRef<string | undefined>) => {
   const router = useRouter();
   const { setAccessToken, getAccessToken, clearAccessToken } =
     useAccessTokenStore();
@@ -177,11 +177,16 @@ export const useJoinLoginProcess = (linkId: ComputedRef<string | undefined>) => 
         setAccessToken(accessToken);
 
         const _linkId = unref(linkId);
-        if (!_linkId) {
-          router.push({ name: "ChukaPokaMain" });
-        } else {
+        const _sendId = unref(sendId);
+        if (_linkId) {
           /** link 페이지에서 이동된 경우 */
           router.push({ name: "ChukaPokaLink", params: { linkId: _linkId } });
+        } else if (_sendId) {
+          /** send 페이지에서 이동된 경우 */
+          router.push({ name: "ChukaPokaSend", params: { sendId: _sendId } });
+
+        } else {
+          router.push({ name: "ChukaPokaMain" });
         }
 
       }

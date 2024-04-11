@@ -45,7 +45,6 @@ onMounted(() => {
   }
   setInterval(
     () => {
-      console.log("reissue");
       if (getAccessToken()) {
         reissue();
       }

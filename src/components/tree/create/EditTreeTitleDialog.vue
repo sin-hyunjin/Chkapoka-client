@@ -38,8 +38,7 @@
             type="outlined"
             width="auto"
             height="auto"
-            :disabled="title.length === 0"
-            @click="title.length !== 0 && $emit('close')"
+            @click="$emit('close')"
           >
             닫기
           </cp-button>
