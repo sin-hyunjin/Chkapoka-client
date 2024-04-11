@@ -1,9 +1,20 @@
 <template>
   <cp-layout :layout-type="LayoutType.Mobile">
     <div class="tree-detail-container" v-if="resultData" :style="innerStyle">
-      <tree-detail-header @back="back" />
+      <tree-detail-header
+        :is-my-tree="resultData?.myTree"
+        @back="back"
+        @edit="edit"
+        @delete="updateVisibleTreeDeleteDialog(true)"
+      />
       <tree-detail-content :data="resultData" />
       <tree-detail-footer :data="resultData" @link="handleLink" />
+      <tree-delete-dialog
+        v-if="visibleTreeDeleteDialog"
+        :visible="visibleTreeDeleteDialog"
+        @delete="handleDelete"
+        @close="updateVisibleTreeDeleteDialog(false)"
+      />
     </div>
   </cp-layout>
 </template>
@@ -11,6 +22,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { getBgColor } from "@/composables/use-tree-create-controller";
+import { useDeleteTreeDetail } from "@/composables/use-tree-delete-api";
 
 export default defineComponent({
   name: "TreeDetailContainer",
@@ -21,7 +33,8 @@ export default defineComponent({
 import TreeDetailHeader from "@/components/tree/detail/TreeDetailHeader.vue";
 import TreeDetailContent from "@/components/tree/detail/TreeDetailContent.vue";
 import TreeDetailFooter from "@/components/tree/detail/TreeDetailFooter.vue";
-import { computed, defineProps } from "vue";
+import TreeDeleteDialog from "@/components/tree/detail/TreeDeleteDialog.vue";
+import { computed, defineProps, ref } from "vue";
 import { LayoutType } from "@/composables/use-window-size-wrap";
 import CpLayout from "@/components/commons/CpLayout.vue";
 import { useFetchTreeDetail } from "@/composables/use-tree-detail-api";
@@ -35,6 +48,15 @@ const props = defineProps<{
 }>();
 
 const { resultData } = useFetchTreeDetail(computed(() => props.id));
+const { mutate: mutateDelete } = useDeleteTreeDetail(
+  computed(() => props.id),
+  {
+    onSuccess: () => {
+      /** 삭제 성공시 메인리스트화면으로 이동 */
+      router.push({ name: "ChukaPokaMain" });
+    },
+  },
+);
 
 const handleLink = () => {
   if (resultData.value) {
@@ -47,6 +69,20 @@ const handleLink = () => {
         });
       });
   }
+};
+
+const edit = () => {
+  router.push({ name: "TreeEdit", params: { id: resultData.value?.treeId } });
+};
+
+const visibleTreeDeleteDialog = ref<boolean>(false);
+const updateVisibleTreeDeleteDialog = (visible: boolean) => {
+  visibleTreeDeleteDialog.value = visible;
+};
+
+const handleDelete = () => {
+  mutateDelete();
+  updateVisibleTreeDeleteDialog(false);
 };
 
 const innerStyle = computed(() => {

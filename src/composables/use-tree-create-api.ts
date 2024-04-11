@@ -23,6 +23,7 @@ export type TreeDetailResponseDto = {
   bgType: BgType;
   updatedAt: string;
   treeItemList: TreeDetailTreeItem[]
+  myTree: boolean;
 };
 
 
@@ -38,6 +39,7 @@ export const useCreateTree = (
   const { mutate } = useMutation(
     ["create-tree"],
     (payload: TreeCreateFormData) => {
+      console.log("payload", payload)
       return api.post("/api/tree", payload);
     },
     options,

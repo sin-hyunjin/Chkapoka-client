@@ -12,7 +12,7 @@
       y="178.616"
       width="166"
       height="119.077"
-      :fill="computedColor.groundColor"
+      :fill="computedColor?.groundColor"
     />
     <!-- tree -->
     <template v-if="treeType === 'TREE_TYPE_01'">
@@ -101,23 +101,27 @@ import {
   TreeType,
 } from "@/composables/use-tree-create-controller";
 const props = defineProps<{
-  treeType: TreeType;
-  bgType: BgType;
+  treeType?: TreeType;
+  bgType?: BgType;
 }>();
 
 const computedColor = computed(() => {
-  const { ground } = getBgColor(props.bgType);
-  return {
-    groundColor: ground,
-  };
+  if (props.bgType) {
+    const { ground } = getBgColor(props.bgType);
+    return {
+      groundColor: ground,
+    };
+  }
 });
 
 // background color
 const innerStyle = computed(() => {
-  const { background } = getBgColor(props.bgType);
-  return {
-    "--background-color": background,
-  };
+  if (props.bgType) {
+    const { background } = getBgColor(props.bgType);
+    return {
+      "--background-color": background,
+    };
+  }
 });
 </script>
 
