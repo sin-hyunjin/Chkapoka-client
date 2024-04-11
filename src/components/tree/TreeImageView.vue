@@ -15,7 +15,9 @@
           :readable="treeItem.readable"
           :style="getTreeItemPosition(idx)"
           @click="
-            treeItem.readable && $emit('click:treeItem', treeItem.treeItemId)
+            treeItem.readable
+              ? $emit('click:treeItem', treeItem.treeItemId)
+              : notifyUnreadable()
           "
         />
       </template>
@@ -51,6 +53,7 @@ import TreeImage04 from "@/components/commons/images/TreeImage04.vue";
 import TreeItem from "@/components/tree/TreeItem.vue";
 import { TreeDetailTreeItemWithReadable } from "@/composables/use-tree-create-api";
 import { TreeType } from "@/composables/use-tree-create-controller";
+import { ElNotification } from "element-plus";
 import { computed, ref } from "vue";
 
 defineProps<{
@@ -139,6 +142,12 @@ const templateTreeItemList = computed(() => {
     },
   ];
 });
+
+const notifyUnreadable = () => {
+  ElNotification({
+    title: "해당 트리 아이템을 읽을 권한이 없습니다.",
+  });
+};
 
 defineExpose({ treeSize });
 </script>
