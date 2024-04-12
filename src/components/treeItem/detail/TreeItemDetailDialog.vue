@@ -2,28 +2,35 @@
   <cp-dialog
     v-if="resultData"
     :model-value="visible"
+    :fullscreen="false"
     margin-top="50px"
+    align-center
     :before-close="() => $emit('close')"
     @close="$emit('close')"
   >
     <template #header>
-      <div class="header">아이템 읽기</div>
+      <div class="header cp-text-head-4">아이템 읽기</div>
     </template>
     <div class="body">
       <div class="write-letter">
         <div class="paper">
-          <cp-letter-bg-default
+          <cp-letter-default
             v-if="resultData.bgType === 'BG_TYPE_01'"
             class="bg-img"
           />
-          <cp-letter-bg-cat
+          <cp-letter-cloud
             v-if="resultData.bgType === 'BG_TYPE_02'"
             class="bg-img"
           />
-          <cp-letter-bg-river
+          <cp-letter-dog
             v-if="resultData.bgType === 'BG_TYPE_03'"
             class="bg-img"
           />
+          <cp-letter-cat
+            v-if="resultData.bgType === 'BG_TYPE_04'"
+            class="bg-img"
+          />
+
           <div class="title">{{ resultData.title }}</div>
           <div class="content">{{ resultData.content }}</div>
         </div>
@@ -49,9 +56,10 @@ export default defineComponent({
 import { computed, defineProps } from "vue";
 import CpDialog from "@/components/commons/CpDialog.vue";
 import CpButton from "@/components/commons/CpButton.vue";
-import CpLetterBgDefault from "@/components/commons/images/CpLetterBgDefault.vue";
-import CpLetterBgCat from "@/components/commons/images/CpLetterBgCat.vue";
-import CpLetterBgRiver from "@/components/commons/images/CpLetterBgRiver.vue";
+import CpLetterDefault from "@/components/commons/images/CpLetterDefault.vue";
+import CpLetterCloud from "@/components/commons/images/CpLetterCloud.vue";
+import CpLetterDog from "@/components/commons/images/CpLetterDog.vue";
+import CpLetterCat from "@/components/commons/images/CpLetterCat.vue";
 import { useFetchTreeItemDetail } from "@/composables/use-tree-item-detail-api";
 
 const props = defineProps<{

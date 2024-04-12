@@ -1,12 +1,10 @@
 <template>
   <div class="tree-item-preview-container">
     <div class="freestyle">
-      <cp-letter-bg-default
-        v-if="data.bgType === 'BG_TYPE_01'"
-        class="bg-img"
-      />
-      <cp-letter-bg-cat v-if="data.bgType === 'BG_TYPE_02'" class="bg-img" />
-      <cp-letter-bg-river v-if="data.bgType === 'BG_TYPE_03'" class="bg-img" />
+      <cp-letter-default v-if="data.bgType === 'BG_TYPE_01'" class="bg-img" />
+      <cp-letter-cloud v-if="data.bgType === 'BG_TYPE_02'" class="bg-img" />
+      <cp-letter-dog v-if="data.bgType === 'BG_TYPE_03'" class="bg-img" />
+      <cp-letter-cat v-if="data.bgType === 'BG_TYPE_04'" class="bg-img" />
       <div class="tree-item-title">{{ data.title }}</div>
       <div class="tree-item-updated-at">
         {{ new Date(Date.parse(data.updatedAt)).toLocaleString() }}
@@ -24,10 +22,10 @@ export default defineComponent({
 </script>
 <script setup lang="ts">
 import { defineProps } from "vue";
-// import IconTreePreview from "@/components/commons/images/IconTreePreview.vue";
-import CpLetterBgDefault from "@/components/commons/images/CpLetterBgDefault.vue";
-import CpLetterBgCat from "@/components/commons/images/CpLetterBgCat.vue";
-import CpLetterBgRiver from "@/components/commons/images/CpLetterBgRiver.vue";
+import CpLetterDefault from "@/components/commons/images/CpLetterDefault.vue";
+import CpLetterCloud from "@/components/commons/images/CpLetterCloud.vue";
+import CpLetterDog from "@/components/commons/images/CpLetterDog.vue";
+import CpLetterCat from "@/components/commons/images/CpLetterCat.vue";
 import { TreeItemListItem } from "@/composables/use-main-api";
 
 defineProps<{

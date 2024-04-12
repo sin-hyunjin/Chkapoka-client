@@ -1,5 +1,5 @@
 <template>
-  <cp-layout :layout-type="layoutType">
+  <cp-layout :layout-type="LayoutType.Mobile">
     <div
       class="chuka-poka-link-container"
       v-if="resultData"

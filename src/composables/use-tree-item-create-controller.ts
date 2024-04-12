@@ -1,6 +1,6 @@
 import { ref, computed } from "vue";
 
-export type BgType = "BG_TYPE_01" | "BG_TYPE_02" | "BG_TYPE_03"; // default, flower, cat
+export type BgType = "BG_TYPE_01" | "BG_TYPE_02" | "BG_TYPE_03" | "BG_TYPE_04"; // default, cloud, dog, cat
 
 export type TreeItemCreateFormData = {
   treeId: string;

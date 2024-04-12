@@ -1,12 +1,14 @@
 <template>
   <cp-dialog
     :model-value="visible"
+    :fullscreen="false"
     margin-top="50px"
+    align-center
     :before-close="() => $emit('close')"
     @close="$emit('close')"
   >
     <template #header>
-      <div class="header">아이템 작성</div>
+      <div class="header cp-text-head-4">아이템 작성</div>
     </template>
     <div class="body">
       <div class="select-letter-bg">
@@ -19,7 +21,7 @@
             ]"
             @click="updateFormData('bgType', 'BG_TYPE_01')"
           >
-            <cp-letter-bg-default />
+            <cp-letter-default />
           </div>
           <div
             :class="[
@@ -28,7 +30,7 @@
             ]"
             @click="updateFormData('bgType', 'BG_TYPE_02')"
           >
-            <cp-letter-bg-cat />
+            <cp-letter-cloud />
           </div>
           <div
             :class="[
@@ -37,22 +39,35 @@
             ]"
             @click="updateFormData('bgType', 'BG_TYPE_03')"
           >
-            <cp-letter-bg-river />
+            <cp-letter-dog />
+          </div>
+          <div
+            :class="[
+              'input',
+              formData.bgType === 'BG_TYPE_04' ? 'selected' : '',
+            ]"
+            @click="updateFormData('bgType', 'BG_TYPE_04')"
+          >
+            <cp-letter-cat />
           </div>
         </div>
       </div>
       <div class="write-letter">
         <div class="paper">
-          <cp-letter-bg-default
+          <cp-letter-default
             v-if="formData.bgType === 'BG_TYPE_01'"
             class="bg-img"
           />
-          <cp-letter-bg-cat
+          <cp-letter-cloud
             v-if="formData.bgType === 'BG_TYPE_02'"
             class="bg-img"
           />
-          <cp-letter-bg-river
+          <cp-letter-dog
             v-if="formData.bgType === 'BG_TYPE_03'"
+            class="bg-img"
+          />
+          <cp-letter-cat
+            v-if="formData.bgType === 'BG_TYPE_04'"
             class="bg-img"
           />
           <input
@@ -90,9 +105,11 @@ export default defineComponent({
 import { defineProps } from "vue";
 import CpDialog from "@/components/commons/CpDialog.vue";
 import CpButton from "@/components/commons/CpButton.vue";
-import CpLetterBgDefault from "@/components/commons/images/CpLetterBgDefault.vue";
-import CpLetterBgCat from "@/components/commons/images/CpLetterBgCat.vue";
-import CpLetterBgRiver from "@/components/commons/images/CpLetterBgRiver.vue";
+import CpLetterDefault from "@/components/commons/images/CpLetterDefault.vue";
+import CpLetterCloud from "@/components/commons/images/CpLetterCloud.vue";
+import CpLetterDog from "@/components/commons/images/CpLetterDog.vue";
+import CpLetterCat from "@/components/commons/images/CpLetterCat.vue";
+
 import {
   TreeItemCreateFormData,
   useTreeItemCreateController,
@@ -127,6 +144,9 @@ const send = () => {
   align-items: center;
 
   .select-letter-bg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .title {
       margin-bottom: var(--cp-number-16);
       color: var(--cp-color-black);
