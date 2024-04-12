@@ -158,6 +158,9 @@ const emits = defineEmits<{
         height: 80%;
         border: none;
         text-align: justify;
+
+        /** \n 개행문자에 따라 자동 줄바꿈 */
+        white-space: pre-wrap;
       }
     }
   }

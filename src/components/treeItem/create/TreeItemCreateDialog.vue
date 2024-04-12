@@ -97,7 +97,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "TreeItemDetail",
+  name: "TreeItemCreateDialog",
 });
 </script>
 
@@ -109,7 +109,6 @@ import CpLetterDefault from "@/components/commons/images/CpLetterDefault.vue";
 import CpLetterCloud from "@/components/commons/images/CpLetterCloud.vue";
 import CpLetterDog from "@/components/commons/images/CpLetterDog.vue";
 import CpLetterCat from "@/components/commons/images/CpLetterCat.vue";
-
 import {
   TreeItemCreateFormData,
   useTreeItemCreateController,
@@ -129,7 +128,21 @@ const { formData, updateFormData, isValid } = useTreeItemCreateController();
 
 const send = () => {
   formData.value.treeId = props.treeId;
+  formData.value.content = convertWithLineBreaking(formData.value.content);
   emits("create:treeItem", formData.value);
+};
+
+const convertWithLineBreaking = (value: string) => {
+  let result = "";
+  [...value].forEach((char, i) => {
+    /** Enter key 클릭시 */
+    if (value.charCodeAt(i) === 10) {
+      result += "\n";
+    } else {
+      result += char;
+    }
+  });
+  return result;
 };
 </script>
 
