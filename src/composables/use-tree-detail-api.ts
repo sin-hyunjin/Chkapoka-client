@@ -1,19 +1,28 @@
-import { BaseErrorResponse, BaseResultResponse, useAxios } from "@/plugins/axios";
+import {
+  BaseErrorResponse,
+  BaseResultResponse,
+  useAxios,
+} from "@/plugins/axios";
 import { UseQueryOptions, useQuery } from "vue-query";
 import { computed, ComputedRef, unref } from "vue";
 import { TreeDetailResponseDto } from "@/composables/use-tree-create-api";
 
-
 /** GET api/tree/{id} START */
 export const useFetchTreeDetail = (
   treeId: ComputedRef<string>,
-  options?: UseQueryOptions<BaseResultResponse<TreeDetailResponseDto>, BaseErrorResponse>
+  options?: UseQueryOptions<
+    BaseResultResponse<TreeDetailResponseDto>,
+    BaseErrorResponse
+  >,
 ) => {
   const api = useAxios();
-  const { data, refetch } = useQuery<BaseResultResponse<TreeDetailResponseDto>, BaseErrorResponse>(
+  const { data, refetch } = useQuery<
+    BaseResultResponse<TreeDetailResponseDto>,
+    BaseErrorResponse
+  >(
     ["useFetchTreeDetail", treeId],
     () => {
-      return api.get(`/api/tree/${unref(treeId)}`);
+      return get(`/api/tree/${unref(treeId)}`);
     },
     options,
   );
@@ -34,10 +43,16 @@ export const useFetchTreeDetail = (
 /** GET api/tree/link/{linkId} START */
 export const useFetchTreeDetailByLinkId = (
   linkId: ComputedRef<string>,
-  options?: UseQueryOptions<BaseResultResponse<TreeDetailResponseDto>, BaseErrorResponse>
+  options?: UseQueryOptions<
+    BaseResultResponse<TreeDetailResponseDto>,
+    BaseErrorResponse
+  >,
 ) => {
   const api = useAxios();
-  const { data, refetch } = useQuery<BaseResultResponse<TreeDetailResponseDto>, BaseErrorResponse>(
+  const { data, refetch } = useQuery<
+    BaseResultResponse<TreeDetailResponseDto>,
+    BaseErrorResponse
+  >(
     ["useFetchTreeDetailByLinkId", linkId],
     () => {
       return api.get(`/api/tree/link/${unref(linkId)}`);
