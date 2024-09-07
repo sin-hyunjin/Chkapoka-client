@@ -22,7 +22,7 @@ export const useFetchTreeDetail = (
   >(
     ["useFetchTreeDetail", treeId],
     () => {
-      return get(`/api/tree/${unref(treeId)}`);
+      return api.get(`/api/tree/${unref(treeId)}`);
     },
     options,
   );
