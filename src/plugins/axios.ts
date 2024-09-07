@@ -18,7 +18,7 @@ const TOKEN_REISSUE_URL = "/api/user/reissue";
 
 export const useAxios = () => {
   const axiosConfig: { baseURL: string; timeout: number } = {
-    baseURL: import.meta.env.VITE_API_BASE_URL,
+    baseURL: "http://localhost:3000",
     timeout: 30000, // 30s
   };
   const api = axios.create(axiosConfig);
